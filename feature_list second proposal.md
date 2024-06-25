@@ -29,28 +29,26 @@ EtsyClone is a website for users to buy and sell items, read and create reviews,
 * Logged in user can delete product image
 * Anyone can view product images
 
-## 5. Orders
-
-* Logged in user can view their orders
-* Logged in user can create order (through shopping cart)
-
-## 6. Shopping Cart
+## 5. Shopping Cart
 
 * Users should be able to view all products added to their cart.
 * Users should be able to add products to their shopping cart.
 * Users should be able to remove products from their shopping cart.
 * Checkout deletes items in the shopping cart (and creates order)
 
-## 7. Bonus Favorites
+## 6. Bonus Favorites
 
 * Logged in users should be able to view all of their favorite products.
 * Logged in users should be able to favorite products.
 * Logged in users should be able to delete products from their favorites.
 
-## 8. Bonus Search
+## 7. Bonus Search
 
 * Users should be able to search for Products.
 * Users should be able to view the results of their search.
 
-## 9. Bonus Past Orders/Reorder
+## 8. Bonus Past Orders/Reorder
+
+* Logged in user can view their orders
+* Logged in user can create order (through shopping cart)
 * Logged in users should be able to reorder any of their past orders.
