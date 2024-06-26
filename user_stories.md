@@ -64,7 +64,7 @@
   * When I'm on the `/new-product` page:
     * I can create and submit a new product.
       * So that I can list items for sale that other users can purchase.
-
+git clone
 ### Viewing Products for sale
 
 * As a logged in _or_ logged out user, I want to be able to view a list of most recently listed products.
