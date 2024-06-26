@@ -64,7 +64,7 @@
   * When I'm on the `/new-product` page:
     * I can create and submit a new product.
       * So that I can list items for sale that other users can purchase.
-git clone
+
 ### Viewing Products for sale
 
 * As a logged in _or_ logged out user, I want to be able to view a list of most recently listed products.
@@ -80,18 +80,52 @@ git clone
 ### Updating a Product listing
 
 * As a logged in user who has listed products for sale, I want to be able to edit any product listing's I have created via the Edit button associated with the product
-  * When I'm on the `/products`, `/products/:id`, or `/users/:id/products` pages:
+  * When I'm on the `/products`, `/products/:productId`, or `/users/:userId/products` pages:
     * I can click "Edit" to make permanent changes to the products listing I have posted.
       * So that I can fix any errors I make in my product listing.
 
 ### Deleting a Product listing
 
 * As a logged in user, I want to be able to delete any product listing's I have created by clicking a Delete button associated with the product listing anywhere that listing appears.
-  * When I'm on the `/products`, `/products/:id`, or `/users/:id/products` pages:
+  * When I'm on the `/products`, `/products/:productId`, or `/users/:userId/products` pages:
     * I can click "Delete" to permanently delete a product listing I have posted.
       * So that when I realize I am tired of selling products, I can easily remove them.
 
-## Favorites
+## Reviews
+
+### Create Reviews for existing product
+
+* As a logged in user who has purchased the product, I want to be able to leave a review.
+  * When I'm on the `/products/:productId/reviews` page:
+    * I can create and submit a new review.
+      * So that I can list a review for the product that I have purchased.
+
+### Viewing Reviews for a product
+
+* As a logged in _or_ logged out user, I want to be able to view a list of reviews of products.
+  * When I'm on the `/products/:productId/reviews` page:
+    * I can view the ten most recently listed reviews for that specific product.
+
+### Updating Reviews for a product
+* As a logged in user who has purchased the product, I want to be able to update my review.
+  * When I'm on the `/reviews/:reviewId` page:
+    * I can click "Edit" to make permanent changes to the review I have commented.
+      * So that I can change my review.
+
+### Deleting Reviews for a product
+* As a logged in user who has purchased the product, I want to be able to delete my review.
+  * When I'm on the `/reviews/:reviewId` page:
+     * I can click "Delete" to permanently delete the review I have commented.
+      * So that when I regret what I said.
+
+
+
+
+
+
+
+
+## Favorites Bonus
 
 ### Add and remove Product to Favorites list
 
