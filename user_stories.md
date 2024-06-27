@@ -34,7 +34,7 @@
   * When I'm on the `/login` page:
     * I would like to be able to enter my email and password on a clearly laid out form.
     * I would like the website to log me in upon successful completion of the log-up form.
-      * So that I can seamlessly access the site's functionality, 
+      * So that I can seamlessly access the site's functionality,
         * purchase products that are listed for sale
         * also having the functionality to add, update, delete products for sale
   * When I enter invalid data on the log-up form:
@@ -74,7 +74,7 @@
 
 * As a logged in _or_ logged out user, I want to be able to view a specific product listing
   * When I'm on the `/products/:id` page:
-    * I can view the product detail page 
+    * I can view the product detail page
       * So that I can review a full description of the product including the product's price, images, inventory quantity and reviews
 
 ### Updating a Product listing
@@ -119,10 +119,46 @@
       * So that when I regret what I said.
 
 
+## Orders
+
+### Create Orders
+* As a logged in user, I want to be able to create an order based on the products currently in my shopping cart.
+  * When I'm on the `/orders` page:
+    * I can click "Checkout" to create my order and remove selected items form my shopping cart.
+      * So I can notify the seller of my intent to purchase.
+
+### View Orders
+* As a looged in user, I want to be able to view my past orders and their current statuses ("pending", "accepted", "fulfilled").
+  * When I'm on the `/orders/:userId` page:
+    * I can see all the products in my order history.
+      * So that I can gauge the extent of my buyer's remorse.
+
+### Delete Pending Orders
+* As a looged in user, I want to be able to cancel an order if its status is still "pending."
+  * When I'm on the `/orders/:orderId` page:
+    * If the status is "pending," I can click "Cancel Order" to prevent my latest order from processing.
+      * So that I am still able to pay rent this month.
 
 
+## Shopping Cart
 
+### Add to Shopping Cart
+* As a user (logged in or not), I want to be able to add products to my Shopping Cart.
+  * When I'm on the `/products/:productId` page:
+    * I can click "Add to Cart" to place the current product in my cart.
+      * So that I can bundle my purchases into a single transaction.
 
+### View Shopping Cart
+* As a user (logged in or not), I want to be able to view all the products that are currently in my Shopping Cart.
+  * When I'm on the `/cart/cartItems` page:
+    * I can view the details of all the products in my cart.
+      * So I can evaluate whether I actually want to purchase them or not.
+
+### Remove from Shopping Cart
+* As a user (logged in or not), I want to be able to remove any or all products from my cart.
+ * When I'm on the `/cart/cartItems/cartItemId` page:
+  * I can click "Remove Item" to delete an item from my cart.
+    * So I can change my mind and not purchase the product.
 
 
 ## Favorites Bonus
@@ -131,9 +167,7 @@
 
 * As a logged in user, I want to be able to add any product listed by another user to my personal favorites list
   * When I'm on the `/products`, `/products/:id`, `/users/:id/favorites` pages:
-    * I can click and unclick the corresponding heart icon on the product listing 
-      * So that I can add and remove that specific product to my favorites list 
+    * I can click and unclick the corresponding heart icon on the product listing
+      * So that I can add and remove that specific product to my favorites list
 
 ### Review a Product I have purchased
-
-
