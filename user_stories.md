@@ -150,13 +150,13 @@
 
 ### View Shopping Cart
 * As a user (logged in or not), I want to be able to view all the products that are currently in my Shopping Cart.
-  * When I'm on the `/cart/cartItems` page:
+  * When I'm on the `/cartItems` page:
     * I can view the details of all the products in my cart.
       * So I can evaluate whether I actually want to purchase them or not.
 
 ### Remove from Shopping Cart
 * As a user (logged in or not), I want to be able to remove any or all products from my cart.
- * When I'm on the `/cart/cartItems/cartItemId` page:
+ * When I'm on the `/cartItems/:cartItemId` page:
   * I can click "Remove Item" to delete an item from my cart.
     * So I can change my mind and not purchase the product.
 
