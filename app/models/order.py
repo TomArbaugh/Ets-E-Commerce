@@ -1,5 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .order_items import order_items
+
+
 class Order(db.Model):
 
     __tablename__ = "orders"

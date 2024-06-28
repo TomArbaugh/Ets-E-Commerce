@@ -40,7 +40,7 @@ class User(db.Model, UserMixin):
         back_populates = 'user_shopping_cart_items'
     )
 
-        user_orders = db.relationship(
+    user_orders = db.relationship(
         'Order',
         back_populates = 'user'
         )

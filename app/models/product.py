@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .review import reviews
-from .shopping_cart_item import shopping_cart_items
 from .order_items import order_items
+from .shopping_cart_item import shopping_cart_items
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -36,14 +36,14 @@ class Product(db.Model):
         back_populates = 'product_reviews'
     )
 
-    #many-to-many users<=shopping_cart_items=>products
+      #many-to-many users<=shopping_cart_items=>products
     user_shopping_cart_items = db.relationship(
         'User',
         secondary=shopping_cart_items,
         back_populates = 'product_shopping_cart_items'
     )
 
-        #many-to-many orders<=order_items=>products
+                #many-to-many orders<=order_items=>products
     order_products = db.relationship(
         'Order',
         secondary=order_items,
