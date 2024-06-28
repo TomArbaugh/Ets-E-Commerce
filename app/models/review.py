@@ -3,6 +3,7 @@ from datetime import datetime
 
 reviews = db.Table(
     'reviews',
+
     db.Model.metadata,
     db.Column('id', db.Integer, nullable=False),
     db.Column('product_id', db.Integer, db.ForeignKey('products.id'), primary_key=True),
@@ -12,4 +13,3 @@ reviews = db.Table(
     db.Column('created_at', db.DateTime, default=datetime.utcnow),
     db.Column('updated_at', db.DateTime, onupdate=datetime.utcnow)
 )
-   
