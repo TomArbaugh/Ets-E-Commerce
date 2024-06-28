@@ -1,4 +1,5 @@
 from .db import db
+from datetime import datetime
 
 reviews = db.Table(
     'reviews',
@@ -9,6 +10,6 @@ reviews = db.Table(
     db.Column('review', db.String(2000), nullable=False),
     db.Column('stars', db.Integer, nullable=False),
     db.Column('created_at', db.DateTime, default=datetime.utcnow),
-    db.Column('updated_at', db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    db.Column('updated_at', db.DateTime, onupdate=datetime.utcnow)
 )
    
