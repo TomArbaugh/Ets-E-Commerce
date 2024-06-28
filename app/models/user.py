@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .review import reviews
+from .shopping_cart_item import shopping_cart_items
 
 
 class User(db.Model, UserMixin):
@@ -29,6 +30,20 @@ class User(db.Model, UserMixin):
         secondary=reviews,
         back_populates = 'user_reviews'
     )
+
+  
+
+        #many-to-many users<=shopping_cart_items=>products
+    product_shopping_cart_items = db.relationship(
+        'Product',
+        secondary=shopping_cart_items,
+        back_populates = 'user_shopping_cart_items'
+    )
+
+        user_orders = db.relationship(
+        'Order',
+        back_populates = 'user'
+        )
 
     @property
     def password(self):
