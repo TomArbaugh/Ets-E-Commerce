@@ -26,6 +26,12 @@ class Product(db.Model):
         back_populates = 'products'
     )
 
+    #many-to-many users<=reviews=>products
+    user_reviews = db.relationship(
+        'User',
+        secondary=reviews,
+        back_populates = 'product_reviews'
+    )
 
 
 

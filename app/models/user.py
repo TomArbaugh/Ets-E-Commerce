@@ -22,6 +22,13 @@ class User(db.Model, UserMixin):
         back_populates = 'user'
     )
 
+    #many-to-many users<=reviews=>products
+    product_reviews = db.relationship(
+        'Product',
+        secondary=reviews,
+        back_populates = 'user_reviews'
+    )
+
     @property
     def password(self):
         return self.hashed_password
