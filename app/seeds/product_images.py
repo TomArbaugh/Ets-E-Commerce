@@ -1,7 +1,7 @@
 from app.models import db, ProductImage, environment, SCHEMA
 from sqlalchemy.sql import text
 
-def seed_product_image():
+def seed_product_images():
     image1 = ProductImage(
         product_id=1, url="image1"
     )
@@ -45,7 +45,7 @@ def seed_product_image():
     db.session.add(image10)
     db.session.commit()
 
-def undo_users():
+def undo_product_images():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.product_images RESTART IDENTITY CASCADE;")
     else:
