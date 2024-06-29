@@ -21,7 +21,8 @@ class User(db.Model, UserMixin):
     #one-to-many users=>products
     products = db.relationship(
         'Product',
-        back_populates = 'user'
+        back_populates = 'user',
+        cascade="delete"
     )
 
     #many-to-many users<=reviews=>products
@@ -33,16 +34,18 @@ class User(db.Model, UserMixin):
 
   
 
-        #many-to-many users<=shopping_cart_items=>products
+    #many-to-many users<=shopping_cart_items=>products
     product_shopping_cart_items = db.relationship(
         'Product',
         secondary=shopping_cart_items,
         back_populates = 'user_shopping_cart_items'
     )
-
+    
+    #one-to-many users=>orders
     user_orders = db.relationship(
         'Order',
-        back_populates = 'user'
+        back_populates = 'user',
+        cascade="delete"
         )
 
     @property
@@ -59,6 +62,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'username': self.username,
             'email': self.email
         }

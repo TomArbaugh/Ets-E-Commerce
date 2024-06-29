@@ -3,6 +3,9 @@ from sqlalchemy.sql import text
 from datetime import datetime
 
 def seed_reviews():
+    reviews = [
+        
+    ]
     review1 = Review(
         product1=1, user_id=2, review='Good', stars=4, created_at=datetime.utcnow, updated_at=datetime.utcnow)
     review2 = Review(

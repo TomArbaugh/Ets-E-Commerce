@@ -10,7 +10,7 @@ class Product(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key = True)
-    owner_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
     name = db.Column(db.String(50), nullable = False)
     category = db.Column(db.String(50), nullable = False)
     description = db.Column(db.String(255), nullable =False)
@@ -20,7 +20,8 @@ class Product(db.Model):
     #one-to-many products=>product_images
     images = db.relationship(
         'ProductImage',
-        back_populates = 'product'
+        back_populates = 'product',
+        cascade="delete"
     )
 
     #many-to-one users=>products
