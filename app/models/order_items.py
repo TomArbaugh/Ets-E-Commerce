@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 order_items = db.Table(
     "order_items",
@@ -8,7 +8,3 @@ order_items = db.Table(
     db.Column('product_id', db.Integer, db.ForeignKey('products.id')),
     db.Column('quantity', db.Integer)
 )
-
-     
-
-  

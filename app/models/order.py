@@ -9,8 +9,8 @@ class Order(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=true)
-    purchaser_id = db.Column(db.Integer, db.ForeignKey('purchaser.id'), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    purchaser_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     total = db.Column(db.Numeric, nullable=False)
     discount = db.Column(db.Numeric, default=None)
     status = db.Column(db.String(25), nullable=False)
@@ -20,7 +20,7 @@ class Order(db.Model):
         'User',
         back_populates = 'user_orders'
         )
-    
+
             #many-to-many orders<=order_items=>products
     products_ordered = db.relationship(
         'Product',
