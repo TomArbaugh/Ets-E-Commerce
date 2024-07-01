@@ -43,7 +43,7 @@ def creat_product():
         db.session.commit()
         return redirect('/')
     if form.errors():
-        return {'errors': form.errors}, 400
+        return {'errors': form.errors}, 40
     
 @product_routes.route('/current')
 @login_required
