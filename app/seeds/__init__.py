@@ -35,13 +35,13 @@ def seed():
         undo_products()
         undo_users()
 
-    users = seed_users()
-    products = seed_products(users)
-    seed_product_images(products)
-    seed_reviews(users, products)
-    seed_shopping_cart_items(users, products)
-    orders = seed_orders(users)
-    seed_order_items(orders, products)
+    seed_users()
+    seed_products()
+    seed_product_images()
+    seed_reviews()
+    seed_shopping_cart_items()
+    orders = seed_orders()
+    seed_order_items()
     # Add other seed functions here
 
 
