@@ -46,8 +46,33 @@ def create_product():
     else:
         print("Form validation failed:", form.errors)  
     return {'errors': form.errors}, 400
+
+@product_routes.route('/<int:product_id', methods=['PUT'])
+@login_required
+def update_product(product_id):
+    """
+    Update a product by ID (only accessible to the creator of the product)
+    """
+    product = Product.query.get(product_id)
+    if product is None:
+        return {'errors': {'message': 'Product not found'}}, 404
+    if product.owner_id != current_user.id:
+        return {'errors': {'message': 'You are not authorized'}}, 403
+    if request.method == 'GET':
+        return product.to_dict()
     
-    
+    form = ProductForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        product.name = form.date['name']
+        product.category = form.date['category']
+        product.description = form.date['description']
+        product.price = form.date['price']
+        product.stock = form.date['stock']
+        db.session.commit()
+        return product.to_dict
+    return {'errors': form.errors}, 400
+
 @product_routes.route('/current')
 @login_required
 def get_user_products():
@@ -68,8 +93,7 @@ def delete_product(product_id):
     if product is None:
       return {'errors': {'message': 'Product not found'}}, 404
 
-    user_id = current_user.id
-    if product.owner_id != user_id:
+    if product.owner_id != current_user.id:
         return {'errors': {'message': 'You are not authorized'}}, 403
     
     db.session.delete(product)
