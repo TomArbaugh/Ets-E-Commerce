@@ -16,7 +16,7 @@ class Product(db.Model):
     description = db.Column(db.String(255), nullable =False)
     price = db.Column(db.Numeric, nullable = False)
     stock = db.Column(db.Integer, nullable = False)
-    
+
     #one-to-many products=>product_images
     images = db.relationship(
         'ProductImage',
@@ -60,6 +60,5 @@ class Product(db.Model):
             'description': self.description,
             'price': self.price,
             'stock': self.stock,
-            'images': self.images,
+            'images': self.images[0].url,
         }
-
