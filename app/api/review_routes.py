@@ -8,6 +8,9 @@ review_routes = Blueprint('reviews', __name__)
 
 @review_routes.route('/<int:id>/reviews')
 def reviews_by_productId(id):
-    reviews = Product.query.get(id)
-    print("REVIEWS: ", reviews)
-    return reviews.to_dict()
+    # reviews = Product.query.get(id).user_reviews
+    # print("REVIEWS: ", reviews)
+
+    review = Product.query.filter(Product.user_reviews.id == id)
+
+    return reviews

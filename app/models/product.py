@@ -60,5 +60,5 @@ class Product(db.Model):
             'description': self.description,
             'price': self.price,
             'stock': self.stock,
-            'images': self.images[0].url,
+            'images': [image.to_dict() for image in self.images],
         }
