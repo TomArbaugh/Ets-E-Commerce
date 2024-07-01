@@ -47,7 +47,7 @@ def create_product():
         print("Form validation failed:", form.errors)  
     return {'errors': form.errors}, 400
 
-@product_routes.route('/<int:product_id', methods=['PUT'])
+@product_routes.route('/<int:product_id>', methods=['GET', 'PUT'])
 @login_required
 def update_product(product_id):
     """
@@ -64,14 +64,19 @@ def update_product(product_id):
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        product.name = form.date['name']
-        product.category = form.date['category']
-        product.description = form.date['description']
-        product.price = form.date['price']
-        product.stock = form.date['stock']
+        product.name = form.data['name']
+        product.category = form.data['category']
+        product.description = form.data['description']
+        product.price = form.data['price']
+        product.stock = form.data['stock']
         db.session.commit()
-        return product.to_dict
-    return {'errors': form.errors}, 400
+        return product.to_dict()
+    
+    elif form.errors:
+        return {'errors': form.errors}, 400
+    
+    # else:
+    #     form.process(obj=product)
 
 @product_routes.route('/current')
 @login_required
