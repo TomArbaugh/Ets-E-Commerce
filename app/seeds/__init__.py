@@ -1,12 +1,17 @@
 from flask.cli import AppGroup
-
-from .order_items import seed_order_items, undo_order_items
-from .orders import seed_orders, undo_orders
-from .product_images import seed_product_images, undo_product_images
+from .users import seed_users, undo_users
 from .products import seed_products, undo_products
+from .product_images import seed_product_images, undo_product_images
 from .reviews import seed_reviews, undo_reviews
 from .shopping_cart_items import seed_shopping_cart_items, undo_shopping_cart_items
-from .users import seed_users, undo_users
+from .orders import seed_orders, undo_orders
+from .order_items import seed_order_items, undo_order_items
+
+
+
+
+
+
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -30,13 +35,13 @@ def seed():
         undo_products()
         undo_users()
 
-    seed_users()
-    seed_products()
-    seed_product_images()
-    seed_reviews()
-    seed_shopping_cart_items()
-    seed_orders()
-    seed_order_items()
+    users = seed_users()
+    products = seed_products(users)
+    seed_product_images(products)
+    seed_reviews(users, products)
+    seed_shopping_cart_items(users, products)
+    orders = seed_orders(users)
+    seed_order_items(orders, products)
     # Add other seed functions here
 
 
