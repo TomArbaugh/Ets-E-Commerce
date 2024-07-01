@@ -36,7 +36,7 @@ class Product(db.Model):
         secondary=reviews,
         back_populates = 'product_reviews'
     )
-
+    
       #many-to-many users<=shopping_cart_items=>products
     user_shopping_cart_items = db.relationship(
         'User',
@@ -61,4 +61,7 @@ class Product(db.Model):
             'price': self.price,
             'stock': self.stock,
             'images': [image.to_dict() for image in self.images],
+            'reviews': {
+                'userId': self.user_reviews
+            }
         }
