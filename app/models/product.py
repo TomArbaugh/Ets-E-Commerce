@@ -61,7 +61,4 @@ class Product(db.Model):
             'price': self.price,
             'stock': self.stock,
             'images': [image.to_dict() for image in self.images],
-            'reviews': {
-                'userId': self.user_reviews
-            }
         }
