@@ -16,7 +16,7 @@ class Product(db.Model):
     description = db.Column(db.String(255), nullable =False)
     price = db.Column(db.Numeric(3,2), nullable = False)
     stock = db.Column(db.Integer, nullable = False)
-    
+
     #one-to-many products=>product_images
     images = db.relationship(
         'ProductImage',
@@ -36,7 +36,7 @@ class Product(db.Model):
         secondary=reviews,
         back_populates = 'product_reviews'
     )
-
+    
       #many-to-many users<=shopping_cart_items=>products
     user_shopping_cart_items = db.relationship(
         'User',
@@ -61,5 +61,7 @@ class Product(db.Model):
             'price': self.price,
             'stock': self.stock,
             'images': [image.to_dict() for image in self.images],
+            'reviews': {
+                'userId': self.user_reviews
+            }
         }
-
