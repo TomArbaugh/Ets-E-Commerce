@@ -18,8 +18,8 @@ def update_product_image(image_id):
     
     product = Product.query.get(image.product_id)
 
-    if product is None:
-        return {'errors': {'message': 'Product not found'}}, 404
+    # if product is None:
+    #     return {'errors': {'message': 'Product not found'}}, 404
 
     if product.owner_id != current_user.id:
         return {'errors': {'message': 'You are not authorized'}}, 403
@@ -44,9 +44,6 @@ def delete_image(image_id):
         return {'errors': {'message': 'Image not found'}}, 404
     
     product = Product.query.get(image.product_id)
-
-    if product is None:
-        return {'errors': {'message': 'Product not found'}}, 404
 
     if product.owner_id != current_user.id:
         return {'errors': {'message': 'You are not authorized'}}, 403

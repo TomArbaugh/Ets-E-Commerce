@@ -103,44 +103,39 @@ def delete_product(product_id):
     return {'message': 'Product delete successfully'}
 
 @product_routes.route('/<int:product_id>/images')
-@login_required
 def get_all_product_images(product_id):
     """
     Get product images by product id
     """
-    product = Product.query.get(product_id)
-    if product is None:
-        return {'errors': {'message': 'Product not found'}}, 404
-  
     images = ProductImage.query.filter_by(product_id=product_id).all()
     return {"images": [image.to_dict() for image in images]}
     
-
 @product_routes.route('/<int:product_id>/images', methods=['POST'])
 @login_required
 def upload_product_image(product_id):
-     """
+    """
     Upload image
     """
-     product = Product.query.get(product_id)
-     if product is None:
-         return {'errors': {'message': 'Product not found'}}, 404
+    product = Product.query.get(product_id)
+    if product is None:
+        return {'errors': {'message': 'Product not found'}}, 404
 
-     if product.owner_id != current_user.id:
-         return {'errors': {'message': 'You are not authorized'}}, 403
+    if product.owner_id != current_user.id:
+        return {'errors': {'message': 'You are not authorized'}}, 403
      
-     form = ProductImageForm()
-     form['csrf_token'].data = request.cookies['csrf_token']
-     if form.validate_on_submit():
-         new_image = ProductImage(
-             url = form.data['url']
-         )
-         db.session.add(new_image)
-         db.session.commit()
-         return new_image.to_dict(), 201
-     else:
+    form = ProductImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_image = ProductImage(
+            product_id = product_id,
+            url = form.data['url']
+        )
+        db.session.add(new_image)
+        db.session.commit()
+        return new_image.to_dict(), 201
+    else:
         print("Form validation failed:", form.errors)  
-     return {'errors': form.errors}, 400
+    return {'errors': form.errors}, 400
 
 
 
