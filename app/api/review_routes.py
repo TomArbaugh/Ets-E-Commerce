@@ -11,14 +11,14 @@ from sqlalchemy import insert, update, delete
 
 review_routes = Blueprint('reviews', __name__)
 
-@review_routes.route('/<int:id>/reviews')
-def reviews_by_productId(id):
+@review_routes.route('/<int:product_id>/reviews')
+def reviews_by_productId(product_id):
 
     """Gets Reviews By Product ID"""
     # reviews = Product.query.get(id).user_reviews
     # print("REVIEWS: ", reviews)
 
-    reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == id).all()
+    reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == product_id).all()
 
     # product = Product.query.get(id)
     reviews_array = []
@@ -31,18 +31,18 @@ def reviews_by_productId(id):
         "stars": review.stars,
         "createdAt": review.created_at,
         "updatedAt": review.updated_at
-    }
+        }
 
     reviews_array.append(review_obj)
     return reviews_array
 
-@review_routes.route('/<int:id>/edit-review', methods=['GET', 'POST'])
+@review_routes.route('/<int:product_id>/edit-review', methods=['GET', 'POST'])
 @login_required
-def edit_review(id):
+def edit_review(product_id):
 
         """Edit Review for a Product"""
 
-        reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == id).all()
+        reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == product_id).all()
 
         for review in reviews_records:
             if review.user_id == current_user.id:
@@ -55,9 +55,9 @@ def edit_review(id):
         if form.validate_on_submit():
             new_review = (
                 update(reviews).
-                where(reviews.c.product_id == id).
+                where(reviews.c.product_id == product_id).
                 values(
-                product_id=id,
+                product_id=product_id,
                 user_id=current_user.id,
                 reviews= form.data['reveiws'],
                 stars = form.data['stars'],
@@ -80,9 +80,9 @@ def edit_review(id):
         }
 
 
-@review_routes.route('/<int:id>/create-review', methods=['POST'])
+@review_routes.route('/<int:product_id>/create-review', methods=['POST'])
 @login_required
-def post_review(id):
+def post_review(product_id):
 
         """Create Review for a Product"""
 
@@ -103,7 +103,7 @@ def post_review(id):
             new_review = (
                 insert(reviews).
                 values(
-                product_id=id,
+                product_id=product_id,
                 user_id=current_user.id,
                 review= form.data['review'],
                 stars = form.data['stars'],
