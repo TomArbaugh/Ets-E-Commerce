@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify, Flask
-from flask_login import login_required
+from flask import Blueprint, jsonify, Flask, request
+from flask_login import login_required, current_user
 from app.models.review import reviews
 from app.models.product import Product
 from app.models import db, User
@@ -25,8 +25,8 @@ def reviews_by_productId(id):
     for review in reviews_records:
 
        review_obj = {
-        "userId": review.user_id,
-        "productId": review.product_id,
+        "user_id": review.user_id,
+        "product_id": review.product_id,
         "review": review.review,
         "stars": review.stars,
         "createdAt": review.created_at,
@@ -54,8 +54,8 @@ def edit_review(id):
 
         if form.validate_on_submit():
             new_review = (
-                update(user_reviews).
-                where(user_reviews.c.product_id == id).
+                update(reviews).
+                where(reviews.c.product_id == id).
                 values(
                 product_id=id,
                 user_id=current_user.id,
@@ -71,8 +71,8 @@ def edit_review(id):
             return "Errors in Route"
 
         return    {
-            "userId": new_review.user_id,
-            "productId": new_review.product_id,
+            "user_id": new_review.user_id,
+            "product_id": new_review.product_id,
             "review": new_review.review,
             "stars": new_review.stars,
             "createdAt": new_review.created_at,
@@ -86,41 +86,45 @@ def post_review(id):
 
         """Create Review for a Product"""
 
-        reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == id).all()
+        reviews_records = db.session.query(reviews).all()
 
-        for review in reviews_records:
-            if review.user_id == current_user.id:
-                raise Exception('User can only create one review')
+        # for review in reviews_records:
+        #     if review.user_id == current_user.id and review.product_id == id:
+        #         raise Exception('User can only create one review')
 
         # need to confirm customer has ordered product
 
-
+        # .join(User).filter(reviews.columns.product_id == id)
 
         form = CreateReview()
-
+        print("PRINT: ", form.data)
+        form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             new_review = (
                 insert(reviews).
                 values(
                 product_id=id,
                 user_id=current_user.id,
-                review= form.data['reveiw'],
+                review= form.data['review'],
                 stars = form.data['stars'],
                 created_at = datetime.utcnow(),
                 updated_at = datetime.utcnow())
                 )
 
+            print('PRINT', new_review)
             db.session.execute(new_review)
             db.session.commit()
 
         if form.errors:
             return "Errors in Route"
 
-        return    {
-            "userId": new_review.user_id,
-            "productId": new_review.product_id,
-            "review": new_review.review,
-            "stars": new_review.stars,
-            "createdAt": new_review.created_at,
-            "updatedAt": new_review.updated_at
-        }
+        return "Success!"
+
+        # return    {
+        #     "user_id": new_review.user_id,
+        #     "product_id": new_review.product_id,
+        #     "review": new_review.review,
+        #     "stars": new_review.stars,
+        #     "createdAt": new_review.created_at,
+        #     "updatedAt": new_review.updated_at
+        # }

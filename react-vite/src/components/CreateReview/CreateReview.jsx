@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 function CreateReview() {
     const { productId } = useParams();
-    // const [product_id, setProductId] = useState(null);
+    // const [productId, setProductId] = useState(null);
     // const [userId, setUserId] = useState(null);
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(null);
@@ -26,10 +26,16 @@ function CreateReview() {
             return;
         }
 
-        const reviewData = { review, stars }
-        console.log(reviewData)
+        const reviewData = {
+            // product_id: productId,
+            // user_id: userId,
+            review,
+            stars,
+        }
+
+        console.log("REVIEWDATA: ", reviewData)
         try {
-            const reviewRes = await fetch(`/api/reviews/${productId}/create-reviews`, {
+            const reviewRes = await fetch(`/api/reviews/${productId}/create-review`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
