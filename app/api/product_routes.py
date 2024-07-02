@@ -10,7 +10,7 @@ def get_products():
     """
     Get all products
     """
-    all_products = Product.query.all()
+    all_products = Product.query.limit(10).all()
     return {"products": [product.to_dict() for product in all_products]}
 
 @product_routes.route('/<int:product_id>')
