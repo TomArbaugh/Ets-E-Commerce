@@ -137,15 +137,14 @@ export const thunkDeleteProducts = (productId) => async (dispatch) => {
 const initialState = {
   allProducts: [],
   productDetails: {},
-  currentUsersProducts: [],
 }
 
-function productsReducer(state = initialState, action) {
+export default function productReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_PRODUCTS:
       newState = {
         ...state,
-        allProducts: action.product,
+        allProducts: action.products,
       };
       return newState;
     case PRODUCT_DETAILS:
@@ -161,22 +160,29 @@ function productsReducer(state = initialState, action) {
       };
       return newState;
     case CURRENT_USERS_PRODUCTS:
-      newState = {
-        ...state,
-        currentUserProducts: action.products,
+      newState = { ...state, 
+        allProducts: action.products
       };
+      return newState;
     case UPDATE_PRODUCT:
       newState = {
         ...state,
       };
+      return newState;
     case DELETE_PRODUCT:
       newState = {
         ...state,
+        allProducts: state.products.filter(product=> product.id !== action.productId)
       };
-    case ADD_PRODUCT_IMAGE:
-      newState = {
-        ...state,
-      };
+      return newState;
+    // case ADD_PRODUCT_IMAGE:
+    //   const { productId, image } = action;
+    //   const product = state[productId];
+    //   if (!product) return state; 
+    //   return {
+    //     ...state,
+    //     productDetails: pass
+    //   };
     default:
       return state;
   }
