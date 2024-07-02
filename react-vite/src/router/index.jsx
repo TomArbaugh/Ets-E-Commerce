@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <LandingPage/>,
+        element: <LandingPage />,
       },
       {
         path: "login",
