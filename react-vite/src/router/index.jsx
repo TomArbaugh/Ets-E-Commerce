@@ -3,7 +3,11 @@ import LoginFormPage from '../components/LoginFormPage';
 import ViewReviews from '../components/ViewReviews/reviews';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
+<<<<<<< HEAD
 import CreateReview from '../components/CreateReview/CreateReview'
+=======
+import LandingPage from '../components/LandingPage/LandingPage';
+>>>>>>> dev
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +15,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <LandingPage />,
       },
       {
         path: "login",
