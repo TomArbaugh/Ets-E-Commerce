@@ -27,9 +27,9 @@ function CreateReview() {
         }
 
         const reviewData = { review, stars }
-
+        console.log(reviewData)
         try {
-            const reviewRes = fetch(`/api/reviews/${productId}/create-reviews`, {
+            const reviewRes = await fetch(`/api/reviews/${productId}/create-reviews`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -38,8 +38,8 @@ function CreateReview() {
             });
 
             if (reviewRes.ok) {
-                const newReview = await reviewRes.json();
-                navigate(`/reviews/${newReview.id}`);
+                // const newReview = await reviewRes.json();
+                navigate(`/reviews/${productId}`);
             }
         } catch (err) {
             console.error('Request Error:', err);

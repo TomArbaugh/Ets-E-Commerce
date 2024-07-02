@@ -37,7 +37,6 @@ def reviews_by_productId(id):
     return reviews_array
 
 @review_routes.route('/<int:id>/edit-review', methods=['GET', 'POST'])
-
 @login_required
 def edit_review(id):
 
@@ -81,9 +80,8 @@ def edit_review(id):
         }
 
 
-@review_routes.route('/<int:id>/create-review', methods=['GET', 'POST'])
-
-
+@review_routes.route('/<int:id>/create-review', methods=['POST'])
+@login_required
 def post_review(id):
 
         """Create Review for a Product"""
@@ -102,7 +100,7 @@ def post_review(id):
 
         if form.validate_on_submit():
             new_review = (
-                db.insert(reviews).
+                insert(reviews).
                 values(
                 product_id=id,
                 user_id=current_user.id,
@@ -112,7 +110,7 @@ def post_review(id):
                 updated_at = datetime.utcnow())
                 )
 
-            db.session.add(new_review)
+            db.session.execute(new_review)
             db.session.commit()
 
         if form.errors:
