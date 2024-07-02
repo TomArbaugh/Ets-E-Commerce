@@ -20,6 +20,7 @@ class ProductImage(db.Model):
         return {
             'id': self.id,
             'product_id': self.product_id,
-            'url': self.url,
+            'url': self.url,            
         }
+
     
