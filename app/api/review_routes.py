@@ -34,8 +34,8 @@ def reviews_by_productId(id):
 @review_routes.route('/<int:id>/edit-review', methods=['GET', 'POST'])
 
 @login_required
-def post_review(id):
-       
+def edit_review(id):
+
         """Edit Review for a Product"""
 
         reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == id).all()
@@ -43,7 +43,7 @@ def post_review(id):
         for review in reviews_records:
             if review.user_id == current_user.id:
                 raise Exception('User can only create one review')
-        
+
         # need to confirm customer has ordered product
 
         form = CreateReview()
@@ -59,12 +59,12 @@ def post_review(id):
                 created_at = form.data['created_at'],
                 updated_at = datetime.utcnow())
                 )
-             
+
             db.session.commit()
 
         if form.errors:
             return "Errors in Route"
-        
+
         return    {
             "userId": new_review.user_id,
             "productId": new_review.product_id,
@@ -73,13 +73,13 @@ def post_review(id):
             "createdAt": new_review.created_at,
             "updatedAt": new_review.updated_at
         }
-        
+
 
 @review_routes.route('/<int:id>/create-review', methods=['GET', 'POST'])
 
 @login_required
 def post_review(id):
-       
+
         """Create Review for a Product"""
 
         reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == id).all()
@@ -87,10 +87,10 @@ def post_review(id):
         for review in reviews_records:
             if review.user_id == current_user.id:
                 raise Exception('User can only create one review')
-        
+
         # need to confirm customer has ordered product
 
-        
+
 
         form = CreateReview()
 
@@ -104,13 +104,13 @@ def post_review(id):
                 created_at = datetime.utcnow(),
                 updated_at = datetime.utcnow())
                 )
-             
+
             db.session.add(review)
             db.session.commit()
 
         if form.errors:
             return "Errors in Route"
-        
+
         return    {
             "userId": new_review.user_id,
             "productId": new_review.product_id,
@@ -119,5 +119,3 @@ def post_review(id):
             "createdAt": new_review.created_at,
             "updatedAt": new_review.updated_at
         }
-        
-
