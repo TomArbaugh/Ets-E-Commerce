@@ -102,6 +102,20 @@ def delete_product(product_id):
     db.session.commit()
     return {'message': 'Product delete successfully'}
 
+@product_routes.route('/<int:product_id>/images')
+@login_required
+def get_all_product_images(product_id):
+    """
+    Get product images by product id
+    """
+    product = Product.query.get(product_id)
+    if product is None:
+        return {'errors': {'message': 'Product not found'}}, 404
+  
+    images = ProductImage.query.filter_by(product_id=product_id).all()
+    return {"images": [image.to_dict() for image in images]}
+    
+
 @product_routes.route('/<int:product_id>/images', methods=['POST'])
 @login_required
 def upload_product_image(product_id):
@@ -122,60 +136,14 @@ def upload_product_image(product_id):
              url = form.data['url']
          )
          db.session.add(new_image)
+         db.session.commit()
          return new_image.to_dict(), 201
      else:
         print("Form validation failed:", form.errors)  
      return {'errors': form.errors}, 400
 
-@product_routes.route('/<int:product_id>/images/<int:image_id>', methods=['GET', 'PUT'])
-@login_required
-def update_product_image(product_id, image_id):
-    """
-    Update image
-    """
-    product = Product.query.get(product_id)
 
-    if product is None:
-        return {'errors': {'message': 'Product not found'}}, 404
 
-    if product.owner_id != current_user.id:
-        return {'errors': {'message': 'You are not authorized'}}, 403
-     
-    image = ProductImage.query.get(image_id)
-    if image is None:
-        return {'errors': {'message': 'Image not found'}}, 404
-    
-    if request.method == 'GET':
-        return image.to_dict()
-    
-    form = ProductImageForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        image.url = form.data['url']
-        db.session.commit()
-        return image.to_dict()
-    if form.errors:
-        return {'errors': form.errors}, 400
-
-@product_routes.route('/<int:product_id>/images/<int:image_id>', methods=['DELETE'])
-@login_required
-def delete_image(product_id, image_id):
-    product = Product.query.get(product_id)
-
-    if product is None:
-        return {'errors': {'message': 'Product not found'}}, 404
-
-    if product.owner_id != current_user.id:
-        return {'errors': {'message': 'You are not authorized'}}, 403
-     
-    image = ProductImage.query.get(image_id)
-    if image is None:
-        return {'errors': {'message': 'Image not found'}}, 404
-    
-    db.session.delete(image)
-    db.session.commit()
-    return {'message': 'Image delete successfully'}
-    
 
     
      
