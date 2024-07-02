@@ -96,10 +96,10 @@ def post_review(id):
 
         if form.validate_on_submit():
             new_review = (
-                insert(user_reviews).
+                insert(reviews).
                 values(user_id=form.data['user_id'],
-                product_id=form.data['product_id'],
-                reviews= form.data['reveiws'],
+                product_id=id,
+                review= form.data['reveiw'],
                 stars = form.data['stars'],
                 created_at = datetime.utcnow(),
                 updated_at = datetime.utcnow())

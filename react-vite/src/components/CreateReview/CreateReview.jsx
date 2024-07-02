@@ -50,6 +50,7 @@ function CreateReview() {
         <div>
             <h1>Create a new review</h1>
             <form onSubmit={handleSubmit}>
+                <h3>Review</h3>
                 <input value={review} type="text" onChange={(e) => setReview(e.target.value)} />
                 {errors.review && <p className="error-message">{errors.review}</p>}
                 <select value={stars} onChange={(e) => setStars(e.target.value)}>
@@ -61,6 +62,7 @@ function CreateReview() {
                     <option value="5">5</option>
                 </select>
                 {errors.stars && <p className="error-message">{errors.stars}</p>}
+                <button type='submit'>Leave Review</button>
             </form>
         </div>
     )
