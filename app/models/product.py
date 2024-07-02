@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .review import reviews
+from .review import Review
 from .order_items import order_items
 from .shopping_cart_item import shopping_cart_items
 
@@ -30,21 +30,21 @@ class Product(db.Model):
         back_populates = 'products'
     )
 
-    #many-to-many users<=reviews=>products
-    user_reviews = db.relationship(
-        'User',
-        secondary=reviews,
-        back_populates = 'product_reviews'
+    #one-to-many products=>reviews
+    reviews = db.relationship(
+        'Review',
+        back_populates = 'product',
+        cascade="all, delete-orphan"
     )
     
-      #many-to-many users<=shopping_cart_items=>products
+    #many-to-many users<=shopping_cart_items=>products
     user_shopping_cart_items = db.relationship(
         'User',
         secondary=shopping_cart_items,
         back_populates = 'product_shopping_cart_items'
     )
 
-                #many-to-many orders<=order_items=>products
+    #many-to-many orders<=order_items=>products
     order_products = db.relationship(
         'Order',
         secondary=order_items,
@@ -61,7 +61,5 @@ class Product(db.Model):
             'price': self.price,
             'stock': self.stock,
             'images': [image.to_dict() for image in self.images],
-            'reviews': {
-                'userId': self.user_reviews
-            }
+            'reviews': [review.to_dict() for review in self.reviews]
         }

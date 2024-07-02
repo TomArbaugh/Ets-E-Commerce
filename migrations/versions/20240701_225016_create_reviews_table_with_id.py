@@ -1,19 +1,16 @@
-"""empty message
+"""Create reviews table with id
 
-Revision ID: 58af1b145257
+Revision ID: 22b045ab4074
 Revises: 
-Create Date: 2024-06-29 16:41:42.444177
+Create Date: 2024-07-01 22:50:16.649176
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '58af1b145257'
+revision = '22b045ab4074'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -47,7 +44,7 @@ def upgrade():
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('category', sa.String(length=50), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
-    sa.Column('price', sa.Numeric(), nullable=False),
+    sa.Column('price', sa.Numeric(precision=3, scale=2), nullable=False),
     sa.Column('stock', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -68,6 +65,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reviews',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('review', sa.String(length=2000), nullable=False),
@@ -76,7 +74,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('product_id', 'user_id')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('shopping_cart_items',
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -86,15 +84,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'product_id')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE product_images SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE shopping_cart_items SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE order_items SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
