@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker, relationship, joinedload
 from flask_login import login_required, current_user
 from ..forms.review_creater import CreateReview
 from datetime import datetime
+from sqlalchemy import insert, update, delete
 
 review_routes = Blueprint('reviews', __name__)
 
@@ -20,9 +21,10 @@ def reviews_by_productId(id):
     reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == id).all()
 
     # product = Product.query.get(id)
+    reviews_array = []
     for review in reviews_records:
 
-       return {
+       review_obj = {
         "userId": review.user_id,
         "productId": review.product_id,
         "review": review.review,
@@ -30,6 +32,9 @@ def reviews_by_productId(id):
         "createdAt": review.created_at,
         "updatedAt": review.updated_at
     }
+
+    reviews_array.append(review_obj)
+    return reviews_array
 
 @review_routes.route('/<int:id>/edit-review', methods=['GET', 'POST'])
 
@@ -52,8 +57,9 @@ def edit_review(id):
             new_review = (
                 update(user_reviews).
                 where(user_reviews.c.product_id == id).
-                values(user_id=form.data['user_id'],
-                product_id=form.data['product_id'],
+                values(
+                product_id=id,
+                user_id=current_user.id,
                 reviews= form.data['reveiws'],
                 stars = form.data['stars'],
                 created_at = form.data['created_at'],
@@ -77,7 +83,7 @@ def edit_review(id):
 
 @review_routes.route('/<int:id>/create-review', methods=['GET', 'POST'])
 
-@login_required
+
 def post_review(id):
 
         """Create Review for a Product"""
@@ -96,16 +102,17 @@ def post_review(id):
 
         if form.validate_on_submit():
             new_review = (
-                insert(reviews).
-                values(user_id=form.data['user_id'],
+                db.insert(reviews).
+                values(
                 product_id=id,
+                user_id=current_user.id,
                 review= form.data['reveiw'],
                 stars = form.data['stars'],
                 created_at = datetime.utcnow(),
                 updated_at = datetime.utcnow())
                 )
 
-            db.session.add(review)
+            db.session.add(new_review)
             db.session.commit()
 
         if form.errors:
