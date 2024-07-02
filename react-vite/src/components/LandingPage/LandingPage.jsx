@@ -6,7 +6,7 @@ import './LandingPage.css';
 
 const LandingPage = () => {
   const dispatch = useDispatch();
-  const products = Object.values(useSelector((state) => state.products.products));
+  const products = useSelector((state) => state.products.allProducts || []);
 
   useEffect(() => {
     dispatch(thunkGetAllProducts());
@@ -16,7 +16,8 @@ const LandingPage = () => {
     <div className="landing-page">
       <div className="products-list-container">
         {products.map((product) => (
-          <link
+          <Link 
+           key={product.id}
            className="link-to-productDetails"
            to={`/products/${product.id}`}
            >
@@ -25,7 +26,7 @@ const LandingPage = () => {
               <p>{product.name}</p>
               <p>${product.price}</p>
             </div>
-          </link>
+          </Link>
         ))}
       </div>
     </div>

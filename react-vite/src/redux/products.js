@@ -83,7 +83,7 @@ export const thunkAddProductImage = (productId, image) => async (dispatch) => {
     headers: {
       "Content-Type": "application/json"
     },
-    body: json.stringify(image),
+    body: JSON.stringify(image),
   });
   if (res.ok) {
     const productImage = await res.json();
@@ -111,7 +111,7 @@ export const thunkUpdateProducts = (product) => async (dispatch) => {
     headers: {
       "Content-Type": "application/json"
     },
-    body: json.stringify(product),
+    body: JSON.stringify(product),
   });
   if (res.ok) {
     const updatedProduct = await res.json();
@@ -140,6 +140,7 @@ const initialState = {
 }
 
 export default function productReducer(state = initialState, action) {
+  let newState;
   switch (action.type) {
     case GET_ALL_PRODUCTS:
       newState = {
