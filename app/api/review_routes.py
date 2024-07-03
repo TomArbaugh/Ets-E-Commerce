@@ -36,7 +36,8 @@ def reviews_by_productId(product_id):
     reviews_array.append(review_obj)
     return reviews_array
 
-@review_routes.route('/<int:product_id>/edit-review', methods=['GET', 'POST'])
+
+@review_routes.route('/<int:product_id>/edit-review/', methods=['GET', 'POST'])
 @login_required
 def edit_review(product_id):
 
@@ -44,6 +45,9 @@ def edit_review(product_id):
 
         reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == product_id).all()
 
+        # review = reviews_records.find(lambda review: review.user_id == current_user.id)
+
+        # print('PRINT', review)
         for review in reviews_records:
             if review.user_id == current_user.id:
                 raise Exception('User can only create one review')
@@ -86,10 +90,10 @@ def post_review(product_id):
 
         """Create Review for a Product"""
 
-        reviews_records = db.session.query(reviews).all()
+        # reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == product_id).all()
 
         # for review in reviews_records:
-        #     if review.user_id == current_user.id and review.product_id == id:
+        #     if review.user_id == current_user.id:
         #         raise Exception('User can only create one review')
 
         # need to confirm customer has ordered product
