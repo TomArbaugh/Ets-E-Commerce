@@ -10,25 +10,29 @@ function Navigation() {
   return (
     <div id='header-container'>
       <div id='logo'>
-        <NavLink className='Esty-logo-link-to-home' to='/'>
+        <NavLink className='logo-link-to-home' to='/'>
           <TbBrandEtsy />
         </NavLink>  
       </div>
+      
+      <div className='category-and-search'>
+        <div id='header-category'>Category</div>
 
-      <div id='header-category'>Category</div>
-
-      <div id='search-bar'>
-        <input 
-          type="text"
-          placeholder='Search for anything'/>
-      </div>
-
-      <div id='login and sigup'>
-        <ProfileButton user={sessionUser}/>
+        <div id='search-bar'>
+          <input 
+            type="text"
+            placeholder='Search for anything'/>
+        </div>
       </div>
       
-      <div id='shopping-cart-icon'>
-      <RiShoppingCartLine />
+      <div className='two-icons'>
+        <div id='login and sigup'>
+          <ProfileButton user={sessionUser}/>
+        </div>
+        
+        <div id='shopping-cart-icon'>
+        <RiShoppingCartLine />
+        </div>
       </div>
     </div>
   );
