@@ -2,7 +2,7 @@ const GET_ALL_PRODUCTS = 'products/all';
 const PRODUCT_DETAILS = 'products/details';
 const CREATE_NEW_PRODUCT = 'products/new';
 const CURRENT_USERS_PRODUCTS = 'products/current';
-const UPDATE_PRODUCT = 'products/update';
+// const UPDATE_PRODUCT = 'products/update';
 const DELETE_PRODUCT = 'products/delete';
 const ADD_PRODUCT_IMAGE = 'products/addImage';
 // const UPDATE_PRODUCT_IMAGE = 'products/updateImage';
@@ -15,7 +15,7 @@ const getAllProducts = (products) => ({
 
 const productDetails = (product) => ({
   type: PRODUCT_DETAILS,
-  payload: product,
+  product,
 });
 
 const createNewProduct = (product) => ({
@@ -28,10 +28,10 @@ const currentUsersProducts = (products) => ({
   products,
 });
 
-const updateProduct = (product) => ({
-  type: UPDATE_PRODUCT,
-  product,
-});
+// const updateProduct = (product) => ({
+//   type: UPDATE_PRODUCT,
+//   product,
+// });
 
 const deleteProduct = (productId) => ({
   type: DELETE_PRODUCT,
@@ -56,9 +56,9 @@ export const thunkProductDetails = (productId) => async (dispatch) => {
   const res = await fetch(`/api/products/${productId}`);
   if (res.ok) {
     const product = await res.json();
-    dispatch(productDetails(product))
+    dispatch(productDetails(product));
   } else {
-    const error = await res.json()
+    const error = await res.json();
     return error;
   }
 };
@@ -105,22 +105,22 @@ export const thunkGetCurrentUsersProducts = () => async (dispatch) => {
   }
 };
 
-export const thunkUpdateProducts = (product) => async (dispatch) => {
-  const res = await fetch(`/api/products/${product.id}`, {
-    method: 'PUT',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(product),
-  });
-  if (res.ok) {
-    const updatedProduct = await res.json();
-    dispatch(updateProduct(updatedProduct))
-  } else {
-    const error = await res.json()
-    return error;
-  }
-};
+// export const thunkUpdateProducts = (product) => async (dispatch) => {
+//   const res = await fetch(`/api/products/${product.id}`, {
+//     method: 'PUT',
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(product),
+//   });
+//   if (res.ok) {
+//     const updatedProduct = await res.json();
+//     dispatch(updateProduct(updatedProduct))
+//   } else {
+//     const error = await res.json()
+//     return error;
+//   }
+// };
 
 export const thunkDeleteProducts = (productId) => async (dispatch) => {
   const res = await fetch(`/api/products/${productId}`, {
@@ -151,7 +151,7 @@ export default function productReducer(state = initialState, action) {
     case PRODUCT_DETAILS:
       newState = {
         ...state,
-        productDetails: action.products,
+        productDetails: action.product,
       };
       return newState;
     case CREATE_NEW_PRODUCT:
@@ -165,15 +165,15 @@ export default function productReducer(state = initialState, action) {
         allProducts: action.products
       };
       return newState;
-    case UPDATE_PRODUCT:
-      newState = {
-        ...state,
-      };
-      return newState;
+    // case UPDATE_PRODUCT:
+    //   newState = {
+    //     ...state,
+    //   };
+    //   return newState;
     case DELETE_PRODUCT:
       newState = {
         ...state,
-        allProducts: state.products.filter(product=> product.id !== action.productId)
+        allProducts: state.allProducts.filter(product => product.id !== action.productId)
       };
       return newState;
     // case ADD_PRODUCT_IMAGE:

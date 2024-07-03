@@ -3,9 +3,9 @@ import LoginFormPage from '../components/LoginFormPage';
 import ViewReviews from '../components/ViewReviews/reviews';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
-import CreateReview from '../components/CreateReview/CreateReview'
+import CreateReview from '../components/CreateReview/CreateReview';
 import LandingPage from '../components/LandingPage/LandingPage';
-import ProductDetails from '..components/ProductDetails/ProductDetails';
+import ProductDetails from '../components/ProductDetails/ProductDetails';
 
 export const router = createBrowserRouter([
   {
