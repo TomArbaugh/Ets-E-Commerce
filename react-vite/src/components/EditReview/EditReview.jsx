@@ -1,15 +1,17 @@
 import { useState} from "react";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 // import { useContext } from "react";
 import { useNavigate, useParams } from 'react-router-dom'
-// import {ModalContext} from '../context/Modal'
+// import { useModal } from '../../context/Modal.jsx'
+import { thunkAuthenticate } from "../../redux/session.js";
+import { useDispatch } from "react-redux";
 
 
 function EditReiew() {
 
 
     const { productId } = useParams();
-    // const { user } = useContext(ModalContext)
+    // const { user } = useModal
 // console.log('USER: ', user)
 
     // const [productId, setProductId] = useState(null);
@@ -18,7 +20,7 @@ function EditReiew() {
     const [stars, setStars] = useState(null);
     const [errors, setErrors] = useState({})
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
 
     const validateForm = () => {
         const newErrors = {};
@@ -26,16 +28,24 @@ function EditReiew() {
         if (stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5"
         return newErrors;
     }
-
+    let user;
+    useEffect(() => {
+        user = dispatch(thunkAuthenticate());
+      }, [dispatch]);
+    console.log("USER1: ", user)
     // useEffect(() => {
     //     const getReview = async () => {
-    //         const reviews = await fetch(`/api/reviews/${productId}/reviews/`)
+    //         const res = await fetch(`/api/reviews/${productId}/reviews/`)
+    //         const reviews = await res.json()
     //         const review = reviews.find((review) => review.user_id === user.id)
     //         console.log(review)
+    //         if (review) {
+    //             setReview(review.review);
+    //             setStars(review.stars);
+    //         }
     //     }
     //     getReview()
-    // }, [productId])
-
+    // }, [productId, user.id])
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = validateForm();
@@ -73,6 +83,7 @@ function EditReiew() {
 
     return (
         <div>
+            {/* <h1>{user}</h1> */}
             <h1>Create a new review</h1>
             <form onSubmit={handleSubmit}>
                 <h3>Hello Review</h3>
