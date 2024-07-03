@@ -1,0 +1,16 @@
+.landing-page {
+    text-align: center;
+}
+
+.products-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 19%;
+    column-gap: 10px;
+    overflow: hidden;
+}
+
+.product-card {
+    border-radius: 10px;
+    overflow: hidden;
+}
