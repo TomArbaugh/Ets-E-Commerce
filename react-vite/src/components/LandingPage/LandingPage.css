@@ -9,7 +9,6 @@
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
-  flex-basis: 19%;
 }
 .product-card {
   border-radius: 10px;
@@ -21,7 +20,4 @@
   padding: 10px;
   transition: transform 0.2s;
   margin-bottom: 10px;
-
 }
-
-.
