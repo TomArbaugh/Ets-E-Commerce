@@ -69,7 +69,7 @@ function EditReiew() {
 
         try {
             const fetchAllReviews = await fetch(`/api/reviews/${productId}/reviews`);
-            console.log("FETCHALLREVIEWS: ", await fetchAllReviews.json())
+            console.log("FETCHALLREVIEWS: ", awaitfetchAllReviews.json())
             const review = fetchAllReviews.find(review => review.user_id = userId)
             console.log('REVIEW: ', review)
         } catch (err) {
