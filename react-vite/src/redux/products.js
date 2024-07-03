@@ -98,7 +98,7 @@ export const thunkGetCurrentUsersProducts = () => async (dispatch) => {
   const res = await fetch('/api/products/current');
   if (res.ok) {
     const usersProducts = await res.json();
-    dispatch(currentUsersProducts(usersProducts))
+    dispatch(currentUsersProducts(usersProducts.products))
   } else {
     const error = await res.json()
     return error;

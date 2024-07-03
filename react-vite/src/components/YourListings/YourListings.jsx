@@ -35,7 +35,7 @@ const YourListings = () => {
                 <img src={product.image_url} alt={product.title} />
                 <div className="listing-details">
                   <h2>{product.title}</h2>
-                  <p>${product.price.toFixed(2)}</p>
+                  <p>${product.price}</p>
                   <p>{product.quantity} in stock</p>
                   <p>{product.category}</p>
                   <p>{product.description}</p>
