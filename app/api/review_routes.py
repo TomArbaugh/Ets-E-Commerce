@@ -43,29 +43,31 @@ def edit_review(product_id):
 
         """Edit Review for a Product"""
 
-        reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == product_id).all()
+        # reviews_records = db.session.query(reviews).join(User).filter(reviews.columns.product_id == product_id).all()
 
         # review = reviews_records.find(lambda review: review.user_id == current_user.id)
 
         # print('PRINT', review)
-        for review in reviews_records:
-            if review.user_id == current_user.id:
-                raise Exception('User can only create one review')
+        # for review in reviews_records:
+        #     if review.user_id == current_user.id:
+        #         raise Exception('User can only create one review')
 
         # need to confirm customer has ordered product
 
         form = CreateReview()
+
+        form['csrf_token'].data = request.cookies['csrf_token']
 
         if form.validate_on_submit():
             new_review = (
                 update(reviews).
                 where(reviews.c.product_id == product_id).
                 values(
-                product_id=product_id,
-                user_id=current_user.id,
-                reviews= form.data['reveiws'],
+                # product_id=product_id,
+                # user_id=current_user.id,
+                reviews= form.data['review'],
                 stars = form.data['stars'],
-                created_at = form.data['created_at'],
+                # created_at = form.data['created_at'],
                 updated_at = datetime.utcnow())
                 )
 
@@ -101,7 +103,7 @@ def post_review(product_id):
         # .join(User).filter(reviews.columns.product_id == id)
 
         form = CreateReview()
-        print("PRINT: ", form.data)
+        # print("PRINT: ", form.data)
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             new_review = (

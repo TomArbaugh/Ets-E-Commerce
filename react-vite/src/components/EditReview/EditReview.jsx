@@ -5,7 +5,7 @@ import { thunkAuthenticate } from "../../redux/session.js";
 import { useDispatch, useSelector } from "react-redux";
 
 
-function EditReiew() {
+function EditReview() {
 
 
     const { productId } = useParams();
@@ -26,11 +26,38 @@ function EditReiew() {
         return newErrors;
     }
 
+    useEffect(() => {
+        const setState = async () => {
+
+            try {
+                const fetchAllReviews = await fetch(`/api/reviews/${productId}/reviews`);
+                const fetchedReviews = await fetchAllReviews.json()
+                // console.log("FETCHALLREVIEWS: ", fetchedReviews)
+                const review = fetchedReviews.find((review) => review.user_id === userId)
+                // console.log(fetchedReviews[0].user_id === userId)
+                // console.log('REVIEW: ', review)
+                if (review) {
+                    setReview(review.review)
+                    setStars(review.stars)
+                }
+            } catch (err) {
+                console.error('Request Error:', err);
+            }
+        }
+    
+        setState()
+    }, [dispatch, userId, productId])
+ 
+
     const userId = useSelector(state => state.session.user.id)
-    console.log("USERId: ", userId)
+    console.log("USERID: ", userId)
+
+
     useEffect(() => {
          dispatch(thunkAuthenticate());
       }, [dispatch, productId]);
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -67,14 +94,6 @@ function EditReiew() {
         }
         console.log("TEST")
 
-        try {
-            const fetchAllReviews = await fetch(`/api/reviews/${productId}/reviews`);
-            console.log("FETCHALLREVIEWS: ", await fetchAllReviews.json())
-            const review = fetchAllReviews.find(review => review.user_id = userId)
-            console.log('REVIEW: ', review)
-        } catch (err) {
-            console.error('Request Error:', err);
-        }
     }
 
     return (
@@ -100,4 +119,4 @@ function EditReiew() {
 
 }
 
-export default EditReiew
+export default EditReview
