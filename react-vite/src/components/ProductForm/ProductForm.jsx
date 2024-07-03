@@ -32,21 +32,26 @@ const ProductForm = () => {
     setErrors(errorArr);
   }, [name, category, description, price, stock]);
 
+  const csrfToken = useSelector(state => state.session.csrfToken); // #### CSRF TOKEN ####
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true);
-    console.log('seession user:', sessionUser) ///////////// CONSOLE LOG
+    console.log('session user:', sessionUser); ///////////// CONSOLE LOG
 
     if (errors.length > 0) return; // prevent submission if frontend errors exist
-    const product = { name, category, description, price, stock, imageUrl};
+    const product = { name, category, description, price, stock, imageUrl, csrf_token: csrfToken}; // #### TOKEN ####
 
     console.log('submitting product:', product); ///////////// CONSOLE LOG
     
     const response = await dispatch(thunkCreateNewProduct(product));
     console.log('response:', response); ///////////// CONSOLE LOG
+    console.log('response errors:', response.errors); ///////////// CONSOLE LOG
 
     if (response.errors) {
+
       setErrors(response.errors);
+
     } else {
       const productId = response.id;
       navigate(`/products/${productId}`);

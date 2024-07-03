@@ -64,20 +64,28 @@ export const thunkProductDetails = (productId) => async (dispatch) => {
 };
 
 export const thunkCreateNewProduct = (product) => async (dispatch) => {
-    const res = await fetch('/api/products', {
+  console.log('submitting product:', product);
+
+  const res = await fetch('/api/products', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
+        "X-CSRFToken": 'csrf_token'
       },
       body: JSON.stringify(product)
     });
+    
+    console.log('response status:', res.status);
 
     if (res.ok) {
       const newProduct = await res.json();
+      console.log('new product created:', newProduct)
+
       dispatch(createNewProduct(newProduct));
       return newProduct;
     } else {
       const error = await res.json(); 
+      console.log('error creating product:', error)
       return {errors: error.errors}
     }
 };
