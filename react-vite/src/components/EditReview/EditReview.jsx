@@ -27,21 +27,10 @@ function EditReiew() {
     }
 
     const userId = useSelector(state => state.session.user.id)
-
+    console.log("USERId: ", userId)
     useEffect(() => {
          dispatch(thunkAuthenticate());
       }, [dispatch, productId]);
-
-    //   const getUser = async () => {
-    //     const response = await fetch("/api/auth/");
-    //     if (response.ok) {
-    //         const data = await response.json();
-    //         console.log(data)
-    //   }
-    // }
-    // getUser()
-
-    console.log("USER1: ", userId)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,18 +50,28 @@ function EditReiew() {
         console.log("REVIEWDATA: ", reviewData)
 
         try {
-            const reviewRes = await fetch(`/api/reviews/${productId}/create-review`, {
+            const reviewRes = await fetch(`/api/reviews/${productId}/edit-review`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(reviewData)
             });
-
+            console.log("TRY")
             if (reviewRes.ok) {
                 // const newReview = await reviewRes.json();
                 navigate(`/reviews/${productId}`);
             }
+        } catch (err) {
+            console.error('Request Error:', err);
+        }
+        console.log("TEST")
+
+        try {
+            const fetchAllReviews = await fetch(`/api/reviews/${productId}/reviews`);
+            console.log("FETCHALLREVIEWS: ", await fetchAllReviews.json())
+            const review = fetchAllReviews.find(review => review.user_id = userId)
+            console.log('REVIEW: ', review)
         } catch (err) {
             console.error('Request Error:', err);
         }
