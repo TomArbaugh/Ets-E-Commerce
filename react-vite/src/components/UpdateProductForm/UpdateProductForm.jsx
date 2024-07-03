@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkCreateNewProduct } from '../../redux/products';
+import { thunkGetProductDetails, thunkUpdateProduct } from '../../redux/products';
 import './UpdateProductForm.css';
 
 const UpdateProductForm = () => {

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { thunkGetCurrentUsersProducts } from '../../redux/products';
 import './YourListings.css';
+import OpenModalButton from '../OpenModalButton'
+import DeleteProductModal from './DeleteProductModal'
 
 const YourListings = () => {
   const dispatch = useDispatch();
@@ -45,7 +47,10 @@ const YourListings = () => {
                   <p>{product.description}</p>
                   <div className="listing-actions">
                     <button onClick={() => handleEditListing(product.id)}>Edit</button>
-                    <button>Delete</button>
+                    <OpenModalButton
+                      buttonText='Delete'
+                      modalComponent={<DeleteProductModal productId = {product.id} />}
+                     />
                   </div>
                 </div>
               </li>
