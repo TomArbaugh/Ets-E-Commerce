@@ -1,0 +1,19 @@
+.profile-dropdown {
+  position: absolute;
+}
+
+#header-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; 
+}
+
+.two-icons {
+  display: flex;
+
+}
+
+.category-and-search {
+  display: flex;
+
+}
