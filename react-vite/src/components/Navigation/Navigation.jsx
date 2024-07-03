@@ -1,18 +1,35 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
+import { RiShoppingCartLine } from "react-icons/ri";
 
 function Navigation() {
+  const sessionUser = useSelector(state => state.session.user);
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
+    <div id='header-container'>
+      <div id='logo'>
+        <NavLink className='Esty-logo-link-to-home' to='/'>
+          <img src='/Wen.ico' alt="Etsy-logo" className='our-logo' />
+        </NavLink>  
+      </div>
 
-      <li>
-        <ProfileButton />
-      </li>
-    </ul>
+      <div id='header-category'>Category</div>
+
+      <div id='search-bar'>
+        <input 
+          type="text"
+          placeholder='Search for anything'/>
+      </div>
+
+      <div id='login and sigup'>
+        <ProfileButton user={sessionUser}/>
+      </div>
+      
+      <div id='shopping-cart-icon'>
+      <RiShoppingCartLine />
+      </div>
+    </div>
   );
 }
 

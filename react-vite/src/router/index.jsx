@@ -5,7 +5,9 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import CreateReview from '../components/CreateReview/CreateReview';
 import LandingPage from '../components/LandingPage/LandingPage';
+import YourListings from '../components/YourListings/YourListings';
 import ProductDetails from '../components/ProductDetails/ProductDetails';
+import ProductForm from '../components/ProductForm/ProductForm'
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +16,14 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
+      },
+      {
+        path: 'products/new',
+        element: <ProductForm />,
+      },
+      {
+        path: 'your-listings',
+        element: <YourListings />,
       },
       {
         path: "login",
