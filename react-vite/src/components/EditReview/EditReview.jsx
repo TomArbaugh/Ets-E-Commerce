@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom'
 import { thunkAuthenticate } from "../../redux/session.js";
 import { useDispatch, useSelector } from "react-redux";
+// import DeleteReview from "../DeleteReview/DeleteReview"
 
 
 function EditReview() {
@@ -26,6 +27,7 @@ function EditReview() {
         return newErrors;
     }
 
+    const userId = useSelector(state => state.session.user.id)
     useEffect(() => {
         const setState = async () => {
 
@@ -49,7 +51,6 @@ function EditReview() {
     }, [dispatch, userId, productId])
 
 
-    const userId = useSelector(state => state.session.user.id)
     console.log("USERID: ", userId)
 
 
@@ -119,4 +120,4 @@ function EditReview() {
 
 }
 
-export default EditReview
+export default EditReview;
