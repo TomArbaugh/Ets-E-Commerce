@@ -137,16 +137,18 @@ def post_review(product_id):
         #     "updatedAt": new_review.updated_at
         # }
 
-@review_routes.route('/<int:product_id>/delete-review', methods=['GET'])
+@review_routes.route('/<int:product_id>/delete-review', methods=['DELETE'])
 @login_required
 def delete_review(product_id):
         """Delete Review for a Product"""
     # table.delete().where(table.c.id==7)
         # stmt = reviews.delete().where(reviews.c.user_id == current_user.id and reviews.c.product_id == product_id)
-        print("STMT: ", stmt)
-        stmt = (
+        print("deleted: ", deleted_review)
+        deleted_review = (
             delete(reviews)
             .where(reviews.c.user_id == current_user.id and reviews.c.product_id == product_id)
         )
-        db.session.execute(stmt)
+        db.session.execute(delete_review)
         db.session.commit()
+
+        return 'deleted'
