@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom'
 
 function CreateReview() {
@@ -18,6 +18,10 @@ function CreateReview() {
         return newErrors;
     }
 
+    useEffect(() => {
+
+    }, [productId])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = validateForm();
@@ -34,6 +38,7 @@ function CreateReview() {
         }
 
         console.log("REVIEWDATA: ", reviewData)
+
         try {
             const reviewRes = await fetch(`/api/reviews/${productId}/create-review`, {
                 method: 'POST',
