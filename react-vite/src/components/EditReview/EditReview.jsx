@@ -1,8 +1,6 @@
 import { useState} from "react";
 import { useEffect } from "react";
-// import { useContext } from "react";
 import { useNavigate, useParams } from 'react-router-dom'
-// import { useModal } from '../../context/Modal.jsx'
 import { thunkAuthenticate } from "../../redux/session.js";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,7 +9,6 @@ function EditReiew() {
 
 
     const { productId } = useParams();
-    // const { user } = useModal
 // console.log('USER: ', user)
 
     // const [productId, setProductId] = useState(null);
@@ -45,19 +42,7 @@ function EditReiew() {
     // getUser()
 
     console.log("USER1: ", userId)
-    // useEffect(() => {
-    //     const getReview = async () => {
-    //         const res = await fetch(`/api/reviews/${productId}/reviews/`)
-    //         const reviews = await res.json()
-    //         const review = reviews.find((review) => review.user_id === user.id)
-    //         console.log(review)
-    //         if (review) {
-    //             setReview(review.review);
-    //             setStars(review.stars);
-    //         }
-    //     }
-    //     getReview()
-    // }, [productId, user.id])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = validateForm();
@@ -95,8 +80,7 @@ function EditReiew() {
 
     return (
         <div>
-            {/* <h1>{user}</h1> */}
-            <h1>Create a new review</h1>
+            <h1>Edit a review</h1>
             <form onSubmit={handleSubmit}>
                 <h3>Hello Review</h3>
                 <input value={review} type="text" onChange={(e) => setReview(e.target.value)} />
