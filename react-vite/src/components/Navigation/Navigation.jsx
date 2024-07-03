@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { RiShoppingCartLine } from "react-icons/ri";
+import { TbBrandEtsy } from "react-icons/tb";
 
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user);
@@ -10,7 +11,7 @@ function Navigation() {
     <div id='header-container'>
       <div id='logo'>
         <NavLink className='Esty-logo-link-to-home' to='/'>
-          <img src='/Wen.ico' alt="Etsy-logo" className='our-logo' />
+          <TbBrandEtsy />
         </NavLink>  
       </div>
 
