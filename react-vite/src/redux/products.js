@@ -64,16 +64,27 @@ export const thunkProductDetails = (productId) => async (dispatch) => {
 };
 
 export const thunkCreateNewProduct = (product) => async (dispatch) => {
-  const res = await fetch('/api/products', {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(product)
-  });
-  if (res.ok) {
-    const newProduct = await res.json();
-    dispatch(createNewProduct(newProduct))
+  try {
+    const res = await fetch('/api/products', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product)
+    });
+
+    if (res.ok) {
+      const newProduct = await res.json();
+      dispatch(createNewProduct(newProduct));
+      return newProduct;
+    } else {
+      const error = await res.json();
+      console.error('error creating product:', error);  
+      return { errors: error.errors };
+    }
+  } catch (err) {
+    console.error('network error:', err);  
+    return { errors: ['Network error'] };
   }
 };
 
