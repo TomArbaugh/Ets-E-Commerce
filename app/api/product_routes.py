@@ -29,6 +29,7 @@ def create_product():
     """
     Create product
     """
+    print("create product route hit")  ############## PRINT
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

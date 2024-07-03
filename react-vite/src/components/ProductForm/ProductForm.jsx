@@ -35,13 +35,10 @@ const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true);
-    if (errors.length > 0) return; // prevent submission if frontend errors exist
-    const product = { name, category, description, price, stock, image_url: imageUrl };
+    console.log('seession user:', sessionUser) ///////////// CONSOLE LOG
 
-    if (!sessionUser) {
-      setErrors(['You must be logged in to create a product listing.']);
-      return;
-    }
+    if (errors.length > 0) return; // prevent submission if frontend errors exist
+    const product = { name, category, description, price, stock, imageUrl};
 
     console.log('submitting product:', product); ///////////// CONSOLE LOG
     
