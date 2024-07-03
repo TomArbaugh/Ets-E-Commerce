@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom'
 // import { useModal } from '../../context/Modal.jsx'
 import { thunkAuthenticate } from "../../redux/session.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 function EditReiew() {
@@ -28,11 +28,23 @@ function EditReiew() {
         if (stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5"
         return newErrors;
     }
-    let user;
+
+    const userId = useSelector(state => state.session.user.id)
+
     useEffect(() => {
-        user = dispatch(thunkAuthenticate());
-      }, [dispatch]);
-    console.log("USER1: ", user)
+         dispatch(thunkAuthenticate());
+      }, [dispatch, productId]);
+
+    //   const getUser = async () => {
+    //     const response = await fetch("/api/auth/");
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         console.log(data)
+    //   }
+    // }
+    // getUser()
+
+    console.log("USER1: ", userId)
     // useEffect(() => {
     //     const getReview = async () => {
     //         const res = await fetch(`/api/reviews/${productId}/reviews/`)
