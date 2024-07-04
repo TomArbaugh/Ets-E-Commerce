@@ -6,7 +6,6 @@ import Layout from './Layout';
 import CreateReview from '../components/CreateReview/CreateReview';
 import LandingPage from '../components/LandingPage/LandingPage';
 
-
 export const router = createBrowserRouter([
   {
     element: <Layout />,
