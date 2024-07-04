@@ -24,16 +24,16 @@ def reviews_by_productId(product_id):
     reviews_array = []
     for review in reviews_records:
 
-       review_obj = {
-        "user_id": review.user_id,
-        "product_id": review.product_id,
-        "review": review.review,
-        "stars": review.stars,
-        "createdAt": review.created_at,
-        "updatedAt": review.updated_at
+        review_obj = {
+            "user_id": review.user_id,
+            "product_id": review.product_id,
+            "review": review.review,
+            "stars": review.stars,
+            "createdAt": review.created_at,
+            "updatedAt": review.updated_at
         }
 
-    reviews_array.append(review_obj)
+        reviews_array.append(review_obj)
     return reviews_array
 
 
