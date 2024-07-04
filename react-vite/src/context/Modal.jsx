@@ -4,7 +4,7 @@ import './Modal.css';
 
 const ModalContext = createContext();
 
-export function ModalProvider({ children }) {
+export function ModalProvider({ children, user }) {
   const modalRef = useRef();
   const [modalContent, setModalContent] = useState(null);
   // callback function that will be called when modal is closing
@@ -25,7 +25,8 @@ export function ModalProvider({ children }) {
     modalContent, // React component to render inside modal
     setModalContent, // function to set the React component to render inside modal
     setOnModalClose, // function to set the callback function called when modal is closing
-    closeModal // function to close the modal
+    closeModal, // function to close the modal
+    user
   };
 
   return (

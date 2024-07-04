@@ -29,6 +29,7 @@ def create_product():
     """
     Create product
     """
+    print("create product route hit")  ############## PRINT
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -42,9 +43,10 @@ def create_product():
         )
         db.session.add(new_product)
         db.session.commit()
+        print(f"product created: {new_product.to_dict()}") ############## PRINT
         return new_product.to_dict(), 201  
     else:
-        print("Form validation failed:", form.errors)  
+        print("form validation failed:", form.errors)  ############## PRINT
     return {'errors': form.errors}, 400
 
 @product_routes.route('/<int:product_id>', methods=['GET', 'PUT'])
@@ -122,7 +124,7 @@ def upload_product_image(product_id):
 
     if product.owner_id != current_user.id:
         return {'errors': {'message': 'You are not authorized'}}, 403
-     
+
     form = ProductImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -137,15 +139,4 @@ def upload_product_image(product_id):
         print("Form validation failed:", form.errors)  
     return {'errors': form.errors}, 400
 
-
-
-
-    
-     
-     
-
-
-
-  
-    
 
