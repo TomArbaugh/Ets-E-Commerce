@@ -1,20 +1,20 @@
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 function CancelOrder() {
     const { orderId } = useParams();
 
-    const userId = useSelector(state => state.session.user.id)
+    // const userId = useSelector(state => state.session.user.id)
 
     const setState = async (e) => {
         e.preventDefault()
         try {
             const fetchAllOrders = await fetch(`/api/orders`);
             const fetchedOrders = await fetchAllOrders.json();
-            console.log("FETCHED ORDERS: ", fetchedOrders)
+            console.log("FETCHED ORDERS: ", fetchedOrders[0])
             const order = fetchedOrders.find((order) => order.id == orderId)
             console.log("ORDER: ", order)
-            if (order.purchaser_id === userId && order.status === 'pending') {
+            if (order.status === 'pending') {
                 const deleteFetch = await fetch(`/api/orders/${orderId}/delete-order`, {
                     method: 'DELETE'
                 })

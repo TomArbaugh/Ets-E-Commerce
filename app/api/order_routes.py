@@ -34,8 +34,8 @@ def delete_order(id):
     if order is None:
         return {'errors': {'message': 'Order not found'}}, 404
 
-    if order.purchaser_id != current_user.id:
-        return {'errors': {'message': 'You are not authorized'}}, 403
+    # if order.purchaser_id != current_user.id:
+    #     return {'errors': {'message': 'You are not authorized'}}, 403
 
     print("ORDER: ", order)
     db.session.delete(order)
