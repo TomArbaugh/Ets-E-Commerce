@@ -2,8 +2,6 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .review import reviews
-from .shopping_cart_item import shopping_cart_items
-
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -32,13 +30,12 @@ class User(db.Model, UserMixin):
         back_populates = 'user_reviews'
     )
 
-  
-
-    #many-to-many users<=shopping_cart_items=>products
-    product_shopping_cart_items = db.relationship(
-        'Product',
-        secondary=shopping_cart_items,
-        back_populates = 'user_shopping_cart_items'
+    #one-to-one relationship shopping_cart => cart_items
+    shopping_cart = db.relationship(
+        'ShoppingCart',
+          uselist=False, 
+          back_populates="user", 
+          cascade="delete"
     )
     
     #one-to-many users=>orders
