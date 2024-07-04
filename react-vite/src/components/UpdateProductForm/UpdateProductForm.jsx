@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkGetProductDetails, thunkUpdateProduct } from '../../redux/products';
+import { thunkProductDetails, thunkUpdateProduct } from '../../redux/products';
 import './UpdateProductForm.css';
 
 const UpdateProductForm = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const product = useSelector(state => state.products[productId]);
+  const product = useSelector(state => state.products.productDetails);
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
@@ -19,17 +19,17 @@ const UpdateProductForm = () => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
-    dispatch(thunkGetProductDetails(productId));
+    dispatch(thunkProductDetails(productId));
   }, [dispatch, productId]);
 
   useEffect(() => {
     if (product) {
-      setName(product.name);
-      setCategory(product.category);
-      setDescription(product.description);
-      setPrice(product.price);
-      setStock(product.stock);
-      setImageUrl(product.imageUrl);
+      setName(product.name || '');
+      setCategory(product.category || '');
+      setDescription(product.description || '');
+      setPrice(product.price || '');
+      setStock(product.stock || '');
+      setImageUrl(product.image_url || '');
     }
   }, [product]);
 
@@ -56,9 +56,17 @@ const UpdateProductForm = () => {
 
     if (errors.length > 0) return;
 
-    const updatedProduct = { name, category, description, price, stock, imageUrl, csrf_token: csrfToken };
+    const updatedProduct = {
+      id: productId,
+      name,
+      category,
+      description,
+      price,
+      stock,
+      imageUrl,
+    };
 
-    const response = await dispatch(thunkUpdateProduct(productId, updatedProduct));
+    const response = await dispatch(thunkUpdateProduct(productId, updatedProduct, csrfToken));
 
     if (response.errors) {
       setErrors(response.errors);
@@ -68,7 +76,7 @@ const UpdateProductForm = () => {
   };
 
   return (
-    <form className='products-form' onSubmit={handleSubmit}>
+    <form className="products-form" onSubmit={handleSubmit}>
       <p>Update your product details below.</p>
       {hasSubmitted && errors.length > 0 && (
         <div className="error-list">
