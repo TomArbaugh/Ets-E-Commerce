@@ -42,7 +42,7 @@ const ProductForm = () => {
     if (response.errors) {
       setErrors(response.errors);
     } else {
-      const productId = response.id;
+      // const productId = response.id;
       navigate('/your-listings');
     }
   };
