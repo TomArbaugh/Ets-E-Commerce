@@ -1,20 +1,31 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { thunkProductDetails } from '../../redux/products';
 import './ProductDetails.css';
+import { getReviewsByProductId } from '../../redux/reviews';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const product = useSelector((state) => state.products.productDetails);
 
+  const reviews = useSelector((state) => state.reviews.reviews)
+
+  
+
   useEffect(() => {
     dispatch(thunkProductDetails(productId));
   }, [dispatch, productId]);
 
+  useEffect(() => {
+    dispatch(getReviewsByProductId(productId))
+  }, [dispatch, productId])
+
   const imageUrl = product.images && product.images.length > 0 ? product.images[0].url : '';
 
+  if (!reviews || reviews.length === 0) return null;
+  
   return (
     <div className="product-details">
       <div className="top-detail">
@@ -36,11 +47,20 @@ const ProductDetails = () => {
             <option>3</option>
           </select>
           <button className="add-to-cart-button">Add to cart</button>
+          <div className="bottom-reviews">
+        {reviews.map((review) => (
+          <>
+          <li key={review.product_id}>{review.review}</li>
+          <li>{review.stars}</li>
+          </>
+       
+       
+        ))}
+        <Link to={`/products/${product.id}/create-review`}>Create Review</Link>
+      </div>
         </div>
       </div>
-      <div className="bottom-reviews">
-        {/* LEAVE THIS OPEN FOR A&T (Aaron & Thomas) */}
-      </div>
+  
     </div>
   );
 };
