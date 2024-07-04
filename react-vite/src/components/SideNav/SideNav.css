@@ -1,0 +1,46 @@
+.side-nav-layout {
+  display: flex;
+  min-width: 1000px;
+  height: 100vh;
+
+}
+
+.side-nav {
+  width: 250px;
+  background-color: #fff;
+  border-right: 1px solid #ddd; 
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+
+}
+
+.shop-manager {
+  padding: 0px 0px 0px 10px;
+}
+.username {
+  padding: 0px 0px 0px 10px;
+}
+
+.nav-link {
+  width: 100%;
+  padding: 10px 15px 10px 10px;
+  text-decoration: none;
+  color: #333;
+  margin-bottom: 10px;
+  color: lightgrey;
+}
+
+.nav-link:hover {
+  background-color: #f0f0f0;
+}
+
+.nav-link.active {
+  background-color: #e1e1e1;
+  color: black;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: #f9f9f9;
+}

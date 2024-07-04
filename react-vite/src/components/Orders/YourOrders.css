@@ -1,0 +1,8 @@
+.product-orders-card {
+  height: 200px;
+  width: 100%;
+  border: 1px solid lightgrey;
+  margin: 0px 10px 0px 0px;
+  justify-content: center;
+  align-items: center;
+}

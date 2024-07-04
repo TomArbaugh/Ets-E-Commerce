@@ -1,10 +1,10 @@
 .products-form {
   max-width: 600px;
-  margin-top: 10px;
+  margin: 20px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: #f9f9f9;
+  background-color: white;
 }
 
 .products-form h1,
@@ -23,7 +23,7 @@
 
 .products-form input,
 .products-form textarea {
-  width: 100%;
+  width: 90%;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;

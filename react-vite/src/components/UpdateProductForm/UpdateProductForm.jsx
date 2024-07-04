@@ -71,7 +71,7 @@ const UpdateProductForm = () => {
     if (response.errors) {
       setErrors(response.errors);
     } else {
-      navigate(`/products/${productId}`);
+      navigate(`/your-listings`);
     }
   };
 

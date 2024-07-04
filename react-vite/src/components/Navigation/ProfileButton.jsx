@@ -6,6 +6,7 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { Link } from 'react-router-dom'
+import './ProfileButton.css';
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function ProfileButton() {
   const ulRef = useRef();
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
+    e.stopPropagation(); 
     setShowMenu(!showMenu);
   };
 
@@ -49,12 +50,12 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li><Link id='manage your listing' to='your-listings'>Your listing</Link></li>
-              <li>
+              <p>{user.username}</p>
+              <p>{user.email}</p>
+              <p><Link id='manage your listing' to='your-listings'>Your listings</Link></p>
+              <p>
                 <button onClick={logout}>Log Out</button>
-              </li>
+              </p>
             </>
           ) : (
             <>

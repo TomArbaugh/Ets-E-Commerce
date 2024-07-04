@@ -16,7 +16,7 @@ function Navigation() {
       </div>
       
       <div className='category-and-search'>
-        <div id='header-category'>Category</div>
+        <div id='header-category'>Categories</div>
 
         <div id='search-bar'>
           <input 
