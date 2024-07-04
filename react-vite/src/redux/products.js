@@ -159,9 +159,11 @@ export default function productReducer(state = initialState, action) {
       };
       return newState;
     case PRODUCT_DETAILS:
-      newState = {
-        ...state,
-        productDetails: action.product,
+      newState = { ...state, productDetails: action.product };
+      return newState;
+    case CURRENT_USERS_PRODUCTS:
+      newState = { ...state, 
+        allProducts: action.products
       };
       return newState;
     case CREATE_NEW_PRODUCT:
@@ -170,30 +172,30 @@ export default function productReducer(state = initialState, action) {
         allProducts: [...state.allProducts, action.productDetails]
       }
       return newState
-    case CURRENT_USERS_PRODUCTS:
-      newState = { ...state, 
-        allProducts: action.products
-      };
-      return newState;
     case UPDATE_PRODUCT:
-      newState = {
+      const updatedProduct = action.product;
+      return {
         ...state,
+        allProducts: state.allProducts.map(product =>
+          product.id === updatedProduct.id ? updatedProduct : product),
+        productDetails: {
+          ...state.productDetails,
+          [updatedProduct.id]: updatedProduct,
+        },
       };
-      return newState
     case DELETE_PRODUCT:
       newState = {
         ...state,
         allProducts: state.allProducts.filter(product => product.id !== action.productId)
       };
       return newState;
-    // case ADD_PRODUCT_IMAGE:
-    //   const { productId, image } = action;
-    //   const product = state[productId];
-    //   if (!product) return state; 
-    //   return {
-    //     ...state,
-    //     productDetails: pass
-    //   };
+    case ADD_PRODUCT_IMAGE:
+      newState = { 
+        ...state, 
+        productDetails: { 
+          ...state.productDetails, 
+          images: [...state.productDetails.images, action.image]}}; 
+      return newState;
     default:
       return state;
   }

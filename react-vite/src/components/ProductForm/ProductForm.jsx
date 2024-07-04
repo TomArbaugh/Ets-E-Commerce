@@ -41,7 +41,6 @@ const ProductForm = () => {
 
     if (response.errors) {
       setErrors(response.errors);
-
     } else {
       const productId = response.id;
       navigate(`/products/${productId}`);
