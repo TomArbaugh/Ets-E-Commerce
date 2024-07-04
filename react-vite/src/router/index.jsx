@@ -9,6 +9,9 @@ import YourListings from '../components/YourListings/YourListings';
 import ProductDetails from '../components/ProductDetails/ProductDetails';
 import ProductForm from '../components/ProductForm/ProductForm'
 import UpdateProductForm from '../components/UpdateProductForm/UpdateProductForm';
+import EditReview from '../components/EditReview/EditReview';
+import DeleteReview from '../components/DeleteReview/DeleteReview';
+
 
 export const router = createBrowserRouter([
   {
@@ -50,14 +53,14 @@ export const router = createBrowserRouter([
         path: "products/:productId/create-review",
         element: <CreateReview />
       },
-      // {
-      //   path: "products/:productId/edit-review",
-      //   element: <EditReview />
-      // },
-      // {
-      //   path: "products/:productId/delete-review",
-      //   element: <DeleteReview />
-      // }
+      {
+        path: "products/:productId/edit-review",
+        element: <EditReview />
+      },
+      {
+        path: "products/:productId/delete-review",
+        element: <DeleteReview />
+      }
     ],
   },
 ]);
