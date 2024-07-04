@@ -16,9 +16,11 @@ function DeleteReview() {
             const review = fetchedReviews.find((review) => review.user_id === userId)
 
             if (review) {
-                await fetch(`/api/review/${productId}/delete-review`, {
+                const deleteFetch = await fetch(`/api/reviews/${productId}/delete-review`, {
                     method: 'DELETE'
                 })
+                const result = await deleteFetch.json()
+                console.log(result)
             }
 
         } catch (err) {

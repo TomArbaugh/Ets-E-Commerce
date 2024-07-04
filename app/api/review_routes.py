@@ -143,12 +143,13 @@ def delete_review(product_id):
         """Delete Review for a Product"""
     # table.delete().where(table.c.id==7)
         # stmt = reviews.delete().where(reviews.c.user_id == current_user.id and reviews.c.product_id == product_id)
-        print("deleted: ", deleted_review)
+        # delete_review = reviews.delete().where(reviews.c.user_id == current_user.id and reviews.c.product_id == product_id)
         deleted_review = (
             delete(reviews)
-            .where(reviews.c.user_id == current_user.id and reviews.c.product_id == product_id)
+            .where(reviews.c.user_id == current_user.id)
         )
-        db.session.execute(delete_review)
+        db.session.execute(deleted_review)
         db.session.commit()
 
-        return 'deleted'
+        print("deleted: ", deleted_review)
+        return jsonify({"deleted"})
