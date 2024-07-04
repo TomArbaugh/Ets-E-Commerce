@@ -7,3 +7,4 @@ __pycache__/
 *.db
 !dist
 dist-ssr
+build

@@ -1,5 +1,5 @@
 import{ useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetAllProducts } from '../../redux/products';
 import './LandingPage.css';
@@ -16,17 +16,17 @@ const LandingPage = () => {
     <div className="landing-page">
       <div className="products-list-container">
         {products.map((product) => (
-          // <Link 
-          //  key={product.id}
-          //  className="link-to-productDetails"
-          //  to={`/products/${product.id}`}
-          //  >
-            <div key={product.id} className="product-card">
+          <Link 
+            key={product.id}
+            className="link-to-productDetails"
+            to={`/products/${product.id}`}
+          >
+            <div className="product-card">
               <img src={product.image_url} alt={product.name} />
               <p>{product.name}</p>
               <p>${product.price}</p>
             </div>
-          // </Link>
+          </Link>
         ))}
       </div>
     </div>
