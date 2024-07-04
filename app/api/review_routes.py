@@ -146,10 +146,10 @@ def delete_review(product_id):
         # delete_review = reviews.delete().where(reviews.c.user_id == current_user.id and reviews.c.product_id == product_id)
         deleted_review = (
             delete(reviews)
-            .where(reviews.c.user_id == current_user.id)
+            .where(reviews.c.user_id == current_user.id, reviews.c.product_id == product_id)
         )
         db.session.execute(deleted_review)
         db.session.commit()
 
         print("deleted: ", deleted_review)
-        return jsonify({"deleted"})
+        return jsonify({"message": "deleted"})
