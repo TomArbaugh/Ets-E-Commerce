@@ -1,0 +1,17 @@
+.your-listings {
+  padding: 20px;
+}
+
+.your-listings ul {
+  list-style: none;
+  padding: 0;
+}
+
+.your-listings li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.your-listings h1 {
+  margin-bottom: 20px;
+}
