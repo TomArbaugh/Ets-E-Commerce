@@ -78,14 +78,11 @@ export const thunkCreateNewProduct = (product) => async (dispatch) => {
 
     if (res.ok) {
       const newProduct = await res.json();
-      console.log('new product created:', newProduct)
-
       dispatch(createNewProduct(newProduct));
       return newProduct;
     } else {
       const error = await res.json(); 
-      console.log('error creating product:', error)
-      return {errors: error.errors}
+      return error
     }
 };
 
@@ -128,6 +125,7 @@ export const thunkUpdateProducts = (product) => async (dispatch) => {
   if (res.ok) {
     const updatedProduct = await res.json();
     dispatch(updateProduct(updatedProduct))
+    return updatedProduct;
   } else {
     const error = await res.json()
     return error;
@@ -169,9 +167,9 @@ export default function productReducer(state = initialState, action) {
     case CREATE_NEW_PRODUCT:
       newState = {
         ...state,
-        allProducts: [...state.allProducts, action.product],
-      };
-      return newState;
+        allProducts: [...state.allProducts, action.productDetails]
+      }
+      return newState
     case CURRENT_USERS_PRODUCTS:
       newState = { ...state, 
         allProducts: action.products
@@ -181,7 +179,7 @@ export default function productReducer(state = initialState, action) {
       newState = {
         ...state,
       };
-      return newState;
+      return newState
     case DELETE_PRODUCT:
       newState = {
         ...state,

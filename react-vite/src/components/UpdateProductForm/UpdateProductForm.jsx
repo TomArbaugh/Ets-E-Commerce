@@ -1,37 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkGetProductDetails, thunkUpdateProduct } from '../../redux/products';
+import { thunkUpdateProducts } from '../../redux/products';
 import './UpdateProductForm.css';
 
 const UpdateProductForm = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const product = useSelector(state => state.products[productId]);
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [stock, setStock] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const product = useSelector(state => state.products.productDetails[productId]);
+  console.log('what is the product', product)
+  
+  const [name, setName] = useState(product.name);
+  const [category, setCategory] = useState(product.category);
+  const [description, setDescription] = useState(product.description);
+  const [price, setPrice] = useState(product.price);
+  const [stock, setStock] = useState(product.stock);
+  // const [imageUrl, setImageUrl] = useState('');
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-
-  useEffect(() => {
-    dispatch(thunkGetProductDetails(productId));
-  }, [dispatch, productId]);
-
-  useEffect(() => {
-    if (product) {
-      setName(product.name);
-      setCategory(product.category);
-      setDescription(product.description);
-      setPrice(product.price);
-      setStock(product.stock);
-      setImageUrl(product.imageUrl);
-    }
-  }, [product]);
 
   useEffect(() => {
     const errorArr = [];
@@ -48,19 +35,16 @@ const UpdateProductForm = () => {
     setErrors(errorArr);
   }, [name, category, description, price, stock]);
 
-  const csrfToken = useSelector(state => state.session.csrfToken);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true);
 
-    if (errors.length > 0) return;
+    const updatedProduct = { ...product, name, category, description, price, stock};
 
-    const updatedProduct = { name, category, description, price, stock, imageUrl, csrf_token: csrfToken };
-
-    const response = await dispatch(thunkUpdateProduct(productId, updatedProduct));
+    const response = await dispatch(thunkUpdateProducts(updatedProduct));
 
     if (response.errors) {
+      console.log('Updated Product Errors:', response.errors);
       setErrors(response.errors);
     } else {
       navigate(`/products/${productId}`);
@@ -99,7 +83,7 @@ const UpdateProductForm = () => {
         {hasSubmitted && Array.isArray(errors) && errors.includes('Category is required') && <p className="error">Category is required</p>}
         {hasSubmitted && Array.isArray(errors) && errors.includes('Category cannot be more than 50 characters') && <p className="error">Category cannot be more than 50 characters</p>}
       </label>
-      <label>
+      {/* <label>
         Photos and video *
         <input
           type="text"
@@ -107,7 +91,7 @@ const UpdateProductForm = () => {
           onChange={(e) => setImageUrl(e.target.value)}
           required
         />
-      </label>
+      </label> */}
       <label>
         Description *
         <textarea
