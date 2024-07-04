@@ -34,25 +34,27 @@ const YourListings = () => {
         ) : (
           <ul>
             {products.map((product) => (
-              <li key={product.id} className="listing-item">
-                <img src={product.image_url} alt={product.title} />
-                <div className="listing-details">
-                  <h2>{product.title}</h2>
-                  <p>${product.price}</p>
-                  <p>{product.quantity} in stock</p>
-                  <p>{product.category}</p>
-                  <p>{product.description}</p>
-                  <div className="listing-actions">
-                    <Link to={`/products/${product.id}/edit`}>
-                       <button>Edit</button>
-                    </Link>
-                    <OpenModalButton
-                      buttonText='Delete'
-                      modalComponent={<DeleteProductModal productId = {product.id} />}
-                     />
+              product && (
+                <li key={product.id} className="listing-item">
+                  {product.image_url && <img src={product.image_url} alt={product.title} />}
+                  <div className="listing-details">
+                    <h2>{product.title}</h2>
+                    <p>${product.price}</p>
+                    <p>{product.quantity} in stock</p>
+                    <p>{product.category}</p>
+                    <p>{product.description}</p>
+                    <div className="listing-actions">
+                      <Link to={`/products/${product.id}/edit`}>
+                        <button>Edit</button>
+                      </Link>
+                      <OpenModalButton
+                        buttonText='Delete'
+                        modalComponent={<DeleteProductModal productId={product.id} />}
+                      />
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
+              )
             ))}
           </ul>
         )}

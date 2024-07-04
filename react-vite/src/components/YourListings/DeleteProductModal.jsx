@@ -25,8 +25,8 @@ export default function DeleteProductModal({ productId }) {
     <div className="delete-box">
       <h1>Confirm Delete</h1>
       <h2>Are you sure you want to remove this product from the listing?</h2>
-      <button className='yes-button' onClick={(e) => ClickYes(e)}>Yes(Delete Product)</button>
-      <button className='no-button' onClick={(e) => ClickNo(e)}>No(Delete Product)</button>
+      <button className='yes-button' onClick={(e) => ClickYes(e)}>Yes (Delete Product)</button>
+      <button className='no-button' onClick={(e) => ClickNo(e)}>No (Keep Product)</button>
     </div>
   );
 }

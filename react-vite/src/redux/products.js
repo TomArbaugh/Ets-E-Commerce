@@ -172,7 +172,7 @@ export default function productReducer(state = initialState, action) {
         allProducts: [...state.allProducts, action.productDetails]
       }
       return newState
-    case UPDATE_PRODUCT:
+    case UPDATE_PRODUCT: {
       const updatedProduct = action.product;
       return {
         ...state,
@@ -183,6 +183,7 @@ export default function productReducer(state = initialState, action) {
           [updatedProduct.id]: updatedProduct,
         },
       };
+    }  
     case DELETE_PRODUCT:
       newState = {
         ...state,

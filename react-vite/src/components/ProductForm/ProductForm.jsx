@@ -34,7 +34,7 @@ const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true);
-   
+
     if (errors.length > 0) return; // prevent submission if frontend errors exist
     const product = { name, category, description, price, stock, imageUrl}; 
     const response = await dispatch(thunkCreateNewProduct(product));
@@ -43,7 +43,7 @@ const ProductForm = () => {
       setErrors(response.errors);
     } else {
       const productId = response.id;
-      navigate(`/products/${productId}`);
+      navigate('/your-listings');
     }
   };
 

@@ -10,12 +10,10 @@ const UpdateProductForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Fetch product details if not already available
   useEffect(() => {
     dispatch(thunkProductDetails(productId));
   }, [dispatch, productId]);
 
-  // Access product from productDetails in the state
   const product = useSelector(state => state.products.productDetails);
 
   console.log('what is productId', productId);
@@ -29,7 +27,6 @@ const UpdateProductForm = () => {
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  // Initialize state variables when product is available
   useEffect(() => {
     if (product) {
       setName(product.name);
@@ -40,7 +37,6 @@ const UpdateProductForm = () => {
     }
   }, [product]);
 
-  // Validate form inputs
   useEffect(() => {
     const errorArr = [];
     if (!name) errorArr.push('Name is required');
@@ -53,7 +49,6 @@ const UpdateProductForm = () => {
     setErrors(errorArr);
   }, [name, category, description, price, stock]);
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true);
@@ -65,7 +60,7 @@ const UpdateProductForm = () => {
     if (response.errors) {
       setErrors(response.errors);
     } else {
-      navigate(`/products/${productId}`);
+      navigate('/your-listings');
     }
   };
 
