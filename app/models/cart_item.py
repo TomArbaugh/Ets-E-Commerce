@@ -23,3 +23,11 @@ class CartItem(db.Model):
       'Product',
       back_populates = 'product_cart_items'
   )
+
+  def to_dict(self):
+        return {
+            'id': self.id,
+            'shopping_cart_id': self.shopping_cart_id,
+            'product_id': self.product_id,
+            'quantity': self.quantity
+        }

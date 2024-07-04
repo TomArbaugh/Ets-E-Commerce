@@ -22,5 +22,12 @@ class ShoppingCart(db.Model):
         cascade="delete"
     )
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'cart_items': [item.to_dict() for item in self.cart_items]
+        }
+
 
    
