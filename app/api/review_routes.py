@@ -24,7 +24,7 @@ def reviews_by_productId(product_id):
     reviews_array = []
     for review in reviews_records:
 
-       review_obj = {
+      review_obj = {
         "user_id": review.user_id,
         "product_id": review.product_id,
         "review": review.review,

@@ -23,7 +23,7 @@ def update_product_image(image_id):
 
     if product.owner_id != current_user.id:
         return {'errors': {'message': 'You are not authorized'}}, 403
-     
+    
     if request.method == 'GET':
         return image.to_dict()
     

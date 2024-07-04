@@ -59,9 +59,15 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
+
+        # ----------create a shopping cart for the new user
+        shopping_cart = ShoppingCart(user_id=user.id)
+        db.session.add(shopping_cart)
+        db.session.commit()
+
+
         return user.to_dict()
     return form.errors, 401
-
 
 @auth_routes.route('/unauthorized')
 def unauthorized():
