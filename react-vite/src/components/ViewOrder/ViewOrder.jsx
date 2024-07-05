@@ -17,7 +17,7 @@ function ViewOrder() {
       }, [dispatch]);
 
     const user = useSelector((state) => state.session.user)
-   
+
 
 
 
@@ -53,20 +53,20 @@ function ViewOrder() {
         console.log("ORDER: ", order)
 
         order.products_ordered.map((order_item) => {
-           
+
             const orderItemObj = {}
-            
-            
+
+
 
             // const id = order_item.order_id
-            
+
             orderItemObj.name = order_item.name,
             orderItemObj.price = order_item.price,
             // orderItemObj.quantity = order_item.quantity,
             // orderItemObj.total = order_item.quantity * order_item.price
-            
+
             orderDetails.order_items.push(orderItemObj)
-            
+
         })
         ordersArr.push(orderDetails)
 }) : null
@@ -88,8 +88,8 @@ function ViewOrder() {
 
                     ))}
                     <p>Status: {order.status}</p>
-                    <p>Total: {order.total}</p>
-                    
+                    <p>Total: {Number(order.total).toFixed(2)}</p>
+
                     <p></p>
                     <p></p>
                 </>
