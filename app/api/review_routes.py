@@ -61,7 +61,7 @@ def edit_review(product_id):
         if form.validate_on_submit():
             new_review = (
                 update(reviews)
-                .where(reviews.c.product_id == product_id)
+                .where(reviews.c.user_id == current_user.id, reviews.c.product_id == product_id)
                 .values(
                 # product_id=product_id,
                 # user_id=current_user.id,

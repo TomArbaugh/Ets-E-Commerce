@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 
 function DeleteReview() {
     const { productId } = useParams();
-
+    const navigate = useNavigate()
     const userId = useSelector(state => state.session.user.id)
 
 
@@ -20,7 +20,9 @@ function DeleteReview() {
                     method: 'DELETE'
                 })
                 const result = await deleteFetch.json()
-                console.log(result)
+                if (result) {
+                    navigate(`/products/${productId}`);
+                }
             }
 
         } catch (err) {
