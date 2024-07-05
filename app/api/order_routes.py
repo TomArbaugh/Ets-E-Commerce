@@ -19,10 +19,12 @@ def orders_by_userId():
             'purchaser_id': order.purchaser_id,
             'total': order.total,
             'discount': order.discount,
-            'status': order.status
+            'status': order.status,
+            'products_ordered': [order.to_dict() for order in order.products_ordered]
         }
         orders_array.append(order_obj)
     print("ORDERS", orders)
+    print("user", current_user.id)
     return orders_array
 
 @order_routes.route('/<int:id>/delete-order', methods=['DELETE'])

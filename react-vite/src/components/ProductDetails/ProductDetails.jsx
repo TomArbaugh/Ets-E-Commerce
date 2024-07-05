@@ -24,7 +24,7 @@ const ProductDetails = () => {
 
   const imageUrl = product.images && product.images.length > 0 ? product.images[0].url : '';
 
-  if (!reviews || reviews.length === 0) return null;
+  // if (!reviews || reviews.length === 0) return null;
   
   return (
     <div className="product-details">
@@ -48,15 +48,17 @@ const ProductDetails = () => {
           </select>
           <button className="add-to-cart-button">Add to cart</button>
           <div className="bottom-reviews">
-        {reviews.map((review) => (
+        {reviews ? reviews.map((review) => (
           <>
           <li key={review.product_id}>{review.review}</li>
           <li>{review.stars}</li>
           </>
        
        
-        ))}
+        )) : null}
         <Link to={`/products/${product.id}/create-review`}>Create Review</Link>
+        <Link to={`/products/${product.id}/edit-review`}>Edit Review</Link>
+        <Link to={`/products/${product.id}/delete-review`}>Delete Review</Link>
       </div>
         </div>
       </div>
