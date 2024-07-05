@@ -1,19 +1,42 @@
 .profile-dropdown {
   position: absolute;
-}
-
-#header-container {
+ }
+ 
+ 
+ #header-container {
   display: flex;
   justify-content: space-around;
-  align-items: center; 
-}
-
-.two-icons {
+  align-items: center;
+ }
+ 
+ 
+ .category-and-search {
+  padding-left: 10px;
+  opacity: 0.2;
+ }
+ 
+ 
+ #header-category {
+  margin-right: 20px;
+ }
+ .search-bar{
+  padding: 10px;
+ }
+ .two-icons {
   display: flex;
-
-}
-
-.category-and-search {
+ 
+ 
+ }
+ 
+ 
+ #login-and-signup{
+  margin-right: 20px;
+ }
+ 
+ 
+ .category-and-search {
   display: flex;
-
-}
+ 
+ 
+ }
+ 

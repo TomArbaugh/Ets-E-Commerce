@@ -26,12 +26,14 @@ function Navigation() {
       </div>
       
       <div className='two-icons'>
-        <div id='login and sigup'>
+        <div id='login and signup'>
           <ProfileButton user={sessionUser}/>
         </div>
         
         <div id='shopping-cart-icon'>
-        <RiShoppingCartLine />
+          <NavLink to='/cart'>
+            <RiShoppingCartLine />
+          </NavLink>
         </div>
       </div>
     </div>

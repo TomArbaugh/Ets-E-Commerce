@@ -11,6 +11,7 @@ import ProductForm from '../components/ProductForm/ProductForm'
 import UpdateProductForm from '../components/UpdateProductForm/UpdateProductForm';
 import EditReview from '../components/EditReview/EditReview';
 import DeleteReview from '../components/DeleteReview/DeleteReview';
+import Cart from '../components/Cart/Cart';
 
 
 export const router = createBrowserRouter([
@@ -60,7 +61,12 @@ export const router = createBrowserRouter([
       {
         path: "products/:productId/delete-review",
         element: <DeleteReview />
-      }
+      },
+      {
+        path: "cart",
+        element: <Cart />
+      },
+ 
     ],
   },
 ]);
