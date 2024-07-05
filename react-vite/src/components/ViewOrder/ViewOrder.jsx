@@ -2,59 +2,71 @@ import { useSelector } from "react-redux"
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { thunkGetAllProducts } from "../../redux/products";
-
+import { useState } from "react";
 
 
 function ViewOrder() {
 
     const dispatch = useDispatch()
+    const [orders, setOrders] = useState([])
 
     useEffect(() => {
         dispatch(thunkGetAllProducts());
       }, [dispatch]);
 
     const user = useSelector((state) => state.session.user)
-    const products = useSelector((state) => state.products.allProducts || []);
+    // const products = useSelector((state) => state.products.allProducts || []);
 
-    let orders;
+    
+    
+    let response;
     const fetchOrders = async () => {
 
         try {
-            const fetch = await fetch(`/api/orders/`)
-            orders = await fetch.json()
-
+            response = await fetch(`/api/orders/`)
+            const data = await response.json()
+            setOrders(data)
+            console.log("27", orders)
         } catch (err) {
             console.error('Request Error:', err);
         }
-
+        
     }
-    fetchOrders()
+    useEffect(() => {
+        fetchOrders()
+    }, [dispatch])
+    
 
 
+    console.log(orders)
 
+    
     const ordersArr = []
-    orders.map((order) => (
+    orders ? orders.map((order) => {
 
-        order.products_ordered.map((order_item) => {
-            const order = []
-            const orderItemObj = {}
+        console.log(order)
 
-            const product = products.find((product) => order_item.product_id === product.id)
+        // order.products_ordered.map((order_item) => {
+        //     const order = []
+        //     const orderItemObj = {}
 
-            // const id = order_item.order_id
+        //     const product = products.find((product) => order_item.product_id === product.id)
 
-            orderItemObj[name] = product.name,
-            orderItemObj[price] = product.price,
-            orderItemObj[quantity] = order_item.quanity,
-            orderItemObj[total] = order_item.quantity * product.price
+        //     // const id = order_item.order_id
 
-            order.push(orderItemObj)
-            ordersArr.push(order)
-        })
+        //     orderItemObj[name] = product.name,
+        //     orderItemObj.price = product.price,
+        //     orderItemObj.quantity = order_item.quanity,
+        //     orderItemObj.total = order_item.quantity * product.price
 
-    ))
+        //     order.push(orderItemObj)
+        //     ordersArr.push(order)
+        // })
+
+}) : null
     console.log("ORDERSARRAY: ", ordersArr)
 
+    if (!orders) return "no orders"
     return (
         <>
             <h1>Orders for {user.first_name}</h1>
