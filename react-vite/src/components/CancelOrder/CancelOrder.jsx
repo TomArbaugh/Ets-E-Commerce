@@ -11,15 +11,15 @@ function CancelOrder() {
         try {
             const fetchAllOrders = await fetch(`/api/orders`);
             const fetchedOrders = await fetchAllOrders.json();
-            console.log("FETCHED ORDERS: ", fetchedOrders[0])
+            // console.log("FETCHED ORDERS: ", fetchedOrders[0])
             const order = fetchedOrders.find((order) => order.id == orderId)
-            console.log("ORDER: ", order)
+            // console.log("ORDER: ", order)
             if (order.status === 'pending') {
                 const deleteFetch = await fetch(`/api/orders/${orderId}/delete-order`, {
                     method: 'DELETE'
                 })
-                const result = await deleteFetch.json()
-                console.log(result)
+                // const result = await deleteFetch.json()
+                // console.log(result)
             }
         } catch (err) {
             console.error("Request Error:", err);

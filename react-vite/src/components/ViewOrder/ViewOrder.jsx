@@ -26,7 +26,7 @@ function ViewOrder() {
             response = await fetch(`/api/orders/`)
             const data = await response.json()
             setOrders(data)
-            console.log("27", orders)
+            // console.log("27", orders)
         } catch (err) {
             console.error('Request Error:', err);
         }
@@ -38,13 +38,13 @@ function ViewOrder() {
     
 
 
-    console.log(orders)
+    // console.log(orders)
 
     
     const ordersArr = []
     orders ? orders.map((order) => {
 
-        console.log(order)
+        // console.log(order)
 
         // order.products_ordered.map((order_item) => {
         //     const order = []
@@ -64,7 +64,7 @@ function ViewOrder() {
         // })
 
 }) : null
-    console.log("ORDERSARRAY: ", ordersArr)
+    // console.log("ORDERSARRAY: ", ordersArr)
 
     if (!orders) return "no orders"
     return (
