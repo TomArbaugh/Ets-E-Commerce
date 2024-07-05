@@ -107,6 +107,7 @@ def post_review(product_id):
         form = CreateReview()
         # print("PRINT: ", form.data)
         form['csrf_token'].data = request.cookies['csrf_token']
+        
         if form.validate_on_submit():
             new_review = (
                 insert(reviews).
@@ -119,7 +120,7 @@ def post_review(product_id):
                 updated_at = datetime.utcnow())
                 )
 
-            print('PRINT', new_review)
+            # print('PRINT', new_review)
             db.session.execute(new_review)
             db.session.commit()
 

@@ -28,16 +28,17 @@ function EditReview() {
     }
 
     const userId = useSelector(state => state.session.user.id)
+
     useEffect(() => {
         const setState = async () => {
 
             try {
                 const fetchAllReviews = await fetch(`/api/reviews/${productId}/reviews`);
                 const fetchedReviews = await fetchAllReviews.json()
-                // console.log("FETCHALLREVIEWS: ", fetchedReviews)
+                console.log("FETCHALLREVIEWS: ", fetchedReviews)
                 const review = fetchedReviews.find((review) => review.user_id === userId)
-                // console.log(fetchedReviews[0].user_id === userId)
-                // console.log('REVIEW: ', review)
+                console.log(fetchedReviews[0].user_id === userId)
+                console.log('REVIEW: ', review)
                 if (review) {
                     setReview(review.review)
                     setStars(review.stars)
@@ -51,7 +52,7 @@ function EditReview() {
     }, [dispatch, userId, productId])
 
 
-    console.log("USERID: ", userId)
+    // console.log("USERID: ", userId)
 
 
     useEffect(() => {
@@ -75,10 +76,10 @@ function EditReview() {
             stars,
         }
 
-        console.log("REVIEWDATA: ", reviewData)
+        // console.log("REVIEWDATA: ", reviewData)
 
         try {
-            const reviewRes = await fetch(`/api/reviews/${productId}/edit-review`, {
+            const reviewRes = await fetch(`/api/reviews/${productId}/edit-review/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
