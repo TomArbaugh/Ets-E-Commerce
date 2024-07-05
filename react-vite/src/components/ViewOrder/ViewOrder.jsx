@@ -15,7 +15,7 @@ function ViewOrder() {
       }, [dispatch]);
 
     const user = useSelector((state) => state.session.user)
-    const products = useSelector((state) => state.products.allProducts || []);
+   
 
 
 
@@ -42,15 +42,16 @@ function ViewOrder() {
 
 
     const ordersArr = []
+    const order = []
     orders ? orders.map((order) => {
-
-        console.log("ORDER: ", order)
+        
+        console.log("ORDER: ", order.status)
 
         order.products_ordered.map((order_item) => {
-            const order = []
+            
             const orderItemObj = {}
 
-            const product = products.find((product) => order_item.product_id === product.id)
+            
 
             // const id = order_item.order_id
 
@@ -58,7 +59,6 @@ function ViewOrder() {
             orderItemObj.price = order_item.price,
             // orderItemObj.quantity = order_item.quanity,
             // orderItemObj.total = order_item.quantity * order_item.price
-
             order.push(orderItemObj)
             ordersArr.push(order)
         })
@@ -66,17 +66,19 @@ function ViewOrder() {
 }) : null
     console.log("ORDERSARRAY: ", ordersArr)
 
-    if (!orders) return "no orders"
+    if (!ordersArr.length) return "no orders"
     return (
         <>
             <h1>Orders for {user.first_name}</h1>
-            {ordersArr ? ordersArr.map((order_items) => (
+            {ordersArr.map((order_items) => (
                 <>
                     {/* {order.products_ordered.map((order_items) => ( */}
                         <>
                             {/* <p>Order Id: {order_items.order_id}</p> */}
-                            <p>Product Name: {order_items.name}</p>
-                            <p>Price: {order_items.price}</p>
+                            <p>Product Name: {order_items[0].name}</p>
+                            <p>Price: {order_items[0].price}</p>
+                            <p>Status: {order_items.status}</p>
+                            <p></p>
                         </>
 
                     {/* ))} */}
@@ -85,7 +87,7 @@ function ViewOrder() {
                     <p></p>
                     <p></p>
                 </>
-            )) : null}
+            ))}
 
         </>
     )
