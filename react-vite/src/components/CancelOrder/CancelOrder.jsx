@@ -1,34 +1,38 @@
-// import { useSelector } from "react-redux";
-// import { useParams } from "react-router-dom";
+
+import { useParams, useNavigate } from "react-router-dom";
+
 
 function CancelOrder() {
-    // const { orderId } = useParams();
+    const { orderId } = useParams();
+    const navigate = useNavigate()
 
-    // // const userId = useSelector(state => state.session.user.id)
+    
 
-    // const setState = async (e) => {
-    //     e.preventDefault()
-    //     try {
-    //         const fetchAllOrders = await fetch(`/api/orders`);
-    //         const fetchedOrders = await fetchAllOrders.json();
-    //         // console.log("FETCHED ORDERS: ", fetchedOrders[0])
-    //         const order = fetchedOrders.find((order) => order.id == orderId)
-    //         // console.log("ORDER: ", order)
-    //         if (order.status === 'pending') {
-    //             // const deleteFetch = await fetch(`/api/orders/${orderId}/delete-order`, {
-    //             //     method: 'DELETE'
-    //             })
-    //             // const result = await deleteFetch.json()
-    //             // console.log(result)
-    //         }
-    //     } catch (err) {
-    //         console.error("Request Error:", err);
-    //     }
-    // }
+    const setState = async (e) => {
+        e.preventDefault()
+        try {
+            const fetchAllOrders = await fetch(`/api/orders/`);
+            const fetchedOrders = await fetchAllOrders.json();
+            console.log("FETCHED ORDERS: ", fetchedOrders[0])
+            const order = fetchedOrders.find((order) => order.id == orderId)
+            console.log("ORDER: ", order)
+            if (order.status === 'pending') {
+                const deleteFetch = await fetch(`/api/orders/${orderId}/delete-order`, {
+                    method: 'DELETE'
+                })
+                const result = await deleteFetch.json()
+                console.log(result)
+
+                navigate('/')
+            }
+        } catch (err) {
+            console.error("Request Error:", err);
+        }
+    }
 
     return (
-        <h2>Hi</h2>
-        // <button onClick={setState}>Cancel Order</button>
+        
+        <button onClick={setState}>Cancel Order</button>
     )
 }
 

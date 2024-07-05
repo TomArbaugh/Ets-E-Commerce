@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { thunkGetAllProducts } from "../../redux/products";
 import { useState } from "react";
+import OpenModalButton from "../OpenModalButton";
+import CancelOrderModal from "../CancelOrderModal/CancelOrderModal";
 
 
 function ViewOrder() {
@@ -38,7 +40,7 @@ function ViewOrder() {
 
 
 
-    console.log(orders)
+    console.log("This is orders", orders)
 
 
     const ordersArr = []
@@ -48,7 +50,7 @@ function ViewOrder() {
         orderDetails.status = order.status
         orderDetails.total = order.total
         orderDetails.order_items = []
-        console.log("ORDER: ", order.status)
+        console.log("ORDER: ", order)
 
         order.products_ordered.map((order_item) => {
            
@@ -60,7 +62,7 @@ function ViewOrder() {
             
             orderItemObj.name = order_item.name,
             orderItemObj.price = order_item.price,
-            // orderItemObj.quantity = order_item.quanity,
+            // orderItemObj.quantity = order_item.quantity,
             // orderItemObj.total = order_item.quantity * order_item.price
             
             orderDetails.order_items.push(orderItemObj)
@@ -81,8 +83,7 @@ function ViewOrder() {
                             {/* <p>Order Id: {order_items.order_id}</p> */}
                             <p>Product Name: {order_item.name}</p>
                             <p>Price: {order_item.price}</p>
-                            
-                            <p></p>
+                            <p>Quantity: {order_item.quantity}</p>
                         </>
 
                     ))}
@@ -93,7 +94,10 @@ function ViewOrder() {
                     <p></p>
                 </>
             ))}
-
+            <OpenModalButton
+            buttonText="Cancel Order"
+            modalComponent={<CancelOrderModal />}
+            />
         </>
     )
 }
