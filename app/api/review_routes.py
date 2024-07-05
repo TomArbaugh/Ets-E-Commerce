@@ -24,16 +24,16 @@ def reviews_by_productId(product_id):
     reviews_array = []
     for review in reviews_records:
 
-       review_obj = {
-        "user_id": review.user_id,
-        "product_id": review.product_id,
-        "review": review.review,
-        "stars": review.stars,
-        "createdAt": review.created_at,
-        "updatedAt": review.updated_at
+        review_obj = {
+            "user_id": review.user_id,
+            "product_id": review.product_id,
+            "review": review.review,
+            "stars": review.stars,
+            "createdAt": review.created_at,
+            "updatedAt": review.updated_at
         }
 
-    reviews_array.append(review_obj)
+        reviews_array.append(review_obj)
     return reviews_array
 
 
@@ -107,6 +107,7 @@ def post_review(product_id):
         form = CreateReview()
         # print("PRINT: ", form.data)
         form['csrf_token'].data = request.cookies['csrf_token']
+        
         if form.validate_on_submit():
             new_review = (
                 insert(reviews).
@@ -119,7 +120,7 @@ def post_review(product_id):
                 updated_at = datetime.utcnow())
                 )
 
-            print('PRINT', new_review)
+            # print('PRINT', new_review)
             db.session.execute(new_review)
             db.session.commit()
 

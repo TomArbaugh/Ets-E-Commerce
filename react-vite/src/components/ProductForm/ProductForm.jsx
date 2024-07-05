@@ -36,7 +36,7 @@ const ProductForm = () => {
     setHasSubmitted(true);
 
     if (errors.length > 0) return; // prevent submission if frontend errors exist
-    const product = { name, category, description, price, stock, imageUrl}; 
+    const product = { name, category, description, price, stock, imageUrl};
     const response = await dispatch(thunkCreateNewProduct(product));
 
     if (response.errors) {
@@ -63,7 +63,7 @@ const ProductForm = () => {
         />
       </label>
     </div>
-      
+
     <div className='category-div'>
       <label>Category *
         {hasSubmitted && errors.includes('Category is required') && <span className="error">Category is required</span>}
@@ -77,7 +77,7 @@ const ProductForm = () => {
         />
       </label>
     </div>
-    
+
     <div className='photo-div'>
       <label>
         Photos and video *
