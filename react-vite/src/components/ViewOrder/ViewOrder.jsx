@@ -42,27 +42,31 @@ function ViewOrder() {
 
 
     const ordersArr = []
-    const order = []
     orders ? orders.map((order) => {
-        
+        const orderDetails = {}
+
+        orderDetails.status = order.status
+        orderDetails.total = order.total
+        orderDetails.order_items = []
         console.log("ORDER: ", order.status)
 
         order.products_ordered.map((order_item) => {
-            
+           
             const orderItemObj = {}
-
+            
             
 
             // const id = order_item.order_id
-
+            
             orderItemObj.name = order_item.name,
             orderItemObj.price = order_item.price,
             // orderItemObj.quantity = order_item.quanity,
             // orderItemObj.total = order_item.quantity * order_item.price
-            order.push(orderItemObj)
-            ordersArr.push(order)
+            
+            orderDetails.order_items.push(orderItemObj)
+            
         })
-
+        ordersArr.push(orderDetails)
 }) : null
     console.log("ORDERSARRAY: ", ordersArr)
 
@@ -70,20 +74,21 @@ function ViewOrder() {
     return (
         <>
             <h1>Orders for {user.first_name}</h1>
-            {ordersArr.map((order_items) => (
+            {ordersArr.map((order) => (
                 <>
-                    {/* {order.products_ordered.map((order_items) => ( */}
+                    {order.order_items.map((order_item) => (
                         <>
                             {/* <p>Order Id: {order_items.order_id}</p> */}
-                            <p>Product Name: {order_items[0].name}</p>
-                            <p>Price: {order_items[0].price}</p>
-                            <p>Status: {order_items.status}</p>
+                            <p>Product Name: {order_item.name}</p>
+                            <p>Price: {order_item.price}</p>
+                            
                             <p></p>
                         </>
 
-                    {/* ))} */}
-                    {/* <p>Total: {order.total}</p> */}
-                    <p></p>
+                    ))}
+                    <p>Status: {order.status}</p>
+                    <p>Total: {order.total}</p>
+                    
                     <p></p>
                     <p></p>
                 </>
