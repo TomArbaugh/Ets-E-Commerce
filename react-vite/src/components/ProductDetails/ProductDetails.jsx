@@ -70,6 +70,8 @@ const ProductDetails = () => {
 
        ))}
        <Link to={`/products/${product.id}/create-review`}>Create Review</Link>
+       <Link to={`/products/${product.id}/edit-review`}>Edit Review</Link>
+       <Link to={`/products/${product.id}/delete-review`}>Delete Review</Link>
      </div>
        </div>
      </div>

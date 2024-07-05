@@ -19,7 +19,7 @@ function CreateReview() {
     }
 
     useEffect(() => {
-
+        console.log(productId)
     }, [productId])
 
     const handleSubmit = async (e) => {

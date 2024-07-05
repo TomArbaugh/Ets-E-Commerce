@@ -11,6 +11,8 @@ import ProductForm from '../components/ProductForm/ProductForm'
 import UpdateProductForm from '../components/UpdateProductForm/UpdateProductForm';
 import EditReview from '../components/EditReview/EditReview';
 import DeleteReview from '../components/DeleteReview/DeleteReview';
+import CancelOrder from '../components/CancelOrder/CancelOrder';
+import ViewOrder from '../components/ViewOrder/ViewOrder';
 import Cart from '../components/Cart/Cart';
 
 
@@ -61,6 +63,14 @@ export const router = createBrowserRouter([
       {
         path: "products/:productId/delete-review",
         element: <DeleteReview />
+      },
+      {
+        path: "orders/:orderId/delete-order",
+        element: <CancelOrder />
+      },
+      {
+        path: "orders/view",
+        element: <ViewOrder />
       },
       {
         path: "cart",
