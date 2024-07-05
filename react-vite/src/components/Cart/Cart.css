@@ -1,8 +1,11 @@
-#small-box {
-    display: flex;
-    column-gap: 10px;
-}
-
-#delete-modal-button {
-    height: 5px
-}
+.cart-item-delete-success-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  #cart-item-card {
+    /* border: 1px solid lightgray; */
+    padding: 0px 0px 10px 10px;
+    margin: 10px 0px 10px 0px;
+  }
