@@ -36,7 +36,7 @@ class Product(db.Model):
         secondary=reviews,
         back_populates = 'product_reviews'
     )
-    
+
     #one-to-many products=>cart_items
     product_cart_items = db.relationship(
         'CartItem',
@@ -58,7 +58,7 @@ class Product(db.Model):
             'name': self.name,
             'category': self.category,
             'description': self.description,
-            'price': self.price,
+            'price': f"{self.price:.2f}",
             'stock': self.stock,
             'images': [image.to_dict() for image in self.images],
         }
