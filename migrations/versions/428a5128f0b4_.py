@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/b04479e64be4_.py
-Revision ID: b04479e64be4
+Revision ID: 428a5128f0b4
 Revises: 
-Create Date: 2024-07-05 00:37:14.581482
-========
-Revision ID: c6f8f26ade8c
-Revises: 
-Create Date: 2024-07-05 02:33:14.905093
->>>>>>>> 7227bbe02ede21c5cf6f6c5b102e586009235dfc:migrations/versions/c6f8f26ade8c_initial_migration.py
+Create Date: 2024-07-05 01:26:30.084262
 
 """
 from alembic import op
@@ -19,9 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-
-revision = 'c6f8f26ade8c'
-
+revision = '428a5128f0b4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -55,7 +47,7 @@ def upgrade():
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('category', sa.String(length=50), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
-    sa.Column('price', sa.Numeric(precision=10, scale=2), nullable=False),
+    sa.Column('price', sa.Numeric(), nullable=False),
     sa.Column('stock', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -102,6 +94,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('product_id', 'user_id')
     )
     # ### end Alembic commands ###
+
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
