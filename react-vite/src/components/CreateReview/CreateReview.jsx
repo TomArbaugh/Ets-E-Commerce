@@ -19,7 +19,7 @@ function CreateReview() {
     }
 
     useEffect(() => {
-        console.log(productId)
+        // console.log(productId)
     }, [productId])
 
     const handleSubmit = async (e) => {
@@ -37,7 +37,7 @@ function CreateReview() {
             stars,
         }
 
-        console.log("REVIEWDATA: ", reviewData)
+        // console.log("REVIEWDATA: ", reviewData)
 
         try {
             const reviewRes = await fetch(`/api/reviews/${productId}/create-review`, {

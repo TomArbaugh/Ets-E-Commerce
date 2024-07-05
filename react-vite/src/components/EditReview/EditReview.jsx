@@ -86,7 +86,7 @@ function EditReview() {
                 },
                 body: JSON.stringify(reviewData)
             });
-            console.log("TRY")
+            // console.log("TRY")
             if (reviewRes.ok) {
                 // const newReview = await reviewRes.json();
                 navigate(`/products/${productId}`);
@@ -94,7 +94,7 @@ function EditReview() {
         } catch (err) {
             console.error('Request Error:', err);
         }
-        console.log("TEST")
+        // console.log("TEST")
 
     }
 

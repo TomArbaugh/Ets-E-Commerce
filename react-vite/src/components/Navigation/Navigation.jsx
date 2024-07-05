@@ -8,7 +8,7 @@ import { RiShoppingCartLine } from "react-icons/ri";
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user);
 
-  console.log('Elya - navigation component rendered twice error');
+  // console.log('Elya - navigation component rendered twice error');
 
   return (
     <div id='header-container'>
