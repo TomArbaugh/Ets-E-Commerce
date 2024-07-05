@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetAllProducts } from '../../redux/products';
 import './LandingPage.css';
 
+
 const LandingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
