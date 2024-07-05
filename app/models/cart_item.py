@@ -6,7 +6,7 @@ class CartItem(db.Model):
   if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-  id = db.Column(db.Integer, primary_key = True)
+  id = db.Column(db.Integer, primary_key = True, unique = True)
   shopping_cart_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shopping_carts.id')))
   product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')))
   quantity = db.Column(db.Integer)
@@ -19,7 +19,7 @@ class CartItem(db.Model):
 
 
   #one-to-many products=>cart_items
-  cart_product = db.relationship(
+  product = db.relationship(
       'Product',
       back_populates = 'product_cart_items'
   )

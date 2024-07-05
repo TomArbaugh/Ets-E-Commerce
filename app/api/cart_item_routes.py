@@ -12,6 +12,7 @@ cart_item_routes = Blueprint('cart_items', __name__)
 def add_product_to_cart(product_id):
   """ Add item to shopping cart """
   form = CartItemForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
       quantity = form.data['quantity']
       shopping_cart = current_user.shopping_cart
@@ -29,7 +30,7 @@ def add_product_to_cart(product_id):
           db.session.add(cart_item)
       db.session.commit()
       flash('Product added to cart successfully')
-      return {'message': 'Product added to cart successfully'}
+      return cart_item.to_dict(), 201 
   if form.errors:
       flash('Fail to add product to cart')
       return {'errors': form.errors}, 400

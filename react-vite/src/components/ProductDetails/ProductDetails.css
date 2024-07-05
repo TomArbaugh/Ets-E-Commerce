@@ -43,3 +43,9 @@
 #button-container {
   display: flex;
 }
+
+.confirmation-message {
+  color: violet;
+  font-size: 1em;
+  margin-top: 10px;
+}

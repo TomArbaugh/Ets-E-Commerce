@@ -4,4 +4,4 @@ from wtforms.validators import DataRequired
 
 class CartItemForm(FlaskForm):
     quantity = IntegerField('quantity', validators=[DataRequired()])
-    submit = SubmitField('submit')
+    submit = SubmitField('Add to cart')
