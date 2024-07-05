@@ -1,0 +1,8 @@
+#small-box {
+    display: flex;
+    column-gap: 10px;
+}
+
+#delete-modal-button {
+    height: 5px
+}

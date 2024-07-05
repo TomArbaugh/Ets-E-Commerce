@@ -30,11 +30,5 @@ class CartItem(db.Model):
             'shopping_cart_id': self.shopping_cart_id,
             'product_id': self.product_id,
             'quantity': self.quantity,
-            # 'product': {
-            #     'id': self.product.id,
-            #     'name': self.product.name,
-            #     'description': self.product.description,
-            #     'price': self.product.price,
-            #     'image_url': self.product.image_url
-            # }
+            'product': { 'name': self.product.name }
         }
