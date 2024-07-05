@@ -64,7 +64,7 @@ const ProductDetails = () => {
          </select>
          <button className="add-to-cart-button" onClick={handleAddToCart}>Add to cart</button>
          <div className="bottom-reviews">
-          <h2>Reveiws</h2>
+          <h2>Reviews</h2>
        {reviews ? reviews.map((review) => (
          <>
          <li key={review.product_id}>{review.review}</li>

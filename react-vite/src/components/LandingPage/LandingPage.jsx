@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetAllProducts } from '../../redux/products';
 import './LandingPage.css';
-
+// comment this line for testing
 
 const LandingPage = () => {
   const dispatch = useDispatch();
