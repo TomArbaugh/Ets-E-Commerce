@@ -14,7 +14,7 @@ class Product(db.Model):
     name = db.Column(db.String(50), nullable = False)
     category = db.Column(db.String(50), nullable = False)
     description = db.Column(db.String(255), nullable =False)
-    price = db.Column(db.Numeric(3,2), nullable = False)
+    price = db.Column(db.Numeric, nullable = False)
     stock = db.Column(db.Integer, nullable = False)
 
     #one-to-many products=>product_images
