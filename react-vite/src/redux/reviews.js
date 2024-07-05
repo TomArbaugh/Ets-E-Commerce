@@ -1,10 +1,8 @@
 const GET_REVIEWS = 'getReveiws'
-
 const getReviews = (productId, data) => ({
     type: GET_REVIEWS,
     payload: data
 })
-
 export const getReviewsByProductId = (productId) => async (dispatch) => {
     const response = await fetch(`/api/reviews/${productId}/reviews`)
     if (response.ok) {
@@ -18,7 +16,6 @@ export const getReviewsByProductId = (productId) => async (dispatch) => {
 }
 
 const initialState = {}
-
 function reviewsReducer(state = initialState, action) {
     switch (action.type) {
       case GET_REVIEWS:

@@ -35,10 +35,10 @@ function EditReview() {
             try {
                 const fetchAllReviews = await fetch(`/api/reviews/${productId}/reviews`);
                 const fetchedReviews = await fetchAllReviews.json()
-                console.log("FETCHALLREVIEWS: ", fetchedReviews)
+                // console.log("FETCHALLREVIEWS: ", fetchedReviews)
                 const review = fetchedReviews.find((review) => review.user_id === userId)
-                console.log(fetchedReviews[0].user_id === userId)
-                console.log('REVIEW: ', review)
+                // console.log(fetchedReviews[0].user_id === userId)
+                // console.log('REVIEW: ', review)
                 if (review) {
                     setReview(review.review)
                     setStars(review.stars)
@@ -86,15 +86,15 @@ function EditReview() {
                 },
                 body: JSON.stringify(reviewData)
             });
-            console.log("TRY")
+            // console.log("TRY")
             if (reviewRes.ok) {
                 // const newReview = await reviewRes.json();
-                navigate(`/reviews/${productId}`);
+                navigate(`/products/${productId}`);
             }
         } catch (err) {
             console.error('Request Error:', err);
         }
-        console.log("TEST")
+        // console.log("TEST")
 
     }
 

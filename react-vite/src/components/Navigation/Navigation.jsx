@@ -3,15 +3,18 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { RiShoppingCartLine } from "react-icons/ri";
-import { TbBrandEtsy } from "react-icons/tb";
+// import { TbBrandEtsy } from "react-icons/tb";
 
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user);
+
+  // console.log('Elya - navigation component rendered twice error');
+
   return (
     <div id='header-container'>
       <div id='logo'>
         <NavLink className='logo-link-to-home' to='/'>
-          <TbBrandEtsy />
+          Home
         </NavLink>  
       </div>
       
@@ -26,12 +29,14 @@ function Navigation() {
       </div>
       
       <div className='two-icons'>
-        <div id='login and sigup'>
+        <div id='login-and-signup'>
           <ProfileButton user={sessionUser}/>
         </div>
         
         <div id='shopping-cart-icon'>
-        <RiShoppingCartLine />
+          <NavLink to='/cart'>
+            <RiShoppingCartLine />
+          </NavLink>
         </div>
       </div>
     </div>

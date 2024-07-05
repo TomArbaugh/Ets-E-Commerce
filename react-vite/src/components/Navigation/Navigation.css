@@ -4,16 +4,49 @@
 
 #header-container {
   display: flex;
-  justify-content: space-around;
-  align-items: center; 
+  justify-content: space-between; 
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff; 
 }
 
-.two-icons {
-  display: flex;
-
+#logo {
+  /* Existing styles */
 }
 
 .category-and-search {
   display: flex;
+  align-items: center;
+  padding-left: 10px;
+  opacity: 0.1; 
+}
 
+#header-category {
+  margin-right: 20px;
+}
+
+#search-bar {
+  padding: 10px;
+}
+
+.two-icons {
+  display: flex;
+  align-items: center; 
+}
+
+#login-and-signup {
+  margin-right: 20px;
+  
+}
+
+#shopping-cart-icon {
+  margin-left: 20px; 
+}
+
+
+#search-bar input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

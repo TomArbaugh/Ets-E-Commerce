@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
+import Layout from './Layout';
+import LandingPage from '../components/LandingPage/LandingPage';
 import LoginFormPage from '../components/LoginFormPage';
 import ViewReviews from '../components/ViewReviews/reviews';
 import SignupFormPage from '../components/SignupFormPage';
-import Layout from './Layout';
 import CreateReview from '../components/CreateReview/CreateReview';
-import LandingPage from '../components/LandingPage/LandingPage';
 import YourListings from '../components/YourListings/YourListings';
 import ProductDetails from '../components/ProductDetails/ProductDetails';
 import ProductForm from '../components/ProductForm/ProductForm'
@@ -12,6 +12,8 @@ import UpdateProductForm from '../components/UpdateProductForm/UpdateProductForm
 import EditReview from '../components/EditReview/EditReview';
 import DeleteReview from '../components/DeleteReview/DeleteReview';
 import CancelOrder from '../components/CancelOrder/CancelOrder';
+import ViewOrder from '../components/ViewOrder/ViewOrder';
+import Cart from '../components/Cart/Cart';
 
 
 export const router = createBrowserRouter([
@@ -65,7 +67,16 @@ export const router = createBrowserRouter([
       {
         path: "orders/:orderId/delete-order",
         element: <CancelOrder />
-      }
+      },
+      {
+        path: "orders/view",
+        element: <ViewOrder />
+      },
+      {
+        path: "cart",
+        element: <Cart />
+      },
+ 
     ],
   },
 ]);
