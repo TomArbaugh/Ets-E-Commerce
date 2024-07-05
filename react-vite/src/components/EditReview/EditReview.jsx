@@ -28,6 +28,7 @@ function EditReview() {
     }
 
     const userId = useSelector(state => state.session.user.id)
+
     useEffect(() => {
         const setState = async () => {
 
@@ -51,7 +52,7 @@ function EditReview() {
     }, [dispatch, userId, productId])
 
 
-    console.log("USERID: ", userId)
+    // console.log("USERID: ", userId)
 
 
     useEffect(() => {
@@ -75,10 +76,10 @@ function EditReview() {
             stars,
         }
 
-        console.log("REVIEWDATA: ", reviewData)
+        // console.log("REVIEWDATA: ", reviewData)
 
         try {
-            const reviewRes = await fetch(`/api/reviews/${productId}/edit-review`, {
+            const reviewRes = await fetch(`/api/reviews/${productId}/edit-review/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -88,7 +89,7 @@ function EditReview() {
             console.log("TRY")
             if (reviewRes.ok) {
                 // const newReview = await reviewRes.json();
-                navigate(`/reviews/${productId}`);
+                navigate(`/products/${productId}`);
             }
         } catch (err) {
             console.error('Request Error:', err);

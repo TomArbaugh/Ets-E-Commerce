@@ -1,42 +1,52 @@
 .profile-dropdown {
   position: absolute;
- }
- 
- 
- #header-container {
+}
+
+#header-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between; 
   align-items: center;
- }
- 
- 
- .category-and-search {
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff; 
+}
+
+#logo {
+  /* Existing styles */
+}
+
+.category-and-search {
+  display: flex;
+  align-items: center;
   padding-left: 10px;
-  opacity: 0.2;
- }
- 
- 
- #header-category {
+  opacity: 0.1; 
+}
+
+#header-category {
   margin-right: 20px;
- }
- .search-bar{
+}
+
+#search-bar {
   padding: 10px;
- }
- .two-icons {
+}
+
+.two-icons {
   display: flex;
- 
- 
- }
- 
- 
- #login-and-signup{
+  align-items: center; 
+}
+
+#login-and-signup {
   margin-right: 20px;
- }
- 
- 
- .category-and-search {
-  display: flex;
- 
- 
- }
- 
+  
+}
+
+#shopping-cart-icon {
+  margin-left: 20px; 
+}
+
+
+#search-bar input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

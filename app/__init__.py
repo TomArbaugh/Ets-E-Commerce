@@ -8,6 +8,7 @@ from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.product_routes import product_routes
+from .api.order_routes import order_routes
 from .seeds import seed_commands
 from .config import Config
 from .api.review_routes import review_routes
@@ -38,6 +39,7 @@ app.register_blueprint(review_routes, url_prefix='/api/reviews')
 app.register_blueprint(product_image_routes, url_prefix='/api/images')
 app.register_blueprint(shopping_cart_routes, url_prefix='/api/shopping_carts')
 app.register_blueprint(cart_item_routes, url_prefix='/api/cart_items')
+app.register_blueprint(order_routes, url_prefix='/api/orders')
 db.init_app(app)
 Migrate(app, db)
 
