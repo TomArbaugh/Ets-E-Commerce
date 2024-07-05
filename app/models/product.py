@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .review import reviews
 from .order_items import order_items
-from .shopping_cart_item import shopping_cart_items
+
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -14,9 +14,9 @@ class Product(db.Model):
     name = db.Column(db.String(50), nullable = False)
     category = db.Column(db.String(50), nullable = False)
     description = db.Column(db.String(255), nullable =False)
-    price = db.Column(db.Numeric, nullable = False)
+    price = db.Column(db.Numeric(3,2), nullable = False)
     stock = db.Column(db.Integer, nullable = False)
-    
+
     #one-to-many products=>product_images
     images = db.relationship(
         'ProductImage',
@@ -36,12 +36,12 @@ class Product(db.Model):
         secondary=reviews,
         back_populates = 'product_reviews'
     )
-
-      #many-to-many users<=shopping_cart_items=>products
-    user_shopping_cart_items = db.relationship(
-        'User',
-        secondary=shopping_cart_items,
-        back_populates = 'product_shopping_cart_items'
+    
+    #one-to-many products=>cart_items
+    product_cart_items = db.relationship(
+        'CartItem',
+        back_populates = 'cart_product',
+        cascade="delete"
     )
 
                 #many-to-many orders<=order_items=>products
@@ -60,6 +60,5 @@ class Product(db.Model):
             'description': self.description,
             'price': self.price,
             'stock': self.stock,
-            'images': self.images,
+            'images': [image.to_dict() for image in self.images],
         }
-
