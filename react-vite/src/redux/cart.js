@@ -21,7 +21,7 @@ export const deleteCartItem = (itemId) => ({
 
 
 export const fetchCartItems = (shoppingCartId) => async (dispatch) => {
- const res = await fetch(`api/shopping_cart/${shoppingCartId}/cart_items`);
+ const res = await fetch(`api/shopping_carts/${shoppingCartId}/cart_items`);
  if (res.ok) {
    const data = await res.json();
    dispatch(getCartItems(data.cart_items));

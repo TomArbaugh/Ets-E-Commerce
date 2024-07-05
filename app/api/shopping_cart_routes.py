@@ -11,12 +11,3 @@ def get_cart_items(shopping_cart_id):
         return {'errors': {'message': 'Shopping Cart not found'}}, 404
     cart_items = CartItem.query.filter_by(shopping_cart_id=shopping_cart_id).all()
     return {"cart_items": [item.to_dict() for item in cart_items]}, 200
-
-#  cart_items_with_product_details = []
-#     for item in cart_items:
-#         product = Product.query.get(item.product_id)
-#         item_dict = item.to_dict()
-#         item_dict['product'] = product.to_dict() if product else None
-#         cart_items_with_product_details.append(item_dict)
-
-#     return {"cart_items": cart_items_with_product_details}, 200
