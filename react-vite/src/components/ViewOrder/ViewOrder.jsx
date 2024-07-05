@@ -87,7 +87,7 @@ function ViewOrder() {
 
                     ))}
                     <p>Status: {order.status}</p>
-                    <p>Total: {order.total.toFixed(2)}</p>
+                    <p>Total: {Number(order.total).toFixed(2)}</p>
 
                     <p></p>
                     <p></p>
