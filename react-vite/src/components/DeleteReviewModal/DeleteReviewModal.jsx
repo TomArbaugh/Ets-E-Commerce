@@ -15,7 +15,7 @@ function DeleteReviewModal({productId}) {
     }
 
     
-    navigate(`/products/${productId}`)
+    navigate(`/`)
 
     return (
         <form>
