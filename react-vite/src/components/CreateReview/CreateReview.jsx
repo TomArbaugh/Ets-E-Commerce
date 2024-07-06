@@ -23,7 +23,7 @@ function CreateReview() {
     let existingReview;
     reviews ? existingReview = reviews.find(review => review.user_id === user.id) : null
 
-    console.log(existingReview)
+    // console.log(existingReview)
 
     const validateForm = () => {
         const newErrors = {};
