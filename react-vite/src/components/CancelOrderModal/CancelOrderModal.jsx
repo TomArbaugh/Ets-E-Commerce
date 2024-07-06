@@ -4,11 +4,11 @@ import CancelOrder from "../CancelOrder/CancelOrder";
 import { useNavigate } from "react-router-dom"
 
 
-function CancelOrderModal() {
+function CancelOrderModal({orderId}) {
     const navigate = useNavigate();
-    // const { productId } = useParams();
+    // const { orderId } = useParams();
     const { closeModal } = useModal();
-  
+    
     
     function onSubmit(e) {
         e.preventDefault()
@@ -18,17 +18,24 @@ function CancelOrderModal() {
     navigate(`/`)
 
     return (
+
+    
         <form>
         <h1>Are you sure you want to cancel?</h1>
         <button
         type='submit'
         onClick={onSubmit}
         >No</button>
-     
-        <CancelOrder />
-       
-
+          <button
+        type='submit'
+        onClick={onSubmit}
+        >
+        <CancelOrder orderId={orderId}/>
+        </button>
         </form>
+      
+    
+     
     )
 }
 
