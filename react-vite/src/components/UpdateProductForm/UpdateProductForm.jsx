@@ -16,8 +16,8 @@ const UpdateProductForm = () => {
 
   const product = useSelector(state => state.products.productDetails);
 
-  console.log('what is productId', productId);
-  console.log('what is state', useSelector(state => state));
+  // console.log('what is productId', productId);
+  // console.log('what is state', useSelector(state => state));
 
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');

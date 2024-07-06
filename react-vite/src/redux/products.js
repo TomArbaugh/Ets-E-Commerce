@@ -64,7 +64,7 @@ export const thunkProductDetails = (productId) => async (dispatch) => {
 };
 
 export const thunkCreateNewProduct = (product) => async (dispatch) => {
-  console.log('submitting product:', product);
+  // console.log('submitting product:', product);
 
   const res = await fetch('/api/products/', {
       method: 'POST',
@@ -74,7 +74,7 @@ export const thunkCreateNewProduct = (product) => async (dispatch) => {
       body: JSON.stringify(product)
     });
     
-    console.log('response status:', res.status);
+    // console.log('response status:', res.status);
 
     if (res.ok) {
       const newProduct = await res.json();

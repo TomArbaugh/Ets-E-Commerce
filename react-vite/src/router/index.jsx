@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
+import Layout from './Layout';
+import LandingPage from '../components/LandingPage/LandingPage';
 import LoginFormPage from '../components/LoginFormPage';
 import ViewReviews from '../components/ViewReviews/reviews';
 import SignupFormPage from '../components/SignupFormPage';
-import Layout from './Layout';
 import CreateReview from '../components/CreateReview/CreateReview';
-import LandingPage from '../components/LandingPage/LandingPage';
 import YourListings from '../components/YourListings/YourListings';
 import ProductDetails from '../components/ProductDetails/ProductDetails';
 import ProductForm from '../components/ProductForm/ProductForm'

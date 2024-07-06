@@ -1,12 +1,16 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 
 function DeleteReview() {
+   
     const { productId } = useParams();
-
+    const navigate = useNavigate()
     const userId = useSelector(state => state.session.user.id)
-
+    
+    
+    
+        const newErrors = {};
 
     const setState = async (e) => {
         e.preventDefault()
@@ -20,7 +24,11 @@ function DeleteReview() {
                     method: 'DELETE'
                 })
                 const result = await deleteFetch.json()
-                console.log(result)
+                if (result) {
+                    navigate(`/`);
+                }
+            } else {
+                newErrors.errors = "You do not have a review to delete"
             }
 
         } catch (err) {
@@ -29,8 +37,13 @@ function DeleteReview() {
     }
 
 
+
     return (
+        <>
         <button onClick={setState}>Delete Review</button>
+        {newErrors.errors && <p className="error-message">{newErrors.errors}</p>}
+        </>
+        
     )
 }
 
