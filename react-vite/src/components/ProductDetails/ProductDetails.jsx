@@ -5,6 +5,8 @@ import { thunkProductDetails } from '../../redux/products';
 import { addItemToCart } from '../../redux/cart';
 import './ProductDetails.css';
 import { getReviewsByProductId } from '../../redux/reviews';
+import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
+import OpenModalButton from '../OpenModalButton';
 
 
 const ProductDetails = () => {
@@ -92,7 +94,10 @@ const ProductDetails = () => {
        <Link to={`/products/${product.id}/edit-review`}>Edit Review</Link>
        </div>
        <div className='button-pad'>
-       <Link to={`/products/${product.id}/delete-review`}>Delete Review</Link>
+       <OpenModalButton 
+       buttonText='Delete Review'
+       modalComponent={<DeleteReviewModal  productId={product.id}/>}
+       />
        </div>
        </div>
   

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 
 function DeleteReview() {
+   
     const { productId } = useParams();
     const navigate = useNavigate()
     const userId = useSelector(state => state.session.user.id)
@@ -29,6 +30,7 @@ function DeleteReview() {
             console.error('Request Error:', err);
         }
     }
+
 
 
     return (

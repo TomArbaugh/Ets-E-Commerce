@@ -14,7 +14,17 @@ def orders_by_userId():
     orders = Order.query.filter_by(purchaser_id = current_user.id).all()
 
     orders_array = []
+    # order_items_array = []
     for order in orders:
+        # order_items = db.session.query(order_items).join(Order).filter(order_items.columns.order_id == order.id).all()
+
+        # for order_item in order_items:
+        #     order_item_obj = {
+        #         'order_id': order_item.order_id,
+        #         'product_id': order_item.product_id,
+        #         'quantity': order_item.quantity
+        #     }
+        #     order_items_array.append(order_item_obj)
 
         order_obj = {
             'id': order.id,
@@ -23,11 +33,14 @@ def orders_by_userId():
             'discount': order.discount,
             'status': order.status,
             'products_ordered': [order.to_dict() for order in order.products_ordered]
+            # 'order_items':  order_items
         }
         orders_array.append(order_obj)
-    print("ORDERS", orders)
-    print("user", current_user.id)
-    return orders_array
+    # print("ORDERS", orders)
+    # print("user", current_user.id)
+    return  orders_array
+        
+
 
 @order_routes.route('/checkout', methods=['POST'])
 @login_required
