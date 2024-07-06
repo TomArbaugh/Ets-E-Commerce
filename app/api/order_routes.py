@@ -30,7 +30,6 @@ def orders_by_userId():
             'id': order.id,
             'purchaser_id': order.purchaser_id,
             'total': order.total,
-            'discount': order.discount,
             'status': order.status,
             'products_ordered': [order.to_dict() for order in order.products_ordered]
             # 'order_items':  order_items
