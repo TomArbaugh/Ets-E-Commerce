@@ -5,37 +5,49 @@ import { thunkProductDetails } from '../../redux/products';
 import { addItemToCart } from '../../redux/cart';
 import './ProductDetails.css';
 import { getReviewsByProductId } from '../../redux/reviews';
+import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
+import OpenModalButton from '../OpenModalButton';
 
 
 const ProductDetails = () => {
+  const dispatch = useDispatch();
 
- const dispatch = useDispatch();
+  const { productId } = useParams();
 
- const { productId } = useParams();
+  const product = useSelector((state) => state.products.productDetails);
 
- const product = useSelector((state) => state.products.productDetails);
-
- const [quantity, setQuantity] = useState(1);
-
-
- const reviews = useSelector((state) => state.reviews.reviews)
+  const [quantity, setQuantity] = useState(1);
+  const [AddToCardMessage, setAddToCartMessage] = useState('');
 
 
+  const reviews = useSelector((state) => state.reviews.reviews)
 
 
- useEffect(() => {
-   dispatch(thunkProductDetails(productId));
- }, [dispatch, productId]);
 
 
- const handleAddToCart = () => {
-   dispatch(addItemToCart(productId, quantity));
- };
+  useEffect(() => {
+    dispatch(thunkProductDetails(productId));
+  }, [dispatch, productId]);
+
+  useEffect(() => {
+    dispatch(getReviewsByProductId(productId))
+  }, [dispatch, productId])
+
+  const handleAddToCart = async() => {
+    const result = await dispatch(addItemToCart(productId, quantity));
+    if (!result.errors) {
+      setAddToCartMessage('Item added to cart!');
+    } else {
+      setAddToCartMessage('Failed to add item to cart.');
+    }  
+    setTimeout(() => {
+      setAddToCartMessage('');
+    }, 2000); 
+  };
+ 
 
 
- useEffect(() => {
-   dispatch(getReviewsByProductId(productId))
- }, [dispatch, productId])
+
 
 
  const imageUrl = product.images && product.images.length > 0 ? product.images[0].url : '';
@@ -63,6 +75,7 @@ const ProductDetails = () => {
            <option value="3">3</option>
          </select>
          <button className="add-to-cart-button" onClick={handleAddToCart}>Add to cart</button>
+         {AddToCardMessage && <p className="confirmation-message">{AddToCardMessage}</p>}
          <div className="bottom-reviews">
           <h2>Reviews</h2>
        {reviews ? reviews.map((review) => (
@@ -81,7 +94,10 @@ const ProductDetails = () => {
        <Link to={`/products/${product.id}/edit-review`}>Edit Review</Link>
        </div>
        <div className='button-pad'>
-       <Link to={`/products/${product.id}/delete-review`}>Delete Review</Link>
+       <OpenModalButton 
+       buttonText='Delete Review'
+       modalComponent={<DeleteReviewModal  productId={product.id}/>}
+       />
        </div>
        </div>
   

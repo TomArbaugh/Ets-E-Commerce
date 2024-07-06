@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux"
+import { getReviewsByProductId } from "../../redux/reviews";
 
 function CreateReview() {
     const { productId } = useParams();
+    const dispatch = useDispatch()
     // const [productId, setProductId] = useState(null);
     // const [userId, setUserId] = useState(null);
     const [review, setReview] = useState('');
@@ -10,11 +13,23 @@ function CreateReview() {
     const [errors, setErrors] = useState({})
     const navigate = useNavigate();
 
+    useEffect(() => {
+        dispatch(getReviewsByProductId(productId))
+      }, [dispatch, productId])
+
+    const reviews = useSelector((state) => state.reviews.reviews)
+    const user = useSelector((state) => state.session.user)
+
+    let existingReview;
+    reviews ? existingReview = reviews.find(review => review.user_id === user.id) : null
+
+    // console.log(existingReview)
 
     const validateForm = () => {
         const newErrors = {};
         if (review.length > 2000) newErrors.review = "Reviews must be less than 2000 characters";
-        if (stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5"
+        if (stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5";
+        if (existingReview) newErrors.existingReview = "You can only leave one review per product."
         return newErrors;
     }
 
@@ -64,6 +79,7 @@ function CreateReview() {
                 <h3>Review</h3>
                 <input value={review} type="text" onChange={(e) => setReview(e.target.value)} />
                 {errors.review && <p className="error-message">{errors.review}</p>}
+                {errors.existingReview && <p className="error-message">{errors.existingReview}</p>}
                 <select value={stars} onChange={(e) => setStars(e.target.value)}>
                     <option value="">Select stars</option>
                     <option value="1">1</option>
