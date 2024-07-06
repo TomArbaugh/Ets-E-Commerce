@@ -8,6 +8,7 @@ const LandingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
   const products = useSelector((state) => state.products.allProducts || []);
+  const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
     dispatch(thunkGetAllProducts());
@@ -21,9 +22,13 @@ const LandingPage = () => {
     <div className="landing-page">
       <div className="landing-page-header">
         <h1>Welcome to Our Marketplace</h1>
-        <button className="add-listing-button" onClick={handleAddListing}>
-          + Add a product listing
-        </button>
+        <div>
+        {sessionUser && (
+          <button className="add-listing-button" onClick={handleAddListing}>
+            + Add a product listing
+          </button>
+          )}
+        </div>
       </div>
       <div className="products-list-container">
         {products.map((product) => (
@@ -33,7 +38,9 @@ const LandingPage = () => {
             to={`/products/${product.id}`}
           >
             <div className="product-card">
-              <img src={product.image_url} alt={product.name} />
+            {product.images && product.images[0] && product.images[0].url && (
+                <img src={product.images[0].url} alt={product.name} />
+              )}
               <p>{product.name}</p>
               <p>${product.price}</p>
             </div>

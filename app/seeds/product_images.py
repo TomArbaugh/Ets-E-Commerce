@@ -3,34 +3,34 @@ from sqlalchemy.sql import text
 
 def seed_product_images():
     image1 = ProductImage(
-        product_id=1, url="image1"
+        product_id=1, url="https://etsy-clone-july24.s3.us-west-1.amazonaws.com/images-for-EstyClone/1-Custom-Leather-Wallet.png"
     )
     image2 = ProductImage(
-        product_id=2, url="image2"
+        product_id=2, url="https://etsy-clone-july24.s3.us-west-1.amazonaws.com/images-for-EstyClone/2-Cable-Organizer.png"
     )
     image3 = ProductImage(
-        product_id=3, url="image3"
+        product_id=3, url="https://etsy-clone-july24.s3.us-west-1.amazonaws.com/images-for-EstyClone/3-Toiletry-Bag.png"
     )
     image4 = ProductImage(
-        product_id=4, url="image4"
+        product_id=4, url="https://etsy-clone-july24.s3.us-west-1.amazonaws.com/images-for-EstyClone/4-Personalized-Shoe-Tags.png"
     )
     image5 = ProductImage(
-        product_id=5, url="image5"
+        product_id=5, url="https://etsy-clone-july24.s3.us-west-1.amazonaws.com/images-for-EstyClone/5-Personalized-Wooden-Puzzle.png"
     )
     image6 = ProductImage(
-        product_id=6, url="image6"
+        product_id=6, url="https://etsy-clone-july24.s3.us-west-1.amazonaws.com/images-for-EstyClone/6-Personalized-Dog-Collar.png"
     )
     image7 = ProductImage(
-        product_id=7, url="image7"
+        product_id=7, url="https://etsy-clone-july24.s3.us-west-1.amazonaws.com/images-for-EstyClone/7-233yr-Old-Sourdough-Starter.png"
     )
     image8 = ProductImage(
-        product_id=8, url="image8"
+        product_id=8, url="https://etsy-clone-july24.s3.us-west-1.amazonaws.com/images-for-EstyClone/8-Custom-Embroidered-Sweatshirt.png"
     )
     image9 = ProductImage(
-        product_id=9, url="image9"
+        product_id=9, url="https://etsy-clone-july24.s3.us-west-1.amazonaws.com/images-for-EstyClone/9-Silver-Chain-Necklace.png"
     )
     image10 = ProductImage(
-        product_id=10, url="image10"
+        product_id=10, url="https://etsy-clone-july24.s3.us-west-1.amazonaws.com/images-for-EstyClone/10-Custom-Neon-Sign.png"
     )
 
     db.session.add(image1)

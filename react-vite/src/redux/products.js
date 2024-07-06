@@ -87,12 +87,11 @@ export const thunkCreateNewProduct = (product) => async (dispatch) => {
 };
 
 export const thunkAddProductImage = (productId, image) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append('image', image);
   const res = await fetch(`/api/products/${productId}/images`, {
     method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(image),
+    body: formData,
   });
   if (res.ok) {
     const productImage = await res.json();
@@ -146,8 +145,10 @@ export const thunkDeleteProducts = (productId) => async (dispatch) => {
 
 const initialState = {
   allProducts: [],
-  productDetails: {},
-}
+  productDetails: {
+    images: [],
+  },
+};
 
 export default function productReducer(state = initialState, action) {
   let newState;
@@ -195,7 +196,11 @@ export default function productReducer(state = initialState, action) {
         ...state, 
         productDetails: { 
           ...state.productDetails, 
-          images: [...state.productDetails.images, action.image]}}; 
+          images: state.productDetails.images 
+            ? [...state.productDetails.images, action.image]
+            : [action.image] 
+        }
+      };
       return newState;
     default:
       return state;

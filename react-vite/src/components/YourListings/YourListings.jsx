@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const YourListings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const products = useSelector((state) => state.products.allProducts);
+  const products = useSelector((state) => state.products.allProducts || []);
 
   useEffect(() => {
     dispatch(thunkGetCurrentUsersProducts());
@@ -34,33 +34,35 @@ const YourListings = () => {
         ) : (
           <ul>
             {products.map((product) => (
-              product && (
-                <li key={product.id} className="listing-item">
-                  {product.image_url && <img src={product.image_url} alt={product.title} />}
-                  <div className="listing-details">
-                    <h2>{product.title}</h2>
-                    <p>${product.price}</p>
-                    <p>{product.quantity} in stock</p>
-                    <p>{product.category}</p>
-                    <p>{product.description}</p>
-                    <div className="listing-actions">
-                      <Link to={`/products/${product.id}/edit`}>
-                        <button>Edit</button>
-                      </Link>
-                      <OpenModalButton
-                        buttonText='Delete'
-                        modalComponent={<DeleteProductModal productId={product.id} />}
-                      />
-                    </div>
-                  </div>
-                </li>
-              )
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
-  );
+               <li key={product.id} className="listing-item">
+               {product.images && product.images[0] && product.images[0].url ? (
+                 <img src={product.images[0].url} alt={product.name} />
+               ) : (
+                 <p>No image available</p>
+               )}
+               <div className="listing-details">
+                 <h2>{product.name}</h2>
+                 <p>${product.price}</p>
+                 <p>{product.quantity} in stock</p>
+                 <p>{product.category}</p>
+                 <p>{product.description}</p>
+                 <div className="listing-actions">
+                   <Link to={`/products/${product.id}/edit`}>
+                     <button>Edit</button>
+                   </Link>
+                   <OpenModalButton
+                     buttonText='Delete'
+                     modalComponent={<DeleteProductModal productId={product.id} />}
+                   />
+                 </div>
+               </div>
+             </li>
+           ))}
+         </ul>
+       )}
+     </div>
+   </div>
+ );
 };
 
 export default YourListings;

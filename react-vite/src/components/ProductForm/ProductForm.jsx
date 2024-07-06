@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { thunkCreateNewProduct } from '../../redux/products';
+import { thunkCreateNewProduct, thunkAddProductImage } from '../../redux/products';
 import './ProductForm.css';
+
 
 const ProductForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [image, setImage] = useState('');
+  const [imageLoading, setImageLoading] = useState(false);
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -33,22 +36,34 @@ const ProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // const formData = new FormData();
+    // formData.append("image", image);
+    // // aws uploads can be a bit slow—displaying
+    // // some sort of loading message is a good idea
+    setImageLoading(true);
+    // await dispatch(thunkCreateNewProduct(formData));
+    // navigate("/images");
     setHasSubmitted(true);
 
     if (errors.length > 0) return; // prevent submission if frontend errors exist
-    const product = { name, category, description, price, stock, imageUrl};
+    const product = { name, category, description, price, stock};
     const response = await dispatch(thunkCreateNewProduct(product));
 
     if (response.errors) {
       setErrors(response.errors);
     } else {
+      if (image) {
+        setImageLoading(true);
+        await dispatch(thunkAddProductImage(response.id, image));
+        setImageLoading(false);
+      }
       // const productId = response.id;
       navigate('/your-listings');
     }
   };
 
   return (
-    <form className='products-form' onSubmit={handleSubmit}>
+    <form className='products-form' onSubmit={handleSubmit} encType="multipart/form-data">
     <h2>Tell the world all about your item and why they’ll love it.</h2>
     <div className='name-div'>
       <label> Name *
@@ -82,13 +97,12 @@ const ProductForm = () => {
       <label>
         Photos and video *
         <input
-          type="text"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-          required
-          placeholder='product image'
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
         />
       </label>
+      {(imageLoading)&& <p>Loading...</p>}
     </div>
 
     <div className='category-div'>
