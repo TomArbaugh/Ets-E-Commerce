@@ -19,6 +19,14 @@ const ProductForm = () => {
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
+  const categories = [
+    "Home & Living",
+    "Clothing & Shoes",
+    "Jewelry & Accessories",
+    "Toys & Entertainment",
+    "Art & Collectibles"
+  ];
+
   useEffect(() => {
     const errorArr = [];
     if (!name) errorArr.push('Name is required');
@@ -64,34 +72,37 @@ const ProductForm = () => {
 
   return (
     <form className='products-form' onSubmit={handleSubmit} encType="multipart/form-data">
-    <h2>Tell the world all about your item and why they’ll love it.</h2>
-    <div className='name-div'>
-      <label> Name *
-        {hasSubmitted && errors.includes('Name is required') && <span className="error">Name is required</span>}
-        {hasSubmitted && errors.includes('Name cannot be more than 50 characters') && <span className="error">Name cannot be more than 50 characters</span>}
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          placeholder='product name'
-        />
-      </label>
-    </div>
+      <h2>Tell the world all about your item and why they’ll love it.</h2>
+      <div className='name-div'>
+        <label> Name *
+          {hasSubmitted && errors.includes('Name is required') && <span className="error">Name is required</span>}
+          {hasSubmitted && errors.includes('Name cannot be more than 50 characters') && <span className="error">Name cannot be more than 50 characters</span>}
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            placeholder='product name'
+          />
+        </label>
+      </div>
 
-    <div className='category-div'>
-      <label>Category *
-        {hasSubmitted && errors.includes('Category is required') && <span className="error">Category is required</span>}
-        {hasSubmitted && errors.includes('Category cannot be more than 50 characters') && <span className="error">Category cannot be more than 50 characters</span>}
-        <input
-          type="text"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          required
-          placeholder='product category'
-        />
-      </label>
-    </div>
+      <div className='category-div'>
+        <label>Category *
+          {hasSubmitted && errors.includes('Category is required') && <span className="error">Category is required</span>}
+          {hasSubmitted && errors.includes('Category cannot be more than 50 characters') && <span className="error">Category cannot be more than 50 characters</span>}
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          >
+            <option value="">Select a category</option>
+            {categories.map((cat, idx) => (
+              <option key={idx} value={cat}>{cat}</option>
+            ))}
+          </select>
+        </label>
+      </div>
 
     <div className='photo-div'>
       <label>
@@ -105,48 +116,49 @@ const ProductForm = () => {
       {(imageLoading)&& <p>Loading...</p>}
     </div>
 
-    <div className='category-div'>
-      <label>Description *
-        {hasSubmitted && errors.includes('Description is required') && <span className="error">Description is required</span>}
-        {hasSubmitted && errors.includes('Description cannot be more than 255 characters') && <span className="error">Description cannot be more than 255 characters</span>}
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-          placeholder='product description'
-        />
-      </label>
-    </div>
+      <div className='category-div'>
+        <label>Description *
+          {hasSubmitted && errors.includes('Description is required') && <span className="error">Description is required</span>}
+          {hasSubmitted && errors.includes('Description cannot be more than 255 characters') && <span className="error">Description cannot be more than 255 characters</span>}
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            placeholder='product description'
+          />
+        </label>
+      </div>
 
-    <div className='price-inventory-div'>
-      <h2>Price & Inventory</h2>
-      <label>Price *
-        {hasSubmitted && errors.includes('Price is required') && <span className="error">Price is required</span>}
-        {hasSubmitted && errors.includes('Price must be a positive number') && <span className="error">Price must be a positive number</span>}
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          required
-          placeholder='price description'
-        />
-      </label>
-      <label>Stock *
-        {hasSubmitted && errors.includes('Stock is required') && <span className="error">Stock is required</span>}
-        {hasSubmitted && errors.includes('Stock must be a positive number') && <span className="error">Stock must be a positive number</span>}
-        <input
-          type="number"
-          value={stock}
-          onChange={(e) => setStock(e.target.value)}
-          required
-          placeholder='product stock'
-        />
-      </label>
-    </div>
-    <button type="submit">Add a listing</button>
-  </form>
+      <div className='price-inventory-div'>
+        <h2>Price & Inventory</h2>
+        <label>Price *
+          {hasSubmitted && errors.includes('Price is required') && <span className="error">Price is required</span>}
+          {hasSubmitted && errors.includes('Price must be a positive number') && <span className="error">Price must be a positive number</span>}
+          <input
+            type="number"
+            value={price}
+            min="0"
+            onChange={(e) => setPrice(e.target.value)}
+            required
+            placeholder='price description'
+          />
+        </label>
+        <label>Stock *
+          {hasSubmitted && errors.includes('Stock is required') && <span className="error">Stock is required</span>}
+          {hasSubmitted && errors.includes('Stock must be a positive number') && <span className="error">Stock must be a positive number</span>}
+          <input
+            type="number"
+            value={stock}
+            min="0"
+            onChange={(e) => setStock(e.target.value)}
+            required
+            placeholder='product stock'
+          />
+        </label>
+      </div>
+      <button type="submit">Add a listing</button>
+    </form>
   );
 };
-
 
 export default ProductForm;

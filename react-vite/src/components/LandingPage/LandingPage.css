@@ -3,7 +3,7 @@
   padding: 10px;
 }
  /* comment this line for testing */
-.landing-page-header {
+.landing-page-welcome-header {
   display: flex;
   flex-direction: column; 
   align-items: center; 

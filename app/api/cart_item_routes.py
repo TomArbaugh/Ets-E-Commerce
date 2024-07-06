@@ -10,7 +10,9 @@ cart_item_routes = Blueprint('cart_items', __name__)
 @cart_item_routes.route('/add/<int:product_id>', methods=['POST'])
 @login_required
 def add_product_to_cart(product_id):
-  """ Add item to shopping cart """
+  """ 
+  Add item to shopping cart 
+  """
   form = CartItemForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
@@ -34,6 +36,29 @@ def add_product_to_cart(product_id):
   if form.errors:
       flash('Fail to add product to cart')
       return {'errors': form.errors}, 400
+  
+@cart_item_routes.route('/<int:cart_id>', methods=['GET'])
+@login_required
+def get_cart_items(cart_id):
+    """ 
+    Get cart item information
+    """
+    cart_items = CartItem.query.filter_by(shopping_cart_id=cart_id).all()
+    return jsonify(cart_items=[item.to_dict() for item in cart_items])
+
+@cart_item_routes.route('/<int:id>', methods=['PUT'])
+def update_cart_item_quantity(id):
+  """ 
+  Change product quantity in shopping cart 
+  """
+  cart_item = CartItem.query.get(id)
+  if not cart_item:
+    return {'error': 'Cart item not found'}, 404
+  
+  data = request.json
+  cart_item.quantity = data['quantity']
+  db.session.commit()
+  return cart_item.to_dict()
 
 
 @cart_item_routes.route('/<int:cart_item_id>', methods=['DELETE'])

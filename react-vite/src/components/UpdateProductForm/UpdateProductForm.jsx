@@ -16,9 +16,6 @@ const UpdateProductForm = () => {
 
   const product = useSelector(state => state.products.productDetails);
 
-  // console.log('what is productId', productId);
-  // console.log('what is state', useSelector(state => state));
-
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
@@ -65,7 +62,7 @@ const UpdateProductForm = () => {
   };
 
   if (!product) {
-    return <div>Loading...</div>; // Display a loading state until the product is loaded
+    return <div>Loading...</div>; // display a loading state until the product is loaded
   }
 
   return (
@@ -117,6 +114,7 @@ const UpdateProductForm = () => {
         <input
           type="number"
           value={price}
+          min="0"
           onChange={(e) => setPrice(e.target.value)}
           required
         />
@@ -132,7 +130,7 @@ const UpdateProductForm = () => {
           required
         />
         {hasSubmitted && errors.includes('Stock is required') && <p className="error">Stock is required</p>}
-        {hasSubmitted && errors.includes('Stock must be a positive number') && <p className="error">Stock must be a positive number</p>}
+        {hasSubmitted && errors.includes('Price must be a positive number') && <p className="error">Price must be a positive number</p>}
       </label>
       <button type="submit">Update listing</button>
     </form>
