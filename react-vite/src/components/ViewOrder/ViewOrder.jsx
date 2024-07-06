@@ -40,7 +40,7 @@ function ViewOrder() {
 
 
 
-    console.log("This is orders", orders)
+    // console.log("This is orders", orders)
 
 
     const ordersArr = []
@@ -51,7 +51,7 @@ function ViewOrder() {
         orderDetails.total = order.total
         orderDetails.id = order.id
         orderDetails.order_items = []
-        console.log("ORDER: ", order)
+        // console.log("ORDER: ", order)
 
         order.products_ordered.map((order_item) => {
 
@@ -71,7 +71,7 @@ function ViewOrder() {
         })
         ordersArr.push(orderDetails)
 }) : null
-    console.log("ORDERSARRAY: ", ordersArr)
+    // console.log("ORDERSARRAY: ", ordersArr)
 
     if (!ordersArr.length) return "no orders"
     return (

@@ -4,7 +4,7 @@ import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { RiShoppingCartLine } from "react-icons/ri";
 // import { TbBrandEtsy } from "react-icons/tb";
-
+// comment this line for testing
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user);
 

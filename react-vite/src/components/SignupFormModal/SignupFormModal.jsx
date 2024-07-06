@@ -7,27 +7,40 @@ import "./SignupForm.css";
 function SignupFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
+  const validateForm = () => {
+    const newErrors = {};
+    if (password !== confirmPassword) newErrors.password =  "Confirm Password field must be the same as the Password field"
+    if (password.length < 6 || password.length > 20) newErrors.passwordLength = "Password must be between 6 and 20 characters."
+    if (!email.includes('@')) newErrors.email = "Please provide a valid email"
+    if (username.length < 3 || username.length > 30) newErrors.username = "Username must be between 3 and 30 characters"
+    if (first_name.length < 3 || first_name.length > 30) newErrors.firstName = "First name must be between 3 and 30 characters"
+    if (last_name.length < 3 || last_name.length > 30) newErrors.lastName = "Last name must be between 3 and 30 characters"
+   
+    return newErrors;
+}
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
+    const newErrors = validateForm();
+    if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
     }
 
     const serverResponse = await dispatch(
       thunkSignup({
         email,
+        first_name,
+        last_name,
         username,
         password,
       })
@@ -61,7 +74,7 @@ function SignupFormModal() {
             First Name
             <input
               type="text"
-              value={firstName}
+              value={first_name}
               onChange={(e) => setFirstName(e.target.value)}
               required
             />
@@ -71,7 +84,7 @@ function SignupFormModal() {
             Last Name
             <input
               type="text"
-              value={lastName}
+              value={last_name}
               onChange={(e) => setLastName(e.target.value)}
               required
             />
@@ -97,6 +110,7 @@ function SignupFormModal() {
             />
           </label>
           {errors.password && <p>{errors.password}</p>}
+          {errors.passwordLength && <p>{errors.passwordLength}</p>}
           <label>
             Confirm Password
             <input

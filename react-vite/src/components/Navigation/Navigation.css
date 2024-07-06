@@ -1,7 +1,7 @@
 .profile-dropdown {
   position: absolute;
 }
-
+/* }comment this line for testing */
 #header-container {
   display: flex;
   justify-content: space-between; 
@@ -9,10 +9,6 @@
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
   background-color: #fff; 
-}
-
-#logo {
-  /* Existing styles */
 }
 
 .category-and-search {

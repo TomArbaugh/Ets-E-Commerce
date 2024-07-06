@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetAllProducts } from '../../redux/products';
 import './LandingPage.css';
 
-
 const LandingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
   const products = useSelector((state) => state.products.allProducts || []);
 
   useEffect(() => {
-    // console.log('Elya - landingPage component rendered twice error');
     dispatch(thunkGetAllProducts());
   }, [dispatch]);
 
@@ -19,7 +17,6 @@ const LandingPage = () => {
     navigate('/products/new');
   };
   
-// console.log(products)
   return (
     <div className="landing-page">
       <div className="landing-page-header">
