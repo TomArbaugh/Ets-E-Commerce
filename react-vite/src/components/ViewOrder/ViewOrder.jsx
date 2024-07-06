@@ -36,7 +36,7 @@ function ViewOrder() {
     }
     useEffect(() => {
         fetchOrders()
-    }, [dispatch])
+    },[dispatch])
 
 
 
