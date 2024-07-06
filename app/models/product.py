@@ -40,7 +40,7 @@ class Product(db.Model):
     #one-to-many products=>cart_items
     product_cart_items = db.relationship(
         'CartItem',
-        back_populates = 'cart_product',
+        back_populates = 'product',
         cascade="delete"
     )
 

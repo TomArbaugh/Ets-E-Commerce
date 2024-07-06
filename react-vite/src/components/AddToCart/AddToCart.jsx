@@ -4,14 +4,14 @@ import { addItemToCart } from '../../redux/cart';
 
 
 const AddToCart = ({ productId }) => {
- const [quantity, setQuantity] = useState(1);
- const dispatch = useDispatch();
+    const [quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
 
 
- const handleSubmit = (e) => {
-   e.preventDefault();
-   dispatch(addItemToCart(productId, quantity));
- };
+    const handleSubmit = async(e) => {
+    e.preventDefault();
+    dispatch(addItemToCart(productId, quantity));
+    };
 
 
  return (
