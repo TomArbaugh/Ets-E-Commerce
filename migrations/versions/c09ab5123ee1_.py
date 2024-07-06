@@ -95,7 +95,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('product_id', 'user_id')
     )
     # ### end Alembic commands ###
-     if environment == "production":
+    if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
 def downgrade():
