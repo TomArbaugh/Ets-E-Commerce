@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
 from app.models import Order, OrderItem, CartItem, ShoppingCart, db
+from sqlalchemy import insert
+from app.models.order_items import order_items
 
 order_routes = Blueprint('orders', __name__)
 
@@ -27,36 +29,31 @@ def orders_by_userId():
     print("user", current_user.id)
     return orders_array
 
-@order_routes.route('/<int:shopping_cart_id>/checkout', methods=['POST'])
+@order_routes.route('/checkout', methods=['POST'])
 @login_required
-
-
-
-
-def checkout_items(shopping_cart_id):
-    shopping_cart = ShoppingCart.query.get(shopping_cart_id)
+def checkout_items():
+    
+    shopping_cart = ShoppingCart.query.filter_by(user_id=current_user.id)
     if shopping_cart is None:
         return {'errors': {'message': 'Shopping Cart not found'}}, 404
     
     new_order = Order(
         purchaser_id=current_user.id,
-
-        total=calculate_total(shopping_cart), #make another function o calculate total??????
+        total=calculate_total(shopping_cart), 
         status='Pending'
     )
     db.session.add(new_order)
     db.session.commit()
 
-
-
-
-    cart_items = CartItem.query.filter_by(shopping_cart_id=shopping_cart_id).all()
+    cart_items = CartItem.query.filter_by(shopping_cart_id=shopping_cart.id).all()
     for cart_item in cart_items:
-        order_item = OrderItem(
+        order_item = (
+            insert(order_items).
+            values(
             order_id=new_order.id,
             product_id=cart_item.product_id,
             quantity=cart_item.quantity
-            # product_name=cart_item.product.name <------------ column does not have name yet
+            )
         )
         db.session.execute(order_item)
         db.session.delete(cart_item)
@@ -64,12 +61,11 @@ def checkout_items(shopping_cart_id):
 
     return new_order.to_dict(), 201
 
-def calculate_total(shopping_cart): #did i put this in the right place?
+def calculate_total(shopping_cart): 
     total = 0
     for item in shopping_cart.cart_items:
         total += item.product.price * item.quantity
     return total
-
 
 @order_routes.route('/<int:id>/delete-order', methods=['DELETE'])
 @login_required
