@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from app.models import Order, db
+from app.models import Order, OrderItem, CartItem, ShoppingCart, db
 
 order_routes = Blueprint('orders', __name__)
 
@@ -26,6 +26,50 @@ def orders_by_userId():
     print("ORDERS", orders)
     print("user", current_user.id)
     return orders_array
+
+@order_routes.route('/<int:shopping_cart_id>/checkout', methods=['POST'])
+@login_required
+
+
+
+
+def checkout_items(shopping_cart_id):
+    shopping_cart = ShoppingCart.query.get(shopping_cart_id)
+    if shopping_cart is None:
+        return {'errors': {'message': 'Shopping Cart not found'}}, 404
+    
+    new_order = Order(
+        purchaser_id=current_user.id,
+
+        total=calculate_total(shopping_cart), #make another function o calculate total??????
+        status='Pending'
+    )
+    db.session.add(new_order)
+    db.session.commit()
+
+
+
+
+    cart_items = CartItem.query.filter_by(shopping_cart_id=shopping_cart_id).all()
+    for cart_item in cart_items:
+        order_item = OrderItem(
+            order_id=new_order.id,
+            product_id=cart_item.product_id,
+            quantity=cart_item.quantity
+            # product_name=cart_item.product.name <------------ column does not have name yet
+        )
+        db.session.execute(order_item)
+        db.session.delete(cart_item)
+    db.session.commit()
+
+    return new_order.to_dict(), 201
+
+def calculate_total(shopping_cart): #did i put this in the right place?
+    total = 0
+    for item in shopping_cart.cart_items:
+        total += item.product.price * item.quantity
+    return total
+
 
 @order_routes.route('/<int:id>/delete-order', methods=['DELETE'])
 @login_required
