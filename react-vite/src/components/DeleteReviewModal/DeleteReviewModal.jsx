@@ -4,7 +4,7 @@ import './DeleteReviewModal.css'
 // import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 
-function DeleteReviewModal({productId}) {
+function DeleteReviewModal() {
     const navigate = useNavigate();
     // const { productId } = useParams();
     const { closeModal } = useModal();
@@ -15,7 +15,7 @@ function DeleteReviewModal({productId}) {
     }
 
     
-    navigate(`/products/${productId}`)
+    navigate(`/`)
 
     return (
         <form>

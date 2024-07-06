@@ -17,6 +17,7 @@ function EditReview() {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(null);
     const [errors, setErrors] = useState({})
+    const [err, setErr] = useState()
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -24,6 +25,7 @@ function EditReview() {
         const newErrors = {};
         if (review.length > 2000) newErrors.review = "Reviews must be less than 2000 characters";
         if (stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5"
+        if (err) newErrors.noReview = "You do not have a review to edit"
         return newErrors;
     }
 
@@ -42,6 +44,8 @@ function EditReview() {
                 if (review) {
                     setReview(review.review)
                     setStars(review.stars)
+                } else {
+                    setErr("You do not have a review to edit")
                 }
             } catch (err) {
                 console.error('Request Error:', err);
@@ -105,6 +109,7 @@ function EditReview() {
                 <h3>Hello Review</h3>
                 <input value={review} type="text" onChange={(e) => setReview(e.target.value)} />
                 {errors.review && <p className="error-message">{errors.review}</p>}
+                {errors.noReview && <p className="error-message">{errors.noReview}</p>}
                 <select value={stars} onChange={(e) => setStars(e.target.value)}>
                     <option value="">Select stars</option>
                     <option value="1">1</option>
