@@ -27,3 +27,5 @@ class Order(db.Model):
         secondary=order_items,
         back_populates = 'order_products'
     )
+
+    

@@ -1,7 +1,8 @@
 //action types
 const ADD_TO_CART = 'cart/ADD_TO_CART';
 const GET_CART_ITEMS = 'cart/GET_CART_ITEMS';
-const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
+const DELETE_CART_ITEM = 'cart/DELETE_CART_ITEM';
+// const CHECK_OUT = 'cart/CHECK_OUT';
 
 export const addToCart = (item) => ({
     type: ADD_TO_CART,
@@ -18,6 +19,10 @@ export const deleteCartItem = (itemId) => ({
     itemId,
    });
 
+// export const checkOut = (items) => ({
+//     type: CHECK_OUT,
+//     items,
+// })
 
 
 export const fetchCartItems = (shoppingCartId) => async (dispatch) => {
@@ -61,6 +66,7 @@ export const removeItemFromCart = (itemId) => async (dispatch) => {
         return error;
     }
 };
+
 
 
 const initialState = {

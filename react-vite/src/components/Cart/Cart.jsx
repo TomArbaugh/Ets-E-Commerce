@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCartItems, removeItemFromCart } from '../../redux/cart';
+import OpenModalButton from '../OpenModalButton';
+import CheckoutModal from './CheckoutModal';
 import './Cart.css';
 
 const Cart = () => {
@@ -26,6 +28,7 @@ const Cart = () => {
   };
 
   return (
+    <>
     <div>
       <h1>Shopping Cart</h1>
       {message && <p className='cart-item-delete-success-message'>{message}</p>}
@@ -53,6 +56,14 @@ const Cart = () => {
         )}
       </ul>
     </div>
+    <div>
+       <OpenModalButton
+        buttonText='Checkout'
+        modalComponent={<CheckoutModal/>}
+      />
+      
+    </div>
+    </>
   );
 };
 

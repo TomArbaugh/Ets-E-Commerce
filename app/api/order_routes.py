@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from app.models import Order, OrderItem, CartItem, ShoppingCart, db
+from app.models import Order, CartItem, ShoppingCart, db
 from sqlalchemy import insert
 from app.models.order_items import order_items
 
@@ -33,13 +33,17 @@ def orders_by_userId():
 @login_required
 def checkout_items():
     
-    shopping_cart = ShoppingCart.query.filter_by(user_id=current_user.id)
+    shopping_cart = ShoppingCart.query.get(current_user.id)
+    print('what is in the shopping cart', shopping_cart)
+    total = 0
+    for item in shopping_cart.cart_items:
+        total += item.product.price * item.quantity
     if shopping_cart is None:
         return {'errors': {'message': 'Shopping Cart not found'}}, 404
     
     new_order = Order(
         purchaser_id=current_user.id,
-        total=calculate_total(shopping_cart), 
+        total=total, 
         status='Pending'
     )
     db.session.add(new_order)
@@ -59,13 +63,13 @@ def checkout_items():
         db.session.delete(cart_item)
     db.session.commit()
 
-    return new_order.to_dict(), 201
+    return "success", 201
 
-def calculate_total(shopping_cart): 
-    total = 0
-    for item in shopping_cart.cart_items:
-        total += item.product.price * item.quantity
-    return total
+# def calculate_total(shopping_cart): 
+#     total = 0
+#     for item in shopping_cart.cart_items:
+#         total += item.product.price * item.quantity
+#     return total
 
 @order_routes.route('/<int:id>/delete-order', methods=['DELETE'])
 @login_required
