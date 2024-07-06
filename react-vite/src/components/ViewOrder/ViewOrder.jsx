@@ -36,7 +36,7 @@ function ViewOrder() {
     }
     useEffect(() => {
         fetchOrders()
-    }, [dispatch])
+    },[dispatch])
 
 
 
@@ -49,6 +49,7 @@ function ViewOrder() {
 
         orderDetails.status = order.status
         orderDetails.total = order.total
+        orderDetails.id = order.id
         orderDetails.order_items = []
         console.log("ORDER: ", order)
 
@@ -81,6 +82,7 @@ function ViewOrder() {
                     {order.order_items.map((order_item) => (
                         <>
                             {/* <p>Order Id: {order_items.order_id}</p> */}
+                            
                             <p>Product Name: {order_item.name}</p>
                             <p>Price: {order_item.price}</p>
                             <p>Quantity: {order_item.quantity}</p>
@@ -89,15 +91,15 @@ function ViewOrder() {
                     ))}
                     <p>Status: {order.status}</p>
                     <p>Total: {Number(order.total).toFixed(2)}</p>
-
                     <p></p>
                     <p></p>
+                    <OpenModalButton
+            buttonText="Cancel Order"
+            modalComponent={<CancelOrderModal orderId={order.id}/>}
+            />
                 </>
             ))}
-            <OpenModalButton
-            buttonText="Cancel Order"
-            modalComponent={<CancelOrderModal />}
-            />
+          
         </>
     )
 }
