@@ -11,7 +11,7 @@ const YourListings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.allProducts || []);
-
+  console.log('what are the products', products)
   useEffect(() => {
     dispatch(thunkGetCurrentUsersProducts());
   }, [dispatch]);
@@ -37,27 +37,27 @@ const YourListings = () => {
         ) : (
           <ul>
             {sortedProducts.map((product) => (
-              <li key={product.id} className="listing-item">
+              <li key={product?.id} className="listing-item">
                 <div className='listing-image'>
-                  {product.images && product.images.length > 0 ? (
-                    <img src={product.images[0].url} alt={product.name} />
+                  {product?.images? (
+                    <img src={product?.images[0]?.url} alt={product?.name} />
                   ) : (
                     <p>No image available</p>
                   )}
                 </div>
                 <div className="listing-details">
-                  <h2>{product.name}</h2>
-                  <p>${product.price}</p>
-                  <p>{product.stock} in stock</p>
-                  <p>{product.category}</p>
-                  <p>{product.description}</p>
+                  <h2>{product?.name}</h2>
+                  <p>${product?.price}</p>
+                  <p>{product?.stock} in stock</p>
+                  <p>{product?.category}</p>
+                  <p>{product?.description}</p>
                   <div className="listing-actions">
-                    <Link to={`/products/${product.id}/edit`}>
+                    <Link to={`/products/${product?.id}/edit`}>
                       <button>Edit</button>
                     </Link>
                     <OpenModalButton
                       buttonText='Delete'
-                      modalComponent={<DeleteProductModal productId={product.id} />}
+                      modalComponent={<DeleteProductModal productId={product?.id} />}
                     />
                   </div>
                 </div>
