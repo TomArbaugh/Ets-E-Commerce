@@ -21,16 +21,21 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <div className="landing-page-welcome-header">
-        <h1>Welcome to Our Marketplace</h1>
+      <div className="welcome-message">
+        <h1>
+        Welcome to Etsy-ish<br />
+        <span>Where our crafting skills are better than our Wi-Fi signal!</span>
+        </h1>
+        </div>
         {sessionUser && (
           <button className="add-listing-button" onClick={handleAddListing}>
             + Add a product listing
           </button>
         )}
       </div>
-      <div className='landing-page-faux-header'>
+      {/* <div className='landing-page-faux-header'>
         <img src="../../images/header.png" alt="Faux Header" />
-      </div>
+      </div> */}
       <div className="products-list-container">
         {products.map((product) => (
           <Link 

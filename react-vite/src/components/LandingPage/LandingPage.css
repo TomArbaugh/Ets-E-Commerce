@@ -3,11 +3,26 @@
   padding: 10px;
 }
 
+.welcome-message h1 {
+  font-size: 36px;
+  margin-bottom: 0; /* Remove bottom margin of h1 */
+}
+
+.welcome-message h2 {
+  margin-top: 0; /* Remove top margin of h2 */
+}
+
+.welcome-message span {
+  display: block;
+  margin: 10px 0px 20px 0px;
+  font-size: 24px;
+}
+
 .landing-page-welcome-header {
   display: flex;
   flex-direction: column; 
   align-items: center; 
-  margin-bottom: 20px; 
+  margin-bottom: 30px; 
 }
 
 .add-listing-button {
