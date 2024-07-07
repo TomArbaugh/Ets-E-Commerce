@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { thunkGetAllProducts } from "../../redux/products";
 import OpenModalButton from "../OpenModalButton";
 import CancelOrderModal from "../CancelOrderModal/CancelOrderModal";
+import './ViewOrder.css';
 
 function ViewOrder() {
 
@@ -33,20 +34,20 @@ function ViewOrder() {
         }
 
     }
-  
 
-    
+
+
     let data;
     const getItems = async () => {
 
         // const id = orderId
 
         const items = await fetch(`/api/orders/order-items/2`)
-        
+
         data = await items.json()
-       
+
         setOrderItems(data)
-    } 
+    }
     console.log("THIS IS IT ", orderItems)
 
     useEffect(() => {
@@ -60,14 +61,13 @@ function ViewOrder() {
 
         orderDetails.status = order.status
         orderDetails.total = order.total
-        orderDetails.id = order.id
         orderDetails.order_items = []
-        // console.log("ORDER: ", order)
+        console.log("ORDER: ", order)
 
         order.products_ordered.map((order_item) => {
 
             const orderItemObj = {}
-           
+
             console.log("THIS SHOULD BE THE ID", order_item.id)
             console.log("orderItems state:", orderItems)
             let quantitiyContainer = orderItems.find((orderItem) => order.id === orderItem.order_id)
@@ -77,7 +77,7 @@ function ViewOrder() {
             // }
             // console.log("container",quantitiyContainer)
             // const id = order_item.order_id
-            
+
             orderItemObj.name = order_item.name,
             orderItemObj.price = order_item.price,
             orderItemObj.quantity = quantitiyContainer.quantity,
@@ -95,27 +95,27 @@ function ViewOrder() {
     return (
         <>
             <h1>Orders for {user.first_name}</h1>
-            {ordersArr.map((order) => (
-                <>
-                    {order.order_items.map((order_item) => (
-                        <>
+            {ordersArr.map((order, index) => (
+                <div key={index} className="order-container">
+                    {order.order_items.map((order_item, itemIndex) => (
+                        <div key={itemIndex} className="order-item-container">
                             {/* <p>Order Id: {order_items.order_id}</p> */}
                             <p>Product Name: {order_item.name}</p>
                             <p>Price: {order_item.price}</p>
                             {/* Add Quantity if it exists */}
                             {order_item.quantity && <p>Quantity: {order_item.quantity}</p>}
-                        </>
+                        </div>
                     ))}
-                    <p>Status: {order.status}</p>
                     <p>Total: {Number(order.total).toFixed(2)}</p>
                     <OpenModalButton
                         buttonText="Cancel Order"
                         modalComponent={<CancelOrderModal orderId={order.id} />}
                     />
-                </>
+                </div>
             ))}
         </>
     );
+
 }
 
 export default ViewOrder;

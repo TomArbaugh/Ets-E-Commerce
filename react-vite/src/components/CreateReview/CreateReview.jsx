@@ -19,11 +19,17 @@ function CreateReview() {
     const user = useSelector((state) => state.session.user);
 
     let existingReview;
+<<<<<<< HEAD
     if (reviews && user) {
         existingReview = reviews.find(review => review.user_id === user.id);
     } else {
         existingReview = null;
     }
+=======
+    reviews && user ? existingReview = reviews.find(review => review.user_id === user.id) : null
+
+    // console.log(existingReview)
+>>>>>>> aaron2
 
     const validateForm = () => {
         const newErrors = {};
