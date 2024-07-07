@@ -23,7 +23,7 @@ function EditReview() {
 
     const validateForm = () => {
         const newErrors = {};
-        if (review.length > 2000) newErrors.review = "Reviews must be less than 2000 characters";
+        if (review.length > 2000 || review.length < 2) newErrors.review = "Reviews must be between 2 and 2000 characters";
         if (stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5"
         if (err) newErrors.noReview = "You do not have a review to edit"
         return newErrors;

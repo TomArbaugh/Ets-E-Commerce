@@ -21,21 +21,26 @@ function CreateReview() {
     const user = useSelector((state) => state.session.user)
 
     let existingReview;
-    reviews ? existingReview = reviews.find(review => review.user_id === user.id) : null
+    if (reviews && user) {
+        existingReview = reviews.find(review => review.user_id === user.id);
+    }
+    // } else if (reviews) {
+    //     throw new Error("You must be logged in to create a review")
+    // }
 
     // console.log(existingReview)
 
     const validateForm = () => {
         const newErrors = {};
-        if (review.length > 2000) newErrors.review = "Reviews must be less than 2000 characters";
-        if (stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5";
+        if (!review || review.length > 2000 || review.length < 2) newErrors.review = "Reviews must be between 2 and  2000 characters";
+        if (!stars || stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5";
         if (existingReview) newErrors.existingReview = "You can only leave one review per product."
         return newErrors;
     }
 
-    useEffect(() => {
-        // console.log(productId)
-    }, [productId])
+    // useEffect(() => {
+    //     // console.log(productId)
+    // }, [productId])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -66,9 +71,13 @@ function CreateReview() {
             if (reviewRes.ok) {
                 // const newReview = await reviewRes.json();
                 navigate(`/products/${productId}`);
+            } else {
+                const errorData = await reviewRes.json();
+                setErrors({ apiError: errorData.message || "An error occurred"})
             }
         } catch (err) {
             console.error('Request Error:', err);
+            setErrors({ apiError: "An error occurred" })
         }
     }
 
@@ -80,6 +89,7 @@ function CreateReview() {
                 <input value={review} type="text" onChange={(e) => setReview(e.target.value)} />
                 {errors.review && <p className="error-message">{errors.review}</p>}
                 {errors.existingReview && <p className="error-message">{errors.existingReview}</p>}
+                <h3>Stars</h3>
                 <select value={stars} onChange={(e) => setStars(e.target.value)}>
                     <option value="">Select stars</option>
                     <option value="1">1</option>

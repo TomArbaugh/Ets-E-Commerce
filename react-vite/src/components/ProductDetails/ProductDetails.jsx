@@ -11,19 +11,12 @@ import OpenModalButton from '../OpenModalButton';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
-
   const { productId } = useParams();
-
   const product = useSelector((state) => state.products.productDetails);
-
   const [quantity, setQuantity] = useState(1);
   const [AddToCardMessage, setAddToCartMessage] = useState('');
-
-
-  const reviews = useSelector((state) => state.reviews.reviews)
-
-
-
+  const reviews = useSelector((state) => state.reviews.reviews);
+  const user = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(thunkProductDetails(productId));
@@ -33,26 +26,19 @@ const ProductDetails = () => {
     dispatch(getReviewsByProductId(productId))
   }, [dispatch, productId])
 
-  const handleAddToCart = async() => {
+  const handleAddToCart = async () => {
     const result = await dispatch(addItemToCart(productId, quantity));
     if (!result.errors) {
       setAddToCartMessage('Item added to cart!');
     } else {
       setAddToCartMessage('Failed to add item to cart.');
-    }  
+    }
     setTimeout(() => {
       setAddToCartMessage('');
-    }, 2000); 
+    }, 2000);
   };
- 
-
-
-
-
 
  const imageUrl = product.images && product.images.length > 0 ? product.images[0].url : '';
-
-
 
   return (
    <div className="product-details">
@@ -88,19 +74,19 @@ const ProductDetails = () => {
        )) : null}
        <div id="button-container">
        <div className='button-pad'>
-       <Link to={`/products/${product.id}/create-review`}>Create Review</Link>
+       {user && <Link to={`/products/${product.id}/create-review`}>Create Review</Link>}
        </div>
        <div className='button-pad'>
-       <Link to={`/products/${product.id}/edit-review`}>Edit Review</Link>
+       {user && <Link to={`/products/${product.id}/edit-review`}>Edit Review</Link>}
        </div>
        <div className='button-pad'>
-       <OpenModalButton 
+       {user && <OpenModalButton
        buttonText='Delete Review'
        modalComponent={<DeleteReviewModal  productId={product.id}/>}
-       />
+       />}
        </div>
        </div>
-  
+
      </div>
        </div>
      </div>

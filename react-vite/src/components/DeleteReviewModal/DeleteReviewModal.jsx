@@ -1,35 +1,40 @@
 import { useModal } from "../../context/Modal";
 import DeleteReview from "../DeleteReview/DeleteReview";
 import './DeleteReviewModal.css'
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 
 function DeleteReviewModal() {
     const navigate = useNavigate();
-    // const { productId } = useParams();
+    const { productId } = useParams();
     const { closeModal } = useModal();
     // console.log("PRODUCT ID: ", productId)
-    function onSubmit(e) {
-        e.preventDefault()
-        closeModal()
+    // function onSubmit(e) {
+    //     e.preventDefault()
+    //     closeModal()
+    //     navigate(`/products/${productId}`)
+    // }
+    const handleCancel = (e) => {
+        // e.preventDefault();
+        closeModal();
+        navigate(`/products/${productId}`);
     }
 
-    
-    navigate(`/`)
+
 
     return (
         <form>
-        <h1>Are you sure you want to delete?</h1>
-        <button
-        type='submit'
-        onClick={onSubmit}
-        >No</button>
-        <button
-        type='submit'
-        onClick={onSubmit}
-        >
-        <DeleteReview id="delete-review"/>
-        </button>
+            <h1>Are you sure you want to delete?</h1>
+            <button
+                type='button'
+                onClick={handleCancel}
+            >No</button>
+            <button
+                type='button'
+                onClick={handleCancel}
+            >
+                <DeleteReview id="delete-review" />
+            </button>
 
         </form>
     )

@@ -65,7 +65,7 @@ def edit_review(product_id):
                 .values(
                 # product_id=product_id,
                 # user_id=current_user.id,
-                review= form.data['review'],
+                review = form.data['review'],
                 stars = form.data['stars'],
                 # created_at = form.data['created_at'],
                 updated_at = datetime.utcnow())
@@ -107,7 +107,7 @@ def post_review(product_id):
         form = CreateReview()
         # print("PRINT: ", form.data)
         form['csrf_token'].data = request.cookies['csrf_token']
-        
+
         if form.validate_on_submit():
             new_review = (
                 insert(reviews).
@@ -153,4 +153,4 @@ def delete_review(product_id):
         db.session.commit()
 
         print("deleted: ", deleted_review)
-        return jsonify({"message": "deleted"})
+        return jsonify({"message": "Review deleted"}), 200
