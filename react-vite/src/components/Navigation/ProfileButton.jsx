@@ -50,35 +50,35 @@ function ProfileButton() {
         <FaUserCircle />
       </button>
       {showMenu && (
-        <ul className="profile-dropdown" ref={ulRef}>
-          {user ? (
-            <>
-              <p>{user.username}</p>
-              <p>{user.email}</p>
-              <p><Link id='manage your listing' to='your-listings'>Your listing</Link></p>
-              <li>
-                <Link to='/orders/view'>View Orders</Link>
-                <Link to='/your-listings'>Your Listings</Link>
-              </li>
-              <p>
-                <button onClick={logout}>Log Out</button>
-              </p>
-            </>
-          ) : (
-            <>
-              <OpenModalMenuItem
-                itemText="Log In"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-              <OpenModalMenuItem
-                itemText="Sign Up"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
-            </>
-          )}
-        </ul>
+        <div className="profile-dropdown" ref={ulRef}>
+        {user ? (
+          <>
+            <p>{user.username}</p>
+            <p>{user.email}</p>
+            {/* <p><Link id='manage your listing' to='your-listings'>Your listing</Link></p> */}
+            <p>
+              <Link to='/orders/view'>View Orders</Link>
+              <Link to='/your-listings'>Your Listings</Link>
+            </p>
+            <p>
+              <button onClick={logout}>Log Out</button>
+            </p>
+          </>
+        ) : (
+          <>
+            <OpenModalMenuItem
+              itemText="Log In"
+              onItemClick={closeMenu}
+              modalComponent={<LoginFormModal />}
+            />
+            <OpenModalMenuItem
+              itemText="Sign Up"
+              onItemClick={closeMenu}
+              modalComponent={<SignupFormModal />}
+            />
+          </>
+        )}
+      </div>
       )}
     </div>
   );

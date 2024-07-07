@@ -10,17 +10,19 @@
 }
 
 .yes-button {
+    border: none;
+    border-radius: 10px;
     background-color: red;
     color: white;
     height:50px;
     width:350px;
-    box-shadow: 3px 3px 2px black
 }
 
 .no-button {
+    border: none;
     background-color: darkgray;
-    color: white;
+    color: black;
     height:50px;
     width:350px;
-    box-shadow: 3px 3px 2px black
+    border-radius: 10px;
 }

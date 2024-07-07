@@ -5,8 +5,6 @@ function CancelOrder({orderId}) {
     // const {orderId} = useParams()
     const navigate = useNavigate()
 
-    
-
     const setState = async (e) => {
         e.preventDefault()
         console.log("OrderId", orderId)
@@ -32,7 +30,7 @@ function CancelOrder({orderId}) {
 
     return (
         
-        <button onClick={setState}>Cancel Order</button>
+        <button className='yes-button' onClick={setState}>Cancel Order</button>
     )
 }
 

@@ -6,21 +6,23 @@
     align-items: center;
     row-gap: 15px;
     overflow: hidden;
-    padding-bottom:20px;
+    padding:20px;
 }
 
 .yes-button {
+    border-radius: 10px;
     background-color: red;
     color: white;
     height:50px;
     width:350px;
-    box-shadow: 3px 3px 2px black
+    border: none;
 }
 
 .no-button {
+    border-radius: 10px;
     background-color: darkgray;
     color: white;
     height:50px;
     width:350px;
-    box-shadow: 3px 3px 2px black
+    border: none;
 }
