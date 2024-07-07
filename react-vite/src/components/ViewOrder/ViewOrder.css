@@ -20,3 +20,12 @@
 .cancel-order-text {
     color: lightcoral;
 }
+
+.cancel-button {
+    display: flex;
+    
+}
+
+.cancel-label {
+    padding-right: 10px;
+}

@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import {useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { thunkGetAllProducts } from "../../redux/products";
 import OpenModalButton from "../OpenModalButton";
@@ -16,7 +16,7 @@ function ViewOrder() {
         dispatch(thunkGetAllProducts());
     }, [dispatch]);
 
-    const user = useSelector((state) => state.session.user);
+    // const user = useSelector((state) => state.session.user);
 
 
 
@@ -95,12 +95,12 @@ function ViewOrder() {
 
     return (
         <>
-            <h1>Orders for {user.first_name}</h1>
+            <h1>Your Orders</h1>
             {ordersArr.map((order, index) => (
                 <div key={index} className="order-container">
                     {order.order_items.map((order_item, itemIndex) => (
                         <div key={itemIndex} className="order-item-container">
-                           
+                           <p>Order {order.order_id}</p>
                             <p>Product Name: {order_item.name}</p>
                             <p>Price: {order_item.price}</p>
                             {/* Add Quantity if it exists */}
@@ -111,10 +111,14 @@ function ViewOrder() {
                     ))}
                     {/* <p>Quantity: {order.products_ordered.id}</p> */}
                     <p>Total: {Number(order.total).toFixed(2)}</p>
+                    <div className="cancel-button">
+                    <p className="cancel-label">Product Not Shipped Yet</p>
                     <OpenModalButton
                         buttonText="Cancel Order"
                         modalComponent={<CancelOrderModal orderId={order.order_id} />}
                     />
+                    </div>
+                    
                      {/* <p>OrderId: {order.purchaser_id}</p> */}
                 </div>
             ))}
