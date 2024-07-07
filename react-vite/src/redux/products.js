@@ -108,7 +108,7 @@ export const thunkGetCurrentUsersProducts = () => async (dispatch) => {
   const res = await fetch('/api/products/current');
   if (res.ok) {
     const usersProducts = await res.json();
-    dispatch(currentUsersProducts(usersProducts.products))
+    await dispatch(currentUsersProducts(usersProducts.products))
   } else {
     const error = await res.json()
     return error;
@@ -125,7 +125,7 @@ export const thunkUpdateProducts = (product) => async (dispatch) => {
   });
   if (res.ok) {
     const updatedProduct = await res.json();
-    dispatch(updateProduct(updatedProduct))
+    await dispatch(updateProduct(updatedProduct))
     return updatedProduct;
   } else {
     const error = await res.json()
