@@ -21,7 +21,7 @@ function CreateReview() {
     const user = useSelector((state) => state.session.user)
 
     let existingReview;
-    reviews ? existingReview = reviews.find(review => review.user_id === user.id) : null
+    reviews && user ? existingReview = reviews.find(review => review.user_id === user.id) : null
 
     // console.log(existingReview)
 
@@ -30,6 +30,7 @@ function CreateReview() {
         if (review.length > 2000) newErrors.review = "Reviews must be less than 2000 characters";
         if (stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5";
         if (existingReview) newErrors.existingReview = "You can only leave one review per product."
+        if (!user) newErrors.user = "You must be logged in to leave a review."
         return newErrors;
     }
 
@@ -77,6 +78,7 @@ function CreateReview() {
             <h1>Create a new review</h1>
             <form onSubmit={handleSubmit}>
                 <h3>Review</h3>
+                {errors.user && <p className="error-message">{errors.user}</p>}
                 <input value={review} type="text" onChange={(e) => setReview(e.target.value)} />
                 {errors.review && <p className="error-message">{errors.review}</p>}
                 {errors.existingReview && <p className="error-message">{errors.existingReview}</p>}

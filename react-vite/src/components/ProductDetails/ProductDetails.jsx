@@ -23,8 +23,6 @@ const ProductDetails = () => {
   const reviews = useSelector((state) => state.reviews.reviews)
 
 
-
-
   useEffect(() => {
     dispatch(thunkProductDetails(productId));
   }, [dispatch, productId]);

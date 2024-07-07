@@ -85,3 +85,7 @@
   text-decoration: none;
   color: inherit;
 }
+
+.invisable {
+  display: none;
+}

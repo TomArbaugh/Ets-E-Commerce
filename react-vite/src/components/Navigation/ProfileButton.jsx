@@ -58,8 +58,9 @@ function ProfileButton() {
               <p><Link id='manage your listing' to='your-listings'>Your listing</Link></p>
               <p>
                 <Link to='/orders/view'>View Orders</Link>
-              </p>
-              <p>
+                <Link to='/your-listings'>Your Listings</Link>
+              </li>
+              <li>
                 <button onClick={logout}>Log Out</button>
               </p>
             </>

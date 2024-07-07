@@ -28,7 +28,9 @@ const LandingPage = () => {
         </h1>
         </div>
         {sessionUser && (
-          <button className="add-listing-button" onClick={handleAddListing}>
+          <button 
+          disabled={!sessionUser}
+          className={sessionUser ? "add-listing-button" : "invisable"} onClick={handleAddListing}>
             + Add a product listing
           </button>
         )}

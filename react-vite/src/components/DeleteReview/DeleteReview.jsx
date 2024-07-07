@@ -6,8 +6,9 @@ function DeleteReview() {
    
     const { productId } = useParams();
     const navigate = useNavigate()
-    const userId = useSelector(state => state.session.user.id)
-    
+    const user = useSelector(state => state.session.user)
+    let userId;
+    user ? userId = user.id : null
     
     
         const newErrors = {};
@@ -25,7 +26,7 @@ function DeleteReview() {
                 })
                 const result = await deleteFetch.json()
                 if (result) {
-                    navigate(`/`);
+                    navigate(`/products/${productId}`);
                 }
             } else {
                 newErrors.errors = "You do not have a review to delete"

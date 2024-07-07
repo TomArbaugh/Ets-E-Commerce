@@ -12,10 +12,11 @@ function DeleteReviewModal() {
     function onSubmit(e) {
         e.preventDefault()
         closeModal()
+        navigate(`/`)
     }
 
     
-    navigate(`/`)
+    
 
     return (
         <form>
