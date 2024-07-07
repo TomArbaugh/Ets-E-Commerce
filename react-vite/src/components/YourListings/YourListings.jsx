@@ -10,8 +10,9 @@ import { Link } from "react-router-dom";
 const YourListings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const products = useSelector((state) => state.products.allProducts || []);
-
+  const products = useSelector((state) => state.products.allProducts);
+  if (!products.length) return null;
+  
   useEffect(() => {
     dispatch(thunkGetCurrentUsersProducts());
   }, [dispatch]);
