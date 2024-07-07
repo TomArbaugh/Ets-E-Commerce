@@ -13,9 +13,10 @@ function CancelOrderModal({orderId}) {
     function onSubmit(e) {
         e.preventDefault()
         closeModal()
+        navigate(`/`)
     }
 
-    navigate(`/`)
+    
 
     return (
 

@@ -22,7 +22,7 @@ function CancelOrder({orderId}) {
                 })
                 const result = await deleteFetch.json()
                 if (result) {
-                    navigate('/')
+                    navigate('/orders/view')
                 }
             }
         } catch (err) {
