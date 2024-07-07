@@ -99,3 +99,24 @@ def delete_order(id):
     db.session.delete(order)
     db.session.commit()
     return jsonify({'message': 'Order canceled'})
+
+@order_routes.route('/order-items/<int:id>')
+def get_order_items(id):
+
+    """Get all order-items"""
+
+    items = db.session.query(order_items).all()
+    
+    
+
+    order_item_array = []
+    for order_item in items:
+
+        order_item_obj = {
+            "order_id": order_item.order_id,
+            "product_id": order_item.product_id,
+            "quantity": order_item.quantity
+        }
+        # print("ORDER_ITEMS_HERE ", order_items)
+        order_item_array.append(order_item_obj)
+    return order_item_array
