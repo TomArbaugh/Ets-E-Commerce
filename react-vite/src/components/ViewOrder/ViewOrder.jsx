@@ -38,7 +38,13 @@ function ViewOrder() {
         fetchOrders()
     },[dispatch])
 
+    const getItems = async (order_id) => {
 
+        const items = await fetch(`/order-items/${order_id}`)
+        const data = await items.json()
+        
+        return data
+    } 
 
     // console.log("This is orders", orders)
 
@@ -57,8 +63,8 @@ function ViewOrder() {
 
             const orderItemObj = {}
 
-
-
+            items = getItems(order_id)
+            console.log("ORDER_ITEMS: ", items)
             // const id = order_item.order_id
 
             orderItemObj.name = order_item.name,
