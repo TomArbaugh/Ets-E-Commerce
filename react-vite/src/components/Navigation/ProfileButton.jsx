@@ -7,6 +7,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
+import './ProfileButton.css'; // Make sure to import the CSS file
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -44,23 +45,24 @@ function ProfileButton() {
   };
 
   return (
-    <>
+    <div className="profile-button-container">
       <button onClick={toggleMenu}>
         <FaUserCircle />
       </button>
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
+        <ul className="profile-dropdown" ref={ulRef}>
           {user ? (
             <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li><Link id='manage your listing' to='your-listings'>Your listing</Link></li>
-              <li>
+              <p>{user.username}</p>
+              <p>{user.email}</p>
+              <p><Link id='manage your listing' to='your-listings'>Your listing</Link></p>
+              <p>
                 <Link to='/orders/view'>View Orders</Link>
+                <Link to='/your-listings'>Your Listings</Link>
               </li>
               <li>
                 <button onClick={logout}>Log Out</button>
-              </li>
+              </p>
             </>
           ) : (
             <>
@@ -78,7 +80,7 @@ function ProfileButton() {
           )}
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

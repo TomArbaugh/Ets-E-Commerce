@@ -1,14 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import OpenModalButton from "../OpenModalButton"; 
+import LoginFormModal from "../LoginFormModal"; 
 import "./Navigation.css";
 import { RiShoppingCartLine } from "react-icons/ri";
-// import { TbBrandEtsy } from "react-icons/tb";
-// comment this line for testing
+
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user);
-
-  // console.log('Elya - navigation component rendered twice error');
 
   return (
     <div id='header-container'>
@@ -19,13 +18,13 @@ function Navigation() {
       </div>
       
       <div className='category-and-search'>
-        <div id='header-category'>Category</div>
+        {/* <div id='header-category'>Category</div>
 
         <div id='search-bar'>
           <input 
             type="text"
             placeholder='Search for anything'/>
-        </div>
+        </div> */}
       </div>
       
       <div className='two-icons'>
@@ -34,9 +33,16 @@ function Navigation() {
         </div>
         
         <div id='shopping-cart-icon'>
-          <NavLink to='/cart'>
-            <RiShoppingCartLine />
-          </NavLink>
+          {sessionUser ? (
+            <NavLink to='/cart'>
+              <RiShoppingCartLine />
+            </NavLink>
+          ) : (
+            <OpenModalButton
+              buttonText={<RiShoppingCartLine />}
+              modalComponent={<LoginFormModal />}
+            />
+          )}
         </div>
       </div>
     </div>

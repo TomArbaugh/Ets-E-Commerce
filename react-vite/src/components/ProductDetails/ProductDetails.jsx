@@ -15,8 +15,15 @@ const ProductDetails = () => {
   const product = useSelector((state) => state.products.productDetails);
   const [quantity, setQuantity] = useState(1);
   const [AddToCardMessage, setAddToCartMessage] = useState('');
+<<<<<<< HEAD
   const reviews = useSelector((state) => state.reviews.reviews);
   const user = useSelector((state) => state.session.user);
+=======
+
+
+  const reviews = useSelector((state) => state.reviews.reviews)
+
+>>>>>>> fd14290b179c7abde4121e7be6c7de3ab9c90f71
 
   useEffect(() => {
     dispatch(thunkProductDetails(productId));

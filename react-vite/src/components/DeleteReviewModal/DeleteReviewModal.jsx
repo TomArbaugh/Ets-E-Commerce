@@ -9,16 +9,12 @@ function DeleteReviewModal() {
     const { productId } = useParams();
     const { closeModal } = useModal();
     // console.log("PRODUCT ID: ", productId)
-    // function onSubmit(e) {
-    //     e.preventDefault()
-    //     closeModal()
-    //     navigate(`/products/${productId}`)
-    // }
-    const handleCancel = (e) => {
-        // e.preventDefault();
-        closeModal();
-        navigate(`/products/${productId}`);
+    function onSubmit(e) {
+        e.preventDefault()
+        closeModal()
+        navigate(`/`)
     }
+
 
 
 

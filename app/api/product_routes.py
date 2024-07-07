@@ -1,7 +1,9 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
 from app.models import Product, ProductImage, db
 from app.forms import ProductForm, ProductImageForm
+from app.api.AWS_helpers  import (
+    upload_file_to_s3, get_unique_filename)
 
 product_routes = Blueprint('products', __name__)
 
@@ -10,7 +12,7 @@ def get_products():
     """
     Get all products
     """
-    all_products = Product.query.limit(10).all()
+    all_products = Product.query.all()
     return {"products": [product.to_dict() for product in all_products]}
 
 @product_routes.route('/<int:product_id>')
@@ -111,7 +113,7 @@ def get_all_product_images(product_id):
     """
     images = ProductImage.query.filter_by(product_id=product_id).all()
     return {"images": [image.to_dict() for image in images]}
-    
+ 
 @product_routes.route('/<int:product_id>/images', methods=['POST'])
 @login_required
 def upload_product_image(product_id):
@@ -128,15 +130,35 @@ def upload_product_image(product_id):
     form = ProductImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        new_image = ProductImage(
-            product_id = product_id,
-            url = form.data['url']
-        )
+        image = form.data["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print(upload)
+
+        if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message (and we printed it above)
+            return {'errors': upload['errors']}, 400
+
+        url = upload["url"]
+        new_image = ProductImage(product_id=product_id, url=url)
         db.session.add(new_image)
         db.session.commit()
         return new_image.to_dict(), 201
     else:
-        print("Form validation failed:", form.errors)  
-    return {'errors': form.errors}, 400
+        return {'errors': form.errors}, 400
+
+    # if form.validate_on_submit():
+    #     new_image = ProductImage(
+    #         product_id = product_id,
+    #         url = form.data['url']
+    #     )
+    #     db.session.add(new_image)
+    #     db.session.commit()
+    #     return new_image.to_dict(), 201
+    # else:
+    #     print("Form validation failed:", form.errors)  
+    # return {'errors': form.errors}, 400
 
 
