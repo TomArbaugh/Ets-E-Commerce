@@ -39,15 +39,19 @@
   gap: 10px;
  }
 
-
+ .create-button-pad {
+  /* border: 1px solid black; */
+ }
  .button-pad {
-  padding-right: 10px;
-  padding-top: 10px;
+  padding: 10px 10px;
+  /* border: 1px solid black; */
  }
 
 
  #button-container {
   display: flex;
+  gap: 10px;
+  margin: 5px;
  }
 
 

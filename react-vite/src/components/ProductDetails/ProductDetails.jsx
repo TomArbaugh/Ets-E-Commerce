@@ -85,7 +85,7 @@ const ProductDetails = () => {
              </ul>
            ) : null}
            <div id="button-container">
-             <div className='button-pad'>
+             <div className='create-button-pad'>
                {user && !alreadyReviewed && <Link to={`/products/${product.id}/create-review`}>Create Review</Link>}
              </div>
              <div className='button-pad'>
