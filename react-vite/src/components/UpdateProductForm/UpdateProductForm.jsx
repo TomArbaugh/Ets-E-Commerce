@@ -37,9 +37,9 @@ const UpdateProductForm = () => {
 
   useEffect(() => {
     if (product) {
-      setName(product.name);
-      setCategory(product.category);
-      setDescription(product.description);
+      setName(product?.name);
+      setCategory(product?.category);
+      setDescription(product?.description);
       setPrice(product.price);
       setStock(product.stock);
     }
@@ -48,11 +48,11 @@ const UpdateProductForm = () => {
   useEffect(() => {
     const errorArr = [];
     if (!name) errorArr.push('Name is required');
-    if (name.length > 50) errorArr.push('Name cannot be more than 50 characters');
+    if (name?.length > 50) errorArr.push('Name cannot be more than 50 characters');
     if (!category) errorArr.push('Category is required');
-    if (category.length > 50) errorArr.push('Category cannot be more than 50 characters');
+    if (category?.length > 50) errorArr.push('Category cannot be more than 50 characters');
     if (!description) errorArr.push('Description is required');
-    if (description.length > 255) errorArr.push('Description cannot be more than 255 characters');
+    if (description?.length > 255) errorArr.push('Description cannot be more than 255 characters');
     if (!price) errorArr.push('Price is required');
     if (price <= 0) errorArr.push('Price must be a positive number');
     if (!stock) errorArr.push('Stock is required');

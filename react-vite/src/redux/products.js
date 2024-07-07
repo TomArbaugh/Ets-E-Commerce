@@ -125,7 +125,7 @@ export const thunkUpdateProducts = (product) => async (dispatch) => {
   });
   if (res.ok) {
     const updatedProduct = await res.json();
-    dispatch(updateProduct(updatedProduct))
+    await dispatch(updateProduct(updatedProduct))
     return updatedProduct;
   } else {
     const error = await res.json()
