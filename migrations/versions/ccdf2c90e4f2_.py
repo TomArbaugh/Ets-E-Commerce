@@ -1,23 +1,16 @@
 """empty message
 
-Revision ID: 8975d90f2304
+Revision ID: ccdf2c90e4f2
 Revises: 
-Create Date: 2024-07-06 13:22:18.262389
+Create Date: 2024-07-06 19:08:57.314533
 
 """
 from alembic import op
 import sqlalchemy as sa
 
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
-
-
-
-
 # revision identifiers, used by Alembic.
-revision = '8975d90f2304'
+revision = 'ccdf2c90e4f2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -98,18 +91,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('product_id', 'user_id')
     )
     # ### end Alembic commands ###
-
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE shopping_carts SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE cart_items SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE order_items SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE product_images SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};") 
-
 
 
 def downgrade():
