@@ -21,16 +21,7 @@ function CreateReview() {
     const user = useSelector((state) => state.session.user)
 
     let existingReview;
-<<<<<<< HEAD
-    if (reviews && user) {
-        existingReview = reviews.find(review => review.user_id === user.id);
-    }
-    // } else if (reviews) {
-    //     throw new Error("You must be logged in to create a review")
-    // }
-=======
     reviews && user ? existingReview = reviews.find(review => review.user_id === user.id) : null
->>>>>>> fd14290b179c7abde4121e7be6c7de3ab9c90f71
 
     // console.log(existingReview)
 

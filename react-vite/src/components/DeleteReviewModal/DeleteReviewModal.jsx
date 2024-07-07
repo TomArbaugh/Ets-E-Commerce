@@ -1,12 +1,12 @@
 import { useModal } from "../../context/Modal";
 import DeleteReview from "../DeleteReview/DeleteReview";
 import './DeleteReviewModal.css'
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 
 function DeleteReviewModal() {
     const navigate = useNavigate();
-    const { productId } = useParams();
+    // const { productId } = useParams();
     const { closeModal } = useModal();
     // console.log("PRODUCT ID: ", productId)
     function onSubmit(e) {
@@ -23,11 +23,11 @@ function DeleteReviewModal() {
             <h1>Are you sure you want to delete?</h1>
             <button
                 type='button'
-                onClick={handleCancel}
+                onClick={onSubmit}
             >No</button>
             <button
                 type='button'
-                onClick={handleCancel}
+                onClick={onSubmit}
             >
                 <DeleteReview id="delete-review" />
             </button>

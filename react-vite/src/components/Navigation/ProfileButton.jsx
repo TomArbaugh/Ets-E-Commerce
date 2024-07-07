@@ -56,11 +56,11 @@ function ProfileButton() {
               <p>{user.username}</p>
               <p>{user.email}</p>
               <p><Link id='manage your listing' to='your-listings'>Your listing</Link></p>
-              <p>
+              <li>
                 <Link to='/orders/view'>View Orders</Link>
                 <Link to='/your-listings'>Your Listings</Link>
               </li>
-              <li>
+              <p>
                 <button onClick={logout}>Log Out</button>
               </p>
             </>
