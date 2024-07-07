@@ -1,0 +1,20 @@
+.order-item-card {
+    display: flex; 
+    border: 1px solid lightgray;
+    padding: 10px;
+    margin: 10px 0;
+    align-items: center; 
+    border-radius: 10px;
+  }
+  
+.order-item-image {
+    border: 1px solid rgb(238, 238, 238);
+    margin: 0px 10px 0px 0px; 
+    width: 150px; 
+    height: auto; 
+  }
+
+  .order-item-image img {
+    width: 100%; /* ensure the image fits the container */
+    height: auto; /* maintain the aspect ratio */
+  }
