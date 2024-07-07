@@ -64,6 +64,7 @@ function ViewOrder() {
             const orderItemObj = {}
 
             items = getItems(order_id)
+            
             console.log("ORDER_ITEMS: ", items)
             // const id = order_item.order_id
 
