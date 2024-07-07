@@ -44,7 +44,7 @@ function DeleteReview() {
 
     return (
         <>
-            <button onClick={setState}>Delete Review</button>
+            <button className='yes-button' onClick={setState}>Delete Review</button>
             {newErrors.errors && <p className="error-message">{newErrors.errors}</p>}
         </>
     );

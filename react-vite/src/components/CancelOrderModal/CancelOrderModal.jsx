@@ -13,8 +13,8 @@ function CancelOrderModal({ orderId }) {
       setTimeout(() => {
           navigate(`/orders/view`);
       }, 100); 
-  }
-
+    }
+    
     function handleYesClick(e) {
         e.preventDefault();
         closeModal();

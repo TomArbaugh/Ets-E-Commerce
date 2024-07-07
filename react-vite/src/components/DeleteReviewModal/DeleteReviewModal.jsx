@@ -9,8 +9,6 @@ function DeleteReviewModal() {
     // const { productId } = useParams();
     const { closeModal } = useModal();
 
-   
-
     function onSubmit(e) {
         e.preventDefault();
         closeModal();
@@ -18,24 +16,22 @@ function DeleteReviewModal() {
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <h1>Are you sure you want to delete?</h1>
+        <form className="delete-review-modal" onSubmit={onSubmit}>
+            <h2>Are you sure you want to delete?</h2>
+            <div className="delete-review-buttons">
             <button
                 type='button'
                 onClick={onSubmit}
+                className="no-button"
             >No</button>
             <button
-                type='button'
-                onClick={onSubmit}
-            >
-                No
-            </button>
-            <button
                 type='submit'
+                className="yes-button"
             > <DeleteReview>
                     Yes
                 </DeleteReview>
             </button>
+            </div>
         </form>
     );
 }
