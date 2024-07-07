@@ -119,7 +119,7 @@ const UpdateProductForm = () => {
         {hasSubmitted && errors.length > 0 && (
           <div className="error-list">
             {errors.map((error, idx) => (
-              <p key={idx} className="error">{error}</p>
+              <p key={idx} className="error-message">{error}</p>
             ))}
           </div>
         )}
@@ -131,8 +131,8 @@ const UpdateProductForm = () => {
             onChange={(e) => setName(e.target.value)}
             required
           />
-          {hasSubmitted && errors.includes('Name is required') && <p className="error">Name is required</p>}
-          {hasSubmitted && errors.includes('Name cannot be more than 50 characters') && <p className="error">Name cannot be more than 50 characters</p>}
+          {hasSubmitted && errors.includes('Name is required') && <p className="error-message">Name is required</p>}
+          {hasSubmitted && errors.includes('Name cannot be more than 50 characters') && <p className="error-message">Name cannot be more than 50 characters</p>}
         </label>
         <label>
           Category *
@@ -146,8 +146,8 @@ const UpdateProductForm = () => {
               <option key={idx} value={cat}>{cat}</option>
             ))}
           </select>
-          {hasSubmitted && errors.includes('Category is required') && <p className="error">Category is required</p>}
-          {hasSubmitted && errors.includes('Category cannot be more than 50 characters') && <p className="error">Category cannot be more than 50 characters</p>}
+          {hasSubmitted && errors.includes('Category is required') && <p className="error-message">Category is required</p>}
+          {hasSubmitted && errors.includes('Category cannot be more than 50 characters') && <p className="error-message">Category cannot be more than 50 characters</p>}
         </label>
         <label>
           Description *
@@ -156,8 +156,8 @@ const UpdateProductForm = () => {
             onChange={(e) => setDescription(e.target.value)}
             required
           />
-          {hasSubmitted && errors.includes('Description is required') && <p className="error">Description is required</p>}
-          {hasSubmitted && errors.includes('Description cannot be more than 255 characters') && <p className="error">Description cannot be more than 255 characters</p>}
+          {hasSubmitted && errors.includes('Description is required') && <p className="error-message">Description is required</p>}
+          {hasSubmitted && errors.includes('Description cannot be more than 255 characters') && <p className="error-message">Description cannot be more than 255 characters</p>}
         </label>
 
         <div className='photo-div'>
@@ -179,8 +179,8 @@ const UpdateProductForm = () => {
         <h2>Price & Inventory</h2>
         <label>
           Price *
-          {hasSubmitted && errors.includes('Price is required') && <span className="error">Price is required</span>}
-            {hasSubmitted && errors.includes('Price must be a positive number') && <span className="error">Price must be a positive number</span>}
+          {hasSubmitted && errors.includes('Price is required') && <span className="error-message">Price is required</span>}
+            {hasSubmitted && errors.includes('Price must be a positive number') && <span className="error-message">Price must be a positive number</span>}
           <input
               type="number"
               value={price}
@@ -190,8 +190,8 @@ const UpdateProductForm = () => {
               required
               placeholder='price'
           />
-          {hasSubmitted && errors.includes('Price is required') && <p className="error">Price is required</p>}
-          {hasSubmitted && errors.includes('Price must be a positive number') && <p className="error">Price must be a positive number</p>}
+          {hasSubmitted && errors.includes('Price is required') && <p className="error-message">Price is required</p>}
+          {hasSubmitted && errors.includes('Price must be a positive number') && <p className="error-message">Price must be a positive number</p>}
         </label>
         <label>
           Stock *
@@ -202,8 +202,8 @@ const UpdateProductForm = () => {
             onChange={(e) => setStock(e.target.value)}
             required
           />
-          {hasSubmitted && errors.includes('Stock is required') && <p className="error">Stock is required</p>}
-          {hasSubmitted && errors.includes('Stock must be a positive number') && <p className="error">Stock must be a positive number</p>}
+          {hasSubmitted && errors.includes('Stock is required') && <p className="error-message">Stock is required</p>}
+          {hasSubmitted && errors.includes('Stock must be a positive number') && <p className="error-message">Stock must be a positive number</p>}
         </label>
         <button type="submit">Update listing</button>
       </form>
