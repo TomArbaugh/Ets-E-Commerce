@@ -1,14 +1,14 @@
 from app.models import db, Product, environment, SCHEMA
-from datetime import datetime  # Import datetime
+from datetime import datetime  
 from sqlalchemy.sql import text
 
 def seed_products():
     product1 = Product(
-        owner_id=3, name='Custom Neon Sign', category='Home & Living', description='Customized Neon sign that reads out your preferred Name, Text, Font, Shape, Style, and Color.', price=7.99, stock=20, created_at=datetime(2023, 6, 1, 12, 0))
+        owner_id=3, name='Custom Neon Sign', category='Home & Living', description='Customized Neon sign that reads out your preferred Name, Text, Font, Shape, Style, and Color.', price=7.99, stock=20, created_at=datetime.now())
     product2 = Product(
-        owner_id=3, name='Custom Embroidered Sweatshirt', category='Clothing & Shoes', description='50% Cotton, 50% Polyester. Double-needle stitched neckline, bottom hem and sleeves t-shirt. All hoodies and crewneck sweatshirts are fleece.', price=34.20, stock=18, created_at=datetime(2023, 6, 2, 12, 0))
+        owner_id=3, name='Custom Embroidered Sweatshirt', category='Clothing & Shoes', description='50% Cotton, 50% Polyester. Double-needle stitched neckline, bottom hem and sleeves t-shirt. All hoodies and crewneck sweatshirts are fleece.', price=34.20, stock=18, created_at=datetime(2024, 6, 3, 12, 0))
     product3 = Product(
-        owner_id=1, name='Custom Leather Wallet', category='Jewelry & Accessories', description="This personalized RFID leather wallet is the perfect gift or for the new dad to be!", price=48.00, stock=11, created_at=datetime(2023,  6, 3, 12, 0))
+        owner_id=1, name='Custom Leather Wallet', category='Jewelry & Accessories', description="This personalized RFID leather wallet is the perfect gift or for the new dad to be!", price=48.00, stock=11, created_at=datetime(2024,  6, 2, 12, 0))
     product4 = Product(
         owner_id=2, name='Personalized Shoe Tags', category='Clothing & Shoes', description='Whether they are for running trainers, gym trainers or general shoes, these shoe tags are the perfect addition to any pair of shoes.', price=20.00, stock=14, created_at=datetime(2023,  6, 4, 12, 0))
     product5 = Product(
@@ -24,6 +24,7 @@ def seed_products():
     product10 = Product(
         owner_id=1, name='Cable Organizer', category='Home & Living', description='Keep your desk clean and organized with our premium wooden cable organizer. Upgrade your workspace with our premium wooden cable organizer and enjoy the convenience and beauty of a clutter-free desk.', price=15.40, stock=12, created_at=datetime(2023,  6, 10, 12, 0))
 
+    db.session.add(product1)
     db.session.add(product1)
     db.session.add(product2)
     db.session.add(product3)

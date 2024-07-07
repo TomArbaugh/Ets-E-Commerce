@@ -15,7 +15,7 @@
 .products-form textarea,
 .products-form select,
 .products-form button {
-  margin-bottom: 10px; /* Add margin to all elements */
+  margin-bottom: 10px;
 }
 
 .products-form label {
@@ -47,22 +47,29 @@
   color: red;
 }
 
-.photo-div input[type="file"] {
-  display: none;
-}
-
-.photo-div .custom-file-upload {
-  display: inline-block;
-  padding: 8px 12px;
-  background-color: rgb(180, 180, 180);
-  color: white;
+.photo-div {
   border-radius: 5px;
-  cursor: pointer;
-  margin: 0px 0px 20px 0px;
-  font-weight: normal;
+  text-align: left;
+}
+.dropzone {
+  border: 2px dashed #ccc;
+  text-align: center;
+  padding: 5px;
+}
+#image-upload{
+  border:none;
+}
+.upload-button {
+  border: 2px dashed #ccc;
 }
 
-/* Add some styles for the loading message */
+
+.photo-div input[type="file"] {
+  display: block;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
 .photo-div p {
   margin-top: 10px;
   font-size: 14px;
@@ -71,13 +78,13 @@
 
 .back-to-listings-link {
   margin: 10px;
-  text-decoration: none; /* Remove underline */
-  color: blue; /* Link color */
-  font-weight: bold; /* Optional: make the text bold */
-  padding-top: 20px; /* Add padding above the link */
-  display: inline-block; /* Ensure it behaves like an inline-block element */
+  text-decoration: none;
+  color: blue;
+  font-weight: bold;
+  padding-top: 20px;
+  display: inline-block;
 }
 
 .back-to-listings-link:hover {
-  text-decoration: underline; /* Underline on hover */
+  text-decoration: underline;
 }

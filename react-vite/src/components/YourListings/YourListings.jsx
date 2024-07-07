@@ -38,11 +38,13 @@ const YourListings = () => {
           <ul>
             {sortedProducts.map((product) => (
               <li key={product.id} className="listing-item">
-                {product.images && product.images.length > 0 ? (
-                  <img src={product.images[0].url} alt={product.name} />
-                ) : (
-                  <p>No image available</p>
-                )}
+                <div className='listing-image'>
+                  {product.images && product.images.length > 0 ? (
+                    <img src={product.images[0].url} alt={product.name} />
+                  ) : (
+                    <p>No image available</p>
+                  )}
+                </div>
                 <div className="listing-details">
                   <h2>{product.name}</h2>
                   <p>${product.price}</p>
