@@ -73,16 +73,17 @@ function ViewOrder() {
            
             console.log("THIS SHOULD BE THE ID", order_item.id)
             console.log("orderItems state:", orderItems)
-            const quantitiyContainer = orderItems.find((orderItem) => order.id === orderItem.order_id)
+            let quantitiyContainer = orderItems.find((orderItem) => order.id === orderItem.order_id)
             // for (let orderItem of orderItems) {
             //     if (orderItem.order_id === order_item.id) orderItemObj.quantity = orderItem.quantity
             //     console.log(orderItem.order_id === order.id)
             // }
             // console.log("container",quantitiyContainer)
             // const id = order_item.order_id
-            orderItemObj.quantity = quantitiyContainer.quantity
+            
             orderItemObj.name = order_item.name,
             orderItemObj.price = order_item.price,
+            orderItemObj.quantity = quantitiyContainer.quantity,
             orderItemObj.total = quantitiyContainer.quantity * order_item.price
 
             orderDetails.order_items.push(orderItemObj)
@@ -90,7 +91,7 @@ function ViewOrder() {
         })
         ordersArr.push(orderDetails)
 }) : null
-    // console.log("ORDERSARRAY: ", ordersArr)
+    console.log("ORDERSARRAY: ", ordersArr)
 
     if (!ordersArr.length) return "no orders"
     return (
@@ -101,7 +102,6 @@ function ViewOrder() {
                     {order.order_items.map((order_item) => (
                         <>
                             {/* <p>Order Id: {order_items.order_id}</p> */}
-                            
                             <p>Product Name: {order_item.name}</p>
                             <p>Price: {order_item.price}</p>
                             <p>Quantity: {order_item.quantity}</p>
