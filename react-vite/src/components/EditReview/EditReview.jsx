@@ -26,10 +26,13 @@ function EditReview() {
         if (review.length > 2000) newErrors.review = "Reviews must be less than 2000 characters";
         if (stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5"
         if (err) newErrors.noReview = "You do not have a review to edit"
+        if (!userId) newErrors.user = "You must be logged in to edit a review."
         return newErrors;
     }
 
-    const userId = useSelector(state => state.session.user.id)
+    const user = useSelector(state => state.session.user)
+    let userId;
+    user ? userId = user.id : null
 
     useEffect(() => {
         const setState = async () => {
@@ -38,10 +41,11 @@ function EditReview() {
                 const fetchAllReviews = await fetch(`/api/reviews/${productId}/reviews`);
                 const fetchedReviews = await fetchAllReviews.json()
                 // console.log("FETCHALLREVIEWS: ", fetchedReviews)
-                const review = fetchedReviews.find((review) => review.user_id === userId)
+                let review; 
+                userId ? review = fetchedReviews.find((review) => review.user_id === userId) : null
                 // console.log(fetchedReviews[0].user_id === userId)
                 // console.log('REVIEW: ', review)
-                if (review) {
+                if (review && review !== null) {
                     setReview(review.review)
                     setStars(review.stars)
                 } else {
@@ -53,7 +57,7 @@ function EditReview() {
         }
 
         setState()
-    }, [dispatch, userId, productId])
+    }, [dispatch, user, productId])
 
 
     // console.log("USERID: ", userId)
@@ -107,6 +111,7 @@ function EditReview() {
             <h1>Edit a review</h1>
             <form onSubmit={handleSubmit}>
                 <h3>Hello Review</h3>
+                {errors.user && <p className="error-message">{errors.user}</p>}
                 <input value={review} type="text" onChange={(e) => setReview(e.target.value)} />
                 {errors.review && <p className="error-message">{errors.review}</p>}
                 {errors.noReview && <p className="error-message">{errors.noReview}</p>}

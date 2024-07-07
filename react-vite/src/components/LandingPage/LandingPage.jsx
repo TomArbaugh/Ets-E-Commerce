@@ -23,7 +23,9 @@ const LandingPage = () => {
       <div className="landing-page-welcome-header">
         <h1>Welcome to Our Marketplace</h1>
         {sessionUser && (
-          <button className="add-listing-button" onClick={handleAddListing}>
+          <button 
+          disabled={!sessionUser}
+          className={sessionUser ? "add-listing-button" : "invisable"} onClick={handleAddListing}>
             + Add a product listing
           </button>
         )}
