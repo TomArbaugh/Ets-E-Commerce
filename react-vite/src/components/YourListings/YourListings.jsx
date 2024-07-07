@@ -20,6 +20,9 @@ const YourListings = () => {
     navigate('/products/new');
   };
 
+  // Sort products by created_at date in descending order
+  const sortedProducts = [...products].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
   return (
     <div className="your-listings-page">
       <div className="your-listings-header">
@@ -29,40 +32,40 @@ const YourListings = () => {
         </button>
       </div>
       <div className="your-listings-content">
-        {products.length === 0 ? (
+        {sortedProducts.length === 0 ? (
           <p>No listings found.</p>
         ) : (
           <ul>
-            {products.map((product) => (
-               <li key={product.id} className="listing-item">
-               {product.images && product.images[0] && product.images[0].url ? (
-                 <img src={product.images[0].url} alt={product.name} />
-               ) : (
-                 <p>No image available</p>
-               )}
-               <div className="listing-details">
-                 <h2>{product.name}</h2>
-                 <p>${product.price}</p>
-                 <p>{product.quantity} in stock</p>
-                 <p>{product.category}</p>
-                 <p>{product.description}</p>
-                 <div className="listing-actions">
-                   <Link to={`/products/${product.id}/edit`}>
-                     <button>Edit</button>
-                   </Link>
-                   <OpenModalButton
-                     buttonText='Delete'
-                     modalComponent={<DeleteProductModal productId={product.id} />}
-                   />
-                 </div>
-               </div>
-             </li>
-           ))}
-         </ul>
-       )}
-     </div>
-   </div>
- );
+            {sortedProducts.map((product) => (
+              <li key={product.id} className="listing-item">
+                {product.images && product.images.length > 0 ? (
+                  <img src={product.images[0].url} alt={product.name} />
+                ) : (
+                  <p>No image available</p>
+                )}
+                <div className="listing-details">
+                  <h2>{product.name}</h2>
+                  <p>${product.price}</p>
+                  <p>{product.stock} in stock</p>
+                  <p>{product.category}</p>
+                  <p>{product.description}</p>
+                  <div className="listing-actions">
+                    <Link to={`/products/${product.id}/edit`}>
+                      <button>Edit</button>
+                    </Link>
+                    <OpenModalButton
+                      buttonText='Delete'
+                      modalComponent={<DeleteProductModal productId={product.id} />}
+                    />
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default YourListings;

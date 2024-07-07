@@ -21,23 +21,22 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <div className="landing-page-welcome-header">
-      <div className="welcome-message">
-        <h1>
-        Welcome to Etsy-ish<br />
-        <span>Where our crafting skills are better than our Wi-Fi signal!</span>
-        </h1>
+        <div className="welcome-message">
+          <h1>
+            Welcome to Etsy-ish<br />
+            <span>Where our crafting skills are better than our Wi-Fi signal!</span>
+          </h1>
         </div>
         {sessionUser && (
           <button 
-          disabled={!sessionUser}
-          className={sessionUser ? "add-listing-button" : "invisable"} onClick={handleAddListing}>
+            disabled={!sessionUser}
+            className={sessionUser ? "add-listing-button" : "invisable"} 
+            onClick={handleAddListing}
+          >
             + Add a product listing
           </button>
         )}
       </div>
-      {/* <div className='landing-page-faux-header'>
-        <img src="../../images/header.png" alt="Faux Header" />
-      </div> */}
       <div className="products-list-container">
         {products.map((product) => (
           <Link 
@@ -46,10 +45,9 @@ const LandingPage = () => {
             to={`/products/${product.id}`}
           >
             <div className="product-card">
-            {product.images && product.images[0] && product.images[0].url && (
+              {product.images && product.images[0] && product.images[0].url && (
                 <img src={product.images[0].url} alt={product.name} />
               )}
-              {/* <p>{product.name}</p> */}
               <p>${product.price}</p>
             </div>
           </Link>

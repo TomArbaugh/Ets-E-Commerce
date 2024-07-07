@@ -45,19 +45,23 @@ const ProductForm = () => {
     e.preventDefault();
     setImageLoading(true);
     setHasSubmitted(true);
-
-    if (errors.length > 0) return; // prevent submission if frontend errors exist
-    const product = { name, category, description, price, stock};
+  
+    if (errors.length > 0) {
+      setImageLoading(false); // reset loading state if there are errors
+      return; // prevent submission if frontend errors exist
+    }
+    
+    const product = { name, category, description, price, stock };
     const response = await dispatch(thunkCreateNewProduct(product));
-
+  
     if (response.errors) {
       setErrors(response.errors);
+      setImageLoading(false); // reset loading state on error
     } else {
       if (image) {
-        setImageLoading(true);
         await dispatch(thunkAddProductImage(response.id, image));
-        setImageLoading(false);
       }
+      setImageLoading(false); // reset loading state after success
       navigate('/your-listings');
     }
   };
@@ -159,4 +163,3 @@ const ProductForm = () => {
 };
 
 export default ProductForm;
-

@@ -1,51 +1,38 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from "react-redux"
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
 import { getReviewsByProductId } from "../../redux/reviews";
 
 function CreateReview() {
     const { productId } = useParams();
-    const dispatch = useDispatch()
-    // const [productId, setProductId] = useState(null);
-    // const [userId, setUserId] = useState(null);
+    const dispatch = useDispatch();
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(null);
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getReviewsByProductId(productId))
-      }, [dispatch, productId])
+        dispatch(getReviewsByProductId(productId));
+    }, [dispatch, productId]);
 
-    const reviews = useSelector((state) => state.reviews.reviews)
-    const user = useSelector((state) => state.session.user)
+    const reviews = useSelector((state) => state.reviews.reviews);
+    const user = useSelector((state) => state.session.user);
 
     let existingReview;
-<<<<<<< HEAD
     if (reviews && user) {
         existingReview = reviews.find(review => review.user_id === user.id);
+    } else {
+        existingReview = null;
     }
-    // } else if (reviews) {
-    //     throw new Error("You must be logged in to create a review")
-    // }
-=======
-    reviews && user ? existingReview = reviews.find(review => review.user_id === user.id) : null
->>>>>>> fd14290b179c7abde4121e7be6c7de3ab9c90f71
-
-    // console.log(existingReview)
 
     const validateForm = () => {
         const newErrors = {};
         if (!review || review.length > 2000 || review.length < 2) newErrors.review = "Reviews must be between 2 and  2000 characters";
         if (!stars || stars < 1 || stars > 5) newErrors.stars = "Stars must be between 1 and 5";
-        if (existingReview) newErrors.existingReview = "You can only leave one review per product."
-        if (!user) newErrors.user = "You must be logged in to leave a review."
+        if (existingReview) newErrors.existingReview = "You can only leave one review per product.";
+        if (!user) newErrors.user = "You must be logged in to leave a review.";
         return newErrors;
-    }
-
-    // useEffect(() => {
-    //     // console.log(productId)
-    // }, [productId])
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -56,13 +43,9 @@ function CreateReview() {
         }
 
         const reviewData = {
-            // product_id: productId,
-            // user_id: userId,
             review,
             stars,
-        }
-
-        // console.log("REVIEWDATA: ", reviewData)
+        };
 
         try {
             const reviewRes = await fetch(`/api/reviews/${productId}/create-review`, {
@@ -74,17 +57,16 @@ function CreateReview() {
             });
 
             if (reviewRes.ok) {
-                // const newReview = await reviewRes.json();
                 navigate(`/products/${productId}`);
             } else {
                 const errorData = await reviewRes.json();
-                setErrors({ apiError: errorData.message || "An error occurred"})
+                setErrors({ apiError: errorData.message || "An error occurred" });
             }
         } catch (err) {
             console.error('Request Error:', err);
-            setErrors({ apiError: "An error occurred" })
+            setErrors({ apiError: "An error occurred" });
         }
-    }
+    };
 
     return (
         <div>
@@ -105,11 +87,11 @@ function CreateReview() {
                     <option value="5">5</option>
                 </select>
                 {errors.stars && <p className="error-message">{errors.stars}</p>}
+                {errors.apiError && <p className="error-message">{errors.apiError}</p>}
                 <button type='submit'>Leave Review</button>
             </form>
         </div>
-    )
+    );
 }
-
 
 export default CreateReview;

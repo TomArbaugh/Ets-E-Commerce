@@ -8,22 +8,14 @@ import { getReviewsByProductId } from '../../redux/reviews';
 import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
 import OpenModalButton from '../OpenModalButton';
 
-
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const product = useSelector((state) => state.products.productDetails);
   const [quantity, setQuantity] = useState(1);
   const [AddToCardMessage, setAddToCartMessage] = useState('');
-<<<<<<< HEAD
   const reviews = useSelector((state) => state.reviews.reviews);
   const user = useSelector((state) => state.session.user);
-=======
-
-
-  const reviews = useSelector((state) => state.reviews.reviews)
-
->>>>>>> fd14290b179c7abde4121e7be6c7de3ab9c90f71
 
   useEffect(() => {
     dispatch(thunkProductDetails(productId));
@@ -45,61 +37,57 @@ const ProductDetails = () => {
     }, 2000);
   };
 
- const imageUrl = product.images && product.images.length > 0 ? product.images[0].url : '';
+  const imageUrl = product.images && product.images.length > 0 ? product.images[0].url : '';
 
   return (
-   <div className="product-details">
-     <div className="top-detail">
-       <div className="left-div-image-container">
-         {imageUrl ? (
-           <img src={imageUrl} alt={product.name} />
-         ) : (
-           <div className="placeholder-image">{product.name}</div>
-         )}
-       </div>
-       <div className="right-div-product-description">
-         <p>${product.price}</p>
-         <p>{product.name}</p>
-         <p>{product.description}</p>
-         <label htmlFor="quantity">Quantity</label>
-         <select id="quantity" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))}>
-           <option value="1">1</option>
-           <option value="2">2</option>
-           <option value="3">3</option>
-         </select>
-         <button className="add-to-cart-button" onClick={handleAddToCart}>Add to cart</button>
-         {AddToCardMessage && <p className="confirmation-message">{AddToCardMessage}</p>}
-         <div className="bottom-reviews">
-          <h2>Reviews</h2>
-       {reviews ? reviews.map((review) => (
-         <>
-         <li key={review.product_id}>{review.review}</li>
-         <li>{review.stars}</li>
-         </>
-
-
-       )) : null}
-       <div id="button-container">
-       <div className='button-pad'>
-       {user && <Link to={`/products/${product.id}/create-review`}>Create Review</Link>}
-       </div>
-       <div className='button-pad'>
-       {user && <Link to={`/products/${product.id}/edit-review`}>Edit Review</Link>}
-       </div>
-       <div className='button-pad'>
-       {user && <OpenModalButton
-       buttonText='Delete Review'
-       modalComponent={<DeleteReviewModal  productId={product.id}/>}
-       />}
-       </div>
-       </div>
-
-     </div>
-       </div>
-     </div>
+    <div className="product-details">
+      <div className="top-detail">
+        <div className="left-div-image-container">
+          {imageUrl ? (
+            <img src={imageUrl} alt={product.name} />
+          ) : (
+            <div className="placeholder-image">{product.name}</div>
+          )}
+        </div>
+        <div className="right-div-product-description">
+          <p>${product.price}</p>
+          <p>{product.name}</p>
+          <p>{product.description}</p>
+          <label htmlFor="quantity">Quantity</label>
+          <select id="quantity" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+          <button className="add-to-cart-button" onClick={handleAddToCart}>Add to cart</button>
+          {AddToCardMessage && <p className="confirmation-message">{AddToCardMessage}</p>}
+          <div className="bottom-reviews">
+            <h2>Reviews</h2>
+            {reviews ? reviews.map((review) => (
+              <div key={review.product_id}>
+                <li>{review.review}</li>
+                <li>{review.stars}</li>
+              </div>
+            )) : null}
+            <div id="button-container">
+              <div className='button-pad'>
+                {user && <Link to={`/products/${product.id}/create-review`}>Create Review</Link>}
+              </div>
+              <div className='button-pad'>
+                {user && <Link to={`/products/${product.id}/edit-review`}>Edit Review</Link>}
+              </div>
+              <div className='button-pad'>
+                {user && <OpenModalButton
+                  buttonText='Delete Review'
+                  modalComponent={<DeleteReviewModal productId={product.id} />}
+                />}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
- );
+  );
 };
-
 
 export default ProductDetails;
