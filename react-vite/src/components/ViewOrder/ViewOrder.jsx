@@ -11,6 +11,8 @@ function ViewOrder() {
 
     const dispatch = useDispatch()
     const [orders, setOrders] = useState([])
+    const [orderItems, setOrderItems] = useState()
+    // const [orderId, setId] = useState()
 
     useEffect(() => {
         dispatch(thunkGetAllProducts());
@@ -34,20 +36,26 @@ function ViewOrder() {
         }
 
     }
+  
+
+    
+    let data;
+    const getItems = async () => {
+
+        // const id = orderId
+
+        const items = await fetch(`/api/orders/order-items/2`)
+        
+        data = await items.json()
+       
+        setOrderItems(data)
+    } 
+    console.log("THIS IS IT ", orderItems)
+
     useEffect(() => {
         fetchOrders()
-    },[dispatch])
-
-    const getItems = async (order_id) => {
-
-        const items = await fetch(`/order-items/${order_id}`)
-        const data = await items.json()
-        
-        return data
-    } 
-
-    // console.log("This is orders", orders)
-
+        getItems()
+    }, [dispatch])
 
     const ordersArr = []
     orders ? orders.map((order) => {
@@ -62,19 +70,23 @@ function ViewOrder() {
         order.products_ordered.map((order_item) => {
 
             const orderItemObj = {}
-
-            items = getItems(order_id)
-            
-            console.log("ORDER_ITEMS: ", items)
+           
+            console.log("THIS SHOULD BE THE ID", order_item.id)
+            console.log("orderItems state:", orderItems)
+            const quantitiyContainer = orderItems.find((orderItem) => order.id === orderItem.order_id)
+            // for (let orderItem of orderItems) {
+            //     if (orderItem.order_id === order_item.id) orderItemObj.quantity = orderItem.quantity
+            //     console.log(orderItem.order_id === order.id)
+            // }
+            // console.log("container",quantitiyContainer)
             // const id = order_item.order_id
-
+            orderItemObj.quantity = quantitiyContainer.quantity
             orderItemObj.name = order_item.name,
             orderItemObj.price = order_item.price,
-            // orderItemObj.quantity = order_item.quantity,
-            // orderItemObj.total = order_item.quantity * order_item.price
+            orderItemObj.total = quantitiyContainer.quantity * order_item.price
 
             orderDetails.order_items.push(orderItemObj)
-
+            console.log("HERE IS THE OBJ", orderItemObj)
         })
         ordersArr.push(orderDetails)
 }) : null
