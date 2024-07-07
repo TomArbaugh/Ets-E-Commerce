@@ -9,7 +9,7 @@ function CancelOrder({orderId}) {
 
     const setState = async (e) => {
         e.preventDefault()
-        // console.log("OrderId", orderId)
+        console.log("OrderId", orderId)
         try {
             const fetchAllOrders = await fetch(`/api/orders/`);
             const fetchedOrders = await fetchAllOrders.json();
