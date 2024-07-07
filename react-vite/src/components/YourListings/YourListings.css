@@ -27,12 +27,13 @@
 }
 
 .listing-item img {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 160px;
   object-fit: cover;
   border-radius: 10px;
   margin-right: 20px;
 }
+
 
 .listing-details {
   flex: 1;

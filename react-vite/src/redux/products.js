@@ -95,12 +95,14 @@ export const thunkAddProductImage = (productId, image) => async (dispatch) => {
   });
   if (res.ok) {
     const productImage = await res.json();
-    dispatch(addProductImage(productId, productImage))
+    dispatch(addProductImage(productId, productImage));
+    return productImage; // return the product image data
   } else {
-    const error = await res.json()
+    const error = await res.json();
     return error;
   }
 };
+
 
 export const thunkGetCurrentUsersProducts = () => async (dispatch) => {
   const res = await fetch('/api/products/current');

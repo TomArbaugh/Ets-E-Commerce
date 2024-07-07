@@ -23,7 +23,7 @@ function SignupFormModal() {
     if (username.length < 3 || username.length > 30) newErrors.username = "Username must be between 3 and 30 characters"
     if (first_name.length < 3 || first_name.length > 30) newErrors.firstName = "First name must be between 3 and 30 characters"
     if (last_name.length < 3 || last_name.length > 30) newErrors.lastName = "Last name must be between 3 and 30 characters"
-   
+
     return newErrors;
 }
 
@@ -58,7 +58,7 @@ function SignupFormModal() {
       <div className="signup-modal-container">
         <h2>Create your account</h2>
         <p>Registration is easy.</p>
-        {errors.server && <p>{errors.server}</p>}
+        {errors.server && <p className="error-message">{errors.server}</p>}
         <form className="signup-form" onSubmit={handleSubmit}>
           <label>
             Email address
@@ -69,7 +69,7 @@ function SignupFormModal() {
               required
             />
           </label>
-          {errors.email && <p>{errors.email}</p>}
+          {errors.email && <p className="error-message">{errors.email}</p>}
           <label>
             First Name
             <input
@@ -79,7 +79,7 @@ function SignupFormModal() {
               required
             />
           </label>
-          {errors.firstName && <p>{errors.firstName}</p>}
+          {errors.firstName && <p className="error-message">{errors.firstName}</p>}
           <label>
             Last Name
             <input
@@ -89,7 +89,7 @@ function SignupFormModal() {
               required
             />
           </label>
-          {errors.lastName && <p>{errors.lastName}</p>}
+          {errors.lastName && <p className="error-message">{errors.lastName}</p>}
           <label>
             Username
             <input
@@ -99,7 +99,7 @@ function SignupFormModal() {
               required
             />
           </label>
-          {errors.username && <p>{errors.username}</p>}
+          {errors.username && <p className="error-message">{errors.username}</p>}
           <label>
             Password
             <input
@@ -109,7 +109,7 @@ function SignupFormModal() {
               required
             />
           </label>
-          {errors.password && <p>{errors.password}</p>}
+          {errors.password && <p className="error-message">{errors.password}</p>}
           {errors.passwordLength && <p>{errors.passwordLength}</p>}
           <label>
             Confirm Password
@@ -120,7 +120,7 @@ function SignupFormModal() {
               required
             />
           </label>
-          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+          {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
           <button type="submit">Register</button>
         </form>
       </div>

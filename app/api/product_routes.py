@@ -12,7 +12,7 @@ def get_products():
     """
     Get all products
     """
-    all_products = Product.query.all()
+    all_products = Product.query.order_by(Product.created_at.desc()).all()
     return {"products": [product.to_dict() for product in all_products]}
 
 @product_routes.route('/<int:product_id>')
@@ -31,7 +31,7 @@ def create_product():
     """
     Create product
     """
-    print("create product route hit")  ############## PRINT
+
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -45,11 +45,9 @@ def create_product():
         )
         db.session.add(new_product)
         db.session.commit()
-        print(f"product created: {new_product.to_dict()}") ############## PRINT
         return new_product.to_dict(), 201  
     else:
-        print("form validation failed:", form.errors)  ############## PRINT
-    return {'errors': form.errors}, 400
+        return {'errors': form.errors}, 400
 
 @product_routes.route('/<int:product_id>', methods=['GET', 'PUT'])
 @login_required
@@ -113,7 +111,7 @@ def get_all_product_images(product_id):
     """
     images = ProductImage.query.filter_by(product_id=product_id).all()
     return {"images": [image.to_dict() for image in images]}
- 
+
 @product_routes.route('/<int:product_id>/images', methods=['POST'])
 @login_required
 def upload_product_image(product_id):
