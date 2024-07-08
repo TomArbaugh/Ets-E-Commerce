@@ -71,7 +71,7 @@ function ViewOrder() {
         
 
             let quantitiyContainer;
-            orderItems ? quantitiyContainer = orderItems.find((orderItem) => order.id === orderItem.order_id && orderItem.product_id === order_item.id) : null
+            orderItems ? quantitiyContainer  = orderItems.find((orderItem) => order.id === orderItem.order_id && orderItem.product_id === order_item.id) : null
             // for (let orderItem of orderItems) {
             //     if (orderItem.order_id === order_item.id) orderItemObj.quantity = orderItem.quantity
             
@@ -81,7 +81,7 @@ function ViewOrder() {
             
             orderItemObj.name = order_item.name,
             orderItemObj.price = order_item.price,
-            orderItemObj.quantity = quantitiyContainer.quantity,
+            orderItemObj.quantity = quantitiyContainer?.quantity,
             orderItemObj.total = quantitiyContainer.quantity * order_item.price
 
             orderDetails.order_items.push(orderItemObj)
