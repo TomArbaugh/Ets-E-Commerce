@@ -11,7 +11,7 @@ function CancelOrder({orderId}) {
         try {
             const fetchAllOrders = await fetch(`/api/orders/`);
             const fetchedOrders = await fetchAllOrders.json();
-           
+            
             const order = fetchedOrders.find((order) => order.id == orderId)
        
             if (order.status === 'Pending') {
@@ -20,6 +20,7 @@ function CancelOrder({orderId}) {
                 })
                 const result = await deleteFetch.json()
                 if (result) {
+                    window.location.reload();
                     navigate('/orders/view')
                 }
             }

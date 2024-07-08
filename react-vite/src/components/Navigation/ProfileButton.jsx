@@ -57,7 +57,7 @@ function ProfileButton() {
             <p>{user.email}</p>
             {/* <p><Link id='manage your listing' to='your-listings'>Your listing</Link></p> */}
             <p>
-              <Link to='/orders/view'>View Orders</Link>
+              <a href='/orders/view'>View Orders</a>
               <Link to='/your-listings'>Your Listings</Link>
             </p>
             <p>

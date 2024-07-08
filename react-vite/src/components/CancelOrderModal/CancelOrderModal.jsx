@@ -18,7 +18,7 @@ function CancelOrderModal({ orderId }) {
     function handleYesClick(e) {
         e.preventDefault();
         closeModal();
-        navigate(`/`);
+        navigate(`/orders/view`);
     }
 
     return (
