@@ -23,4 +23,8 @@ sqlalchemy==1.4.46; python_version >= '2.7' and python_version not in '3.0, 3.1,
 werkzeug==2.2.2; python_version >= '3.7'
 wtforms==3.0.1; python_version >= '3.7'
 zipp==3.17.0; python_version >= '3.8'
+<<<<<<< HEAD
 boto3==1.26.0; python_version >= '3.7'
+=======
+boto3==1.34.140
+>>>>>>> 4ddb428d497fa51fd4da62837299e7ef8f09c719
