@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Navigate, useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkProductDetails, thunkUpdateProducts, thunkAddProductImage } from '../../redux/products';
+import { thunkProductDetails, thunkUpdateProducts } from '../../redux/products';
 import './UpdateProductForm.css';
 
 const UpdateProductForm = () => {
@@ -21,11 +21,11 @@ const UpdateProductForm = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
-  const [image, setImage] = useState('');
-  const [imageLoading, setImageLoading] = useState(false);
+  // const [image, setImage] = useState('');
+  // const [imageLoading, setImageLoading] = useState(false);
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [imageUrl, setImageUrl] = useState('');
+  // const [imageUrl, setImageUrl] = useState('');
 
   const categories = [
     "Home & Living",
@@ -62,7 +62,7 @@ const UpdateProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setImageLoading(true);
+    // setImageLoading(true);
     setHasSubmitted(true);
     
     const updatedProduct = { ...product, name, category, description, price, stock };
@@ -72,43 +72,43 @@ const UpdateProductForm = () => {
     if (response.errors) {
       setErrors(response.errors);
     } else {
-      if (image) {
-        setImageLoading(true);
-        const imageResponse = await dispatch(thunkAddProductImage(productId, image));
-        if (imageResponse.errors) {
-          setErrors(imageResponse.errors.image);
-        } else {
-          setImageUrl(imageResponse.url); // set the image URL
-        }
-        setImageLoading(false);
-      }
+      // if (image) {
+      //   // setImageLoading(true);
+      //   const imageResponse = await dispatch(thunkUpdateProductImage(productId, image));
+      //   if (imageResponse.errors) {
+      //     setErrors(imageResponse.errors.image);
+      //   } else {
+      //     // setImageUrl(imageResponse.url); // set the image URL
+      //   }
+      //   // setImageLoading(false);
+      // }
       navigate('/your-listings');
     }
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files[0];
-    setImage(file);
-  };
+  //  const handleDrop = (e) => {
+  //   e.preventDefault();
+  //   const file = e.dataTransfer.files[0];
+  //   setImage(file);
+  // };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    handleFile(file);
-  };
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   handleFile(file);
+  // };
 
-  const handleFile = (file) => {
-    if (file && !['image/jpeg', 'image/png', 'image/gif', 'application/pdf'].includes(file.type)) {
-      setErrors(['File does not have an approved extension: pdf, jpg, jpeg, png, gif']);
-    } else {
-      setImage(file);
-      setErrors([]);
-    }
-  };
+  // const handleFile = (file) => {
+  //   if (file && !['image/jpeg', 'image/png', 'image/gif', 'application/pdf'].includes(file.type)) {
+  //     setErrors(['File does not have an approved extension: pdf, jpg, jpeg, png, gif']);
+  //   } else {
+  //     setImage(file);
+  //     setErrors([]);
+  //   }
+  // };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  // const handleDragOver = (e) => {
+  //   e.preventDefault();
+  // };
 
   return (
     <>
@@ -159,22 +159,6 @@ const UpdateProductForm = () => {
           {hasSubmitted && errors.includes('Description is required') && <p className="error-message">Description is required</p>}
           {hasSubmitted && errors.includes('Description cannot be more than 255 characters') && <p className="error-message">Description cannot be more than 255 characters</p>}
         </label>
-
-        <div className='photo-div'>
-          <label>Photos and video *</label>
-          <div className="dropzone" onDrop={handleDrop} onDragOver={handleDragOver}>
-            {image ? image.name : 'Drag and drop an image'}
-          </div> 
-          <input
-            type="file"
-            accept="image/*,application/pdf"
-            onChange={handleFileChange}
-            id="image-upload"
-            className="upload-button"
-          />
-          {imageUrl && <p>Image URL: <a href={imageUrl} target="_blank" rel="noopener noreferrer">{imageUrl}</a></p>}
-          {(imageLoading) && <p>Loading...</p>}
-        </div>
 
         <h2>Price & Inventory</h2>
         <label>

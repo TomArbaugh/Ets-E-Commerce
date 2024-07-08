@@ -5,7 +5,7 @@ const CURRENT_USERS_PRODUCTS = 'products/current';
 const UPDATE_PRODUCT = 'products/update';
 const DELETE_PRODUCT = 'products/delete';
 const ADD_PRODUCT_IMAGE = 'products/addImage';
-// const UPDATE_PRODUCT_IMAGE = 'products/updateImage';
+const UPDATE_PRODUCT_IMAGE = 'products/updateImage';
 // const DELETE_PRODUCT_IMAGE = 'products/deleteImage';
 
 const getAllProducts = (products) => ({
@@ -43,6 +43,13 @@ const addProductImage = (productId, image) => ({
   productId, 
   image
 });
+
+const updateProductImage = (productId, image) => ({
+  type: UPDATE_PRODUCT_IMAGE,
+  productId,
+  image
+})
+
 
 export const thunkGetAllProducts = () => async (dispatch) => {
   const res = await fetch('/api/products');
@@ -95,8 +102,25 @@ export const thunkAddProductImage = (productId, image) => async (dispatch) => {
   });
   if (res.ok) {
     const productImage = await res.json();
-    dispatch(addProductImage(productId, productImage));
-    return productImage; // return the product image data
+    await dispatch(addProductImage(productId, productImage));
+    return productImage; 
+  } else {
+    const error = await res.json();
+    return error;
+  }
+};
+
+export const thunkUpdateProductImage = (productId, image) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append('image', image);
+  const res = await fetch(`/api/products/${productId}/images`, {
+    method: 'PUT',
+    body: formData,
+  });
+  if (res.ok) {
+    const updatedImage = await res.json();
+    await dispatch(updateProductImage(productId, updatedImage));
+    return updatedImage 
   } else {
     const error = await res.json();
     return error;
@@ -203,6 +227,19 @@ export default function productReducer(state = initialState, action) {
             : [action.image] 
         }
       };
+      return newState;
+    case UPDATE_PRODUCT_IMAGE: {
+      const updatedImage = action.image;
+      newState = {
+        ...state,
+        productDetails: {
+          ...state.productDetails,
+          images: state.productDetails.images.map(image=>
+            image.id === updatedImage.id ? updatedImage : image
+          )
+        }
+      };
+    }
       return newState;
     default:
       return state;
