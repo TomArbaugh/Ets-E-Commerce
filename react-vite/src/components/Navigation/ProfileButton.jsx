@@ -44,8 +44,11 @@ function ProfileButton() {
     closeMenu();
   };
 
-  const handleLink = () => window.location.reload();
-
+  // const handleLink = (event, url) => {
+  //   event.preventDefault();
+  //   window.location.href = url;
+  //   window.location.reload();
+  // }
   return (
     <div className="profile-button-container">
       <button onClick={toggleMenu}>
@@ -59,7 +62,8 @@ function ProfileButton() {
             <p>{user.email}</p>
             {/* <p><Link id='manage your listing' to='your-listings'>Your listing</Link></p> */}
             <p>
-              <a href='/orders/view' onClick={handleLink}>View Orders</a>
+              {/* <a href='/orders/view' onClick={handleLink(event,'/orders/view')}>View Orders</a> */}
+              <Link to='/orders/view'>Your Orders</Link>
               <Link to='/your-listings'>Your Listings</Link>
             </p>
             <p>
