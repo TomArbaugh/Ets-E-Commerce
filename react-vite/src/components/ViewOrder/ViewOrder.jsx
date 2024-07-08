@@ -28,7 +28,7 @@ function ViewOrder() {
             response = await fetch(`/api/orders/`)
             const data = await response.json()
             setOrders(data)
-            // console.log("27", orders)
+      
         } catch (err) {
             console.error('Request Error:', err);
         }
@@ -48,7 +48,7 @@ function ViewOrder() {
 
         setOrderItems(data)
     }
-    console.log("THIS IS IT ", orderItems)
+
 
     useEffect(() => {
         fetchOrders()
@@ -62,21 +62,20 @@ function ViewOrder() {
         orderDetails.status = order.status
         orderDetails.total = order.total
         orderDetails.order_items = []
-        console.log("ORDER: ", order)
+
         orderDetails.order_id = order.id
         order.products_ordered.map((order_item) => {
 
             const orderItemObj = {}
 
-            console.log("THIS SHOULD BE THE ID", order_item.id)
-            console.log("orderItems state:", orderItems)
+        
 
             let quantitiyContainer = orderItems.find((orderItem) => order.id === orderItem.order_id && orderItem.product_id === order_item.id)
             // for (let orderItem of orderItems) {
             //     if (orderItem.order_id === order_item.id) orderItemObj.quantity = orderItem.quantity
-            //     console.log(orderItem.order_id === order.id)
+            
             // }
-            // console.log("container",quantitiyContainer)
+          
             orderItemObj.id = order_item.id
             
             orderItemObj.name = order_item.name,
@@ -85,11 +84,11 @@ function ViewOrder() {
             orderItemObj.total = quantitiyContainer.quantity * order_item.price
 
             orderDetails.order_items.push(orderItemObj)
-            console.log("HERE IS THE OBJ", orderItemObj)
+        
         })
         ordersArr.push(orderDetails)
 }) : null
-    console.log("ORDERSARRAY: ", ordersArr)
+ 
 
     if (!ordersArr.length) return <p>No orders</p>;
 

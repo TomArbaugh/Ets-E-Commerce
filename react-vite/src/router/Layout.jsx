@@ -10,7 +10,7 @@ export default function Layout() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
-    // console.log('Elya - layout component rendered');
+
   }, [dispatch]);
 
   return (

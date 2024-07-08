@@ -11,7 +11,7 @@ const YourListings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.allProducts || []);
-  console.log('what are the products', products)
+
   useEffect(() => {
     dispatch(thunkGetCurrentUsersProducts());
   }, [dispatch]);
@@ -36,8 +36,8 @@ const YourListings = () => {
           <p>No listings found.</p>
         ) : (
           <ul>
-            {sortedProducts.map((product) => (
-              <li key={product?.id} className="listing-item">
+            {sortedProducts.map((product, index) => (
+              <li key={product?.id || index} className="listing-item">
                 <div className='listing-image'>
                   {product?.images? (
                     <img src={product?.images[0]?.url} alt={product?.name} />
