@@ -44,6 +44,8 @@ function ProfileButton() {
     closeMenu();
   };
 
+  const handleLink = () => window.location.reload();
+
   return (
     <div className="profile-button-container">
       <button onClick={toggleMenu}>
@@ -57,7 +59,7 @@ function ProfileButton() {
             <p>{user.email}</p>
             {/* <p><Link id='manage your listing' to='your-listings'>Your listing</Link></p> */}
             <p>
-              <a href='/orders/view'>View Orders</a>
+              <a href='/orders/view' onClick={handleLink}>View Orders</a>
               <Link to='/your-listings'>Your Listings</Link>
             </p>
             <p>

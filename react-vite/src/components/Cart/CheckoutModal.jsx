@@ -14,6 +14,7 @@ export default function CheckoutModal() {
             'Content-Type': 'application/json'
         }
       })
+      window.location.reload();
       navigate('/orders/view')
       
       closeModal();
