@@ -40,7 +40,7 @@ const deleteProduct = (productId) => ({
 
 const addProductImage = (productId, image) => ({
   type: ADD_PRODUCT_IMAGE,
-  productId, 
+  productId,
   image
 });
 
@@ -56,7 +56,7 @@ export const thunkGetAllProducts = () => async (dispatch) => {
   if (res.ok) {
     const allProducts = await res.json();
     dispatch(getAllProducts(allProducts.products))
-  } 
+  }
 };
 
 export const thunkProductDetails = (productId) => async (dispatch) => {
@@ -80,7 +80,7 @@ export const thunkCreateNewProduct = (product) => async (dispatch) => {
       },
       body: JSON.stringify(product)
     });
-    
+
     // console.log('response status:', res.status);
 
     if (res.ok) {
@@ -88,7 +88,7 @@ export const thunkCreateNewProduct = (product) => async (dispatch) => {
       dispatch(createNewProduct(newProduct));
       return newProduct;
     } else {
-      const error = await res.json(); 
+      const error = await res.json();
       return error
     }
 };
@@ -103,7 +103,7 @@ export const thunkAddProductImage = (productId, image) => async (dispatch) => {
   if (res.ok) {
     const productImage = await res.json();
     await dispatch(addProductImage(productId, productImage));
-    return productImage; 
+    return productImage;
   } else {
     const error = await res.json();
     return error;
@@ -120,7 +120,7 @@ export const thunkUpdateProductImage = (productId, image) => async (dispatch) =>
   if (res.ok) {
     const updatedImage = await res.json();
     await dispatch(updateProductImage(productId, updatedImage));
-    return updatedImage 
+    return updatedImage
   } else {
     const error = await res.json();
     return error;
@@ -189,7 +189,7 @@ export default function productReducer(state = initialState, action) {
       newState = { ...state, productDetails: action.product };
       return newState;
     case CURRENT_USERS_PRODUCTS:
-      newState = { ...state, 
+      newState = { ...state,
         allProducts: action.products
       };
       return newState;
@@ -210,7 +210,7 @@ export default function productReducer(state = initialState, action) {
           [updatedProduct.id]: updatedProduct,
         },
       };
-    }  
+    }
     case DELETE_PRODUCT:
       newState = {
         ...state,
@@ -218,13 +218,13 @@ export default function productReducer(state = initialState, action) {
       };
       return newState;
     case ADD_PRODUCT_IMAGE:
-      newState = { 
-        ...state, 
-        productDetails: { 
-          ...state.productDetails, 
-          images: state.productDetails.images 
+      newState = {
+        ...state,
+        productDetails: {
+          ...state.productDetails,
+          images: state.productDetails.images
             ? [...state.productDetails.images, action.image]
-            : [action.image] 
+            : [action.image]
         }
       };
       return newState;

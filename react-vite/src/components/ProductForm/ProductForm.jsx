@@ -3,10 +3,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { thunkCreateNewProduct, thunkAddProductImage } from '../../redux/products';
 import './ProductForm.css';
+// import { useHistory } from "react-router-dom";
 
 const ProductForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // let history = useHistory();
 
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
@@ -44,6 +46,8 @@ const ProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", image);
     setImageLoading(true);
     setHasSubmitted(true);
 
@@ -54,142 +58,148 @@ const ProductForm = () => {
 
     const product = { name, category, description, price, stock };
     const response = await dispatch(thunkCreateNewProduct(product));
+    console.log("RESPONSE ID: ", response.id)
 
     if (response.errors) {
       setErrors(response.errors);
       setImageLoading(false);
     } else {
       if (image) {
+        console.log("IMAGE: ", image)
         const imageResponse = await dispatch(thunkAddProductImage(response.id, image));
         setImageUrl(imageResponse.url); // set the image URL
       }
       setImageLoading(false);
       navigate('/your-listings');
     }
+    // history.push("/images")
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
-    setImage(file);
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    handleFile(file);
-  };
-
-  const handleFile = (file) => {
     if (file && !['image/jpeg', 'image/png', 'image/gif', 'application/pdf'].includes(file.type)) {
       setErrors(['File does not have an approved extension: pdf, jpg, jpeg, png, gif']);
     } else {
       setImage(file);
-      setErrors([]);
     }
+  }
+    // const handleFileChange = (e) => {
+    //   const file = e.target.files[0];
+    //   handleFile(file);
+    // };
+
+    // const handleFile = (file) => {
+    //   if (file && !['image/jpeg', 'image/png', 'image/gif', 'application/pdf'].includes(file.type)) {
+    //     setErrors(['File does not have an approved extension: pdf, jpg, jpeg, png, gif']);
+    //   } else {
+    //     setImage(file);
+    //     setErrors([]);
+    //   }
+    // };
+
+    const handleDragOver = (e) => {
+      e.preventDefault();
+    };
+    console.log("IMAGE", imageUrl)
+    return (
+      <>
+        <Link to="/your-listings" className="back-to-listings-link">&larr; Back to Your Listings</Link>
+
+        <form className='products-form' onSubmit={handleSubmit} encType="multipart/form-data">
+          <h2>Tell us about your item and why we will love it</h2>
+          <div className='name-div'>
+            <label> Name *
+              {hasSubmitted && errors.includes('Name is required') && <span className="error-message">Name is required</span>}
+              {hasSubmitted && errors.includes('Name cannot be more than 50 characters') && <span className="error-message">Name cannot be more than 50 characters</span>}
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                placeholder='product name'
+              />
+            </label>
+          </div>
+
+          <div className='category-div'>
+            <label>Category *
+              {hasSubmitted && errors.includes('Category is required') && <span className="error-message">Category is required</span>}
+
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              >
+                <option value="">Select a category</option>
+                {categories.map((cat, idx) => (
+                  <option key={idx} value={cat}>{cat}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <div className='photo-div'>
+            <label>Photos and video *</label>
+            <div className="dropzone" onDrop={handleDrop} onDragOver={handleDragOver}>
+              {image ? image.name : 'Drag and drop an image'}
+            </div>
+            <input
+              type="file"
+              accept="image/*,application/pdf"
+              onChange={(e) => setImage(e.target.files[0])}
+              id="image-upload"
+              className="upload-button"
+            />
+            {imageUrl && <p>Image URL: <a href={imageUrl} target="_blank" rel="noopener noreferrer">{imageUrl}</a></p>}
+            {(imageLoading) && <p>Loading...</p>}
+          </div>
+
+          <div className='category-div'>
+            <label>Description *
+              {hasSubmitted && errors.includes('Description is required') && <span className="error-message">Description is required</span>}
+              {hasSubmitted && errors.includes('Description cannot be more than 255 characters') && <span className="error-message">Description cannot be more than 255 characters</span>}
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+                placeholder='product description'
+              />
+            </label>
+          </div>
+
+          <div className='price-inventory-div'>
+            <h2>Price & Inventory</h2>
+            <label>Price *
+              {hasSubmitted && errors.includes('Price is required') && <span className="error-message">Price is required</span>}
+              {hasSubmitted && errors.includes('Price must be a positive number') && <span className="error-message">Price must be a positive number</span>}
+              <input
+                type="number"
+                value={price}
+                step="0.01"  // allow decimal values
+                min="0"
+                onChange={(e) => setPrice(e.target.value)}
+                required
+                placeholder='price'
+              />
+            </label>
+            <label>Stock *
+              {hasSubmitted && errors.includes('Stock is required') && <span className="error-message">Stock is required</span>}
+              {hasSubmitted && errors.includes('Stock must be a positive number') && <span className="error-message">Stock must be a positive number</span>}
+              <input
+                type="number"
+                value={stock}
+                min="0"
+                onChange={(e) => setStock(e.target.value)}
+                required
+                placeholder='stock'
+              />
+            </label>
+          </div>
+          <button type="submit">Add a listing</button>
+        </form>
+      </>
+    );
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  return (
-    <>
-      <Link to="/your-listings" className="back-to-listings-link">&larr; Back to Your Listings</Link>
-
-      <form className='products-form' onSubmit={handleSubmit} encType="multipart/form-data">
-        <h2>Tell us about your item and why we will love it</h2>
-        <div className='name-div'>
-          <label> Name *
-            {hasSubmitted && errors.includes('Name is required') && <span className="error-message">Name is required</span>}
-            {hasSubmitted && errors.includes('Name cannot be more than 50 characters') && <span className="error-message">Name cannot be more than 50 characters</span>}
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              placeholder='product name'
-            />
-          </label>
-        </div>
-
-        <div className='category-div'>
-          <label>Category *
-            {hasSubmitted && errors.includes('Category is required') && <span className="error-message">Category is required</span>}
-
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
-            >
-              <option value="">Select a category</option>
-              {categories.map((cat, idx) => (
-                <option key={idx} value={cat}>{cat}</option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        <div className='photo-div'>
-          <label>Photos and video *</label>
-          <div className="dropzone" onDrop={handleDrop} onDragOver={handleDragOver}>
-            {image ? image.name : 'Drag and drop an image'}
-          </div> 
-          <input
-            type="file"
-            accept="image/*,application/pdf"
-            onChange={handleFileChange}
-            id="image-upload"
-            className="upload-button"
-          />
-          {imageUrl && <p>Image URL: <a href={imageUrl} target="_blank" rel="noopener noreferrer">{imageUrl}</a></p>}
-          {(imageLoading) && <p>Loading...</p>}
-        </div>
-
-        <div className='category-div'>
-          <label>Description *
-            {hasSubmitted && errors.includes('Description is required') && <span className="error-message">Description is required</span>}
-            {hasSubmitted && errors.includes('Description cannot be more than 255 characters') && <span className="error-message">Description cannot be more than 255 characters</span>}
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-              placeholder='product description'
-            />
-          </label>
-        </div>
-
-        <div className='price-inventory-div'>
-          <h2>Price & Inventory</h2>
-          <label>Price *
-            {hasSubmitted && errors.includes('Price is required') && <span className="error-message">Price is required</span>}
-            {hasSubmitted && errors.includes('Price must be a positive number') && <span className="error-message">Price must be a positive number</span>}
-            <input
-              type="number"
-              value={price}
-              step="0.01"  // allow decimal values
-              min="0"
-              onChange={(e) => setPrice(e.target.value)}
-              required
-              placeholder='price'
-            />
-          </label>
-          <label>Stock *
-            {hasSubmitted && errors.includes('Stock is required') && <span className="error-message">Stock is required</span>}
-            {hasSubmitted && errors.includes('Stock must be a positive number') && <span className="error-message">Stock must be a positive number</span>}
-            <input
-              type="number"
-              value={stock}
-              min="0"
-              onChange={(e) => setStock(e.target.value)}
-              required
-              placeholder='stock'
-            />
-          </label>
-        </div>
-        <button type="submit">Add a listing</button>
-      </form>
-    </>
-  );
-};
-
-export default ProductForm;
+  export default ProductForm;
