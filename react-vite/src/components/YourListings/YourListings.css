@@ -1,0 +1,62 @@
+.your-listings-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.your-listings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.your-listings-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.listing-item {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+.listing-item img {
+  width: 200px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+
+.listing-details {
+  flex: 1;
+}
+
+.listing-details h2 {
+  margin: 0 0 10px 0;
+}
+
+.listing-details p {
+  margin: 5px 0;
+}
+
+.listing-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.add-listing-button {
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}

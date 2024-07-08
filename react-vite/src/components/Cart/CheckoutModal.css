@@ -1,0 +1,28 @@
+.delete-box {
+    width: 450px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 15px;
+    overflow: hidden;
+    padding-bottom:20px;
+}
+
+.yes-button {
+    border: none;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    height:50px;
+    width:350px;
+}
+
+.no-button {
+    border: none;
+    background-color: darkgray;
+    color: black;
+    height:50px;
+    width:350px;
+    border-radius: 10px;
+}

@@ -12,7 +12,6 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     purchaser_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     total = db.Column(db.Numeric, nullable=False)
-    discount = db.Column(db.Numeric, default=None)
     status = db.Column(db.String(25), nullable=False)
 
 
@@ -27,3 +26,5 @@ class Order(db.Model):
         secondary=order_items,
         back_populates = 'order_products'
     )
+
+    

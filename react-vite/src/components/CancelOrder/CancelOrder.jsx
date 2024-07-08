@@ -29,7 +29,11 @@ function CancelOrder({orderId}) {
     }
 
     return (
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 3d688d1d738a286943a7db2fe0799b53b3e650fd
         <button className='yes-button' onClick={setState}>Cancel Order</button>
     )
 }
