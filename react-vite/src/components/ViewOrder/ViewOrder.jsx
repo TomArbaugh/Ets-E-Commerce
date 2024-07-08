@@ -81,7 +81,7 @@ function ViewOrder() {
             
             orderItemObj.name = order_item.name,
             orderItemObj.price = order_item.price,
-            orderItemObj.quantity = quantitiyContainer?.quantity,
+            quantitiyContainer ? orderItemObj.quantity = quantitiyContainer.quantity : null,
             orderItemObj.total = quantitiyContainer.quantity * order_item.price
 
             orderDetails.order_items.push(orderItemObj)
