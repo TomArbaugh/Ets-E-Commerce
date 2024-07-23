@@ -82,7 +82,7 @@ function ViewOrder() {
             orderItemObj.name = order_item.name,
             orderItemObj.price = order_item.price,
             quantitiyContainer ? orderItemObj.quantity = quantitiyContainer.quantity : null,
-            orderItemObj.total = quantitiyContainer.quantity * order_item.price
+            quantitiyContainer ? orderItemObj.total = quantitiyContainer.quantity * order_item.price : null
 
             orderDetails.order_items.push(orderItemObj)
         
@@ -104,7 +104,7 @@ function ViewOrder() {
                             <p>Product Name: {order_item.name}</p>
                             <p>Price: {order_item.price}</p>
                             {/* Add Quantity if it exists */}
-                            {order_item.quantity && <p>Quantity: {order_item.quantity}</p>}
+                            {order_item.quantity ? <p>Quantity: {order_item.quantity}</p> : null}
                             
                         </div>
                         
