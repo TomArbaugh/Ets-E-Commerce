@@ -66,19 +66,19 @@
 }
 
 .add-to-cart-button {
-  background-color: black; 
-  color: white; 
-  border: none; 
-  padding: 16px 40px; 
-  border-radius: 30px; 
-  font-size: 16px; 
-  cursor: pointer; 
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .add-to-cart-button:hover {
-  background-color: rgb(19, 19, 19); 
-  transform: scale(1.01); 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  background-color: rgb(19, 19, 19);
+  transform: scale(1.01);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .confirmation-message {
@@ -111,53 +111,53 @@
   padding: 0;
 }
 
-.create-review-link { 
+.create-review-link {
   color: black;
   margin: 20px 0px;
 }
 
-.create-review-link:hover { 
+.create-review-link:hover {
   color: grey;
   margin: 20px 0px;
 }
 
 
 .edit-review-button {
-  color: black; 
+  color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  font-size: 14px; 
-  font-weight: bold; 
-  cursor: pointer; 
-  margin-right: 10px; 
-  transition: background-color 0.3s, transform 0.3s; /* smooth transitions */
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s, transform 0.3s;
   white-space: nowrap;
 }
 
 .edit-review-button:hover {
-  color: grey; 
-  transform: scale(1.05); /* slightly grow on hover */
+  color: grey;
+  transform: scale(1.05);
 }
 
 .delete-review-button {
-  color: black; 
+  color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  font-size: 14px; 
-  font-weight: bold; 
-  cursor: pointer; 
-  margin-right: 10px; 
-  transition: background-color 0.3s, transform 0.3s; /* smooth transitions */
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s, transform 0.3s;
   white-space: nowrap;
 }
 
 .delete-review-button:hover {
-  color: grey; 
+  color: grey;
 }
 
 .error-message {
-  color: red; /* Red text color for errors */
-  font-weight: bold; /* Bold text for errors */
+  color: red;
+  font-weight: bold;
 }

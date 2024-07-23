@@ -5,8 +5,8 @@ import { thunkProductDetails } from '../../redux/products';
 import { addItemToCart } from '../../redux/cart';
 import './ProductDetails.css';
 import { getReviewsByProductId } from '../../redux/reviews';
-// import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
-// import OpenModalButton from '../OpenModalButton';
+import EditReview from '../EditReview/EditReview';
+import OpenModalButton from '../OpenModalButton';
 import { FaStar } from 'react-icons/fa';
 
 const ProductDetails = () => {
@@ -19,6 +19,9 @@ const reviews = useSelector((state) => state.reviews.reviews);
 const user = useSelector((state) => state.session.user);
 const deletedReview = useSelector((state) => state.reviews.deletedReview)
 
+  useEffect(() => {
+    dispatch(thunkProductDetails(productId));
+  }, [dispatch, productId]);
   useEffect(() => {
     dispatch(thunkProductDetails(productId));
   }, [dispatch, productId]);
@@ -79,9 +82,12 @@ const deletedReview = useSelector((state) => state.reviews.deletedReview)
                     <div>{review.stars} <FaStar color="#ffc107" /></div>
                     <div className="reviewed-by"><strong>{review.first_name} {review.last_name}</strong> <em>{review.createdAt}</em></div>
                     {user && review.user_id === user.id && (
-                      <div className='button-pad'>
-                        <Link to={`/products/${product.id}/edit-review`} className='edit-review-button'>Edit Review</Link>
-                      </div>
+                       <div className="button-pad-edit">
+                       {user && alreadyReviewed && <OpenModalButton
+                         buttonText='Edit Review'
+                         modalComponent={<EditReview productId={product.id} />}
+                       />}
+                     </div>
                     )}
                   </li>
                 ))}
@@ -98,6 +104,6 @@ const deletedReview = useSelector((state) => state.reviews.deletedReview)
       </div>
     </div>
   );
-};
+}
 
-export default ProductDetails;
+export default ProductDetails

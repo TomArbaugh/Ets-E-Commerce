@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { thunkAuthenticate } from "../../redux/session.js";
-import OpenModalButton from '../OpenModalButton'; // <-- this has been added to import OpenModalButton
-import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal'; // <-- this has been added to import DeleteReviewModal
-import './EditReview.css'; 
+import './EditReview.css';
 
 function EditReview() {
     const { productId } = useParams();
@@ -86,33 +84,32 @@ function EditReview() {
     };
 
     return (
-        <div>
-            <h1>Edit a review</h1>
+        <div className="edit-review-container">
+            <h1>Edit your review</h1>
             <form onSubmit={handleSubmit}>
-                <h3>Hello Review</h3>
+                <h3>My Review</h3>
                 {errors.user && <p className="error-message">{errors.user}</p>}
-                <input value={review} type="text" onChange={(e) => setReview(e.target.value)} />
-                {errors.review && <p className="error-message">{errors.review}</p>}
-                {errors.noReview && <p className="error-message">{errors.noReview}</p>}
-                <select value={stars} onChange={(e) => setStars(Number(e.target.value))}>
-                    <option value="">Select stars</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                {errors.stars && <p className="error-message">{errors.stars}</p>}
-                {errors.apiError && <p className="error-message">{errors.apiError}</p>}
+                <label className="edit-form-labels">
+                    Stars
+                    <select value={stars} onChange={(e) => setStars(Number(e.target.value))}>
+                        <option value="">Select stars</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    {errors.stars && <p className="error-message">{errors.stars}</p>}
+                    {errors.apiError && <p className="error-message">{errors.apiError}</p>}
+                </label>
+                <label className="edit-form-labels">
+                    What did you think of this product?
+                    <textarea value={review} type="text" onChange={(e) => setReview(e.target.value)} />
+                    {errors.review && <p className="error-message">{errors.review}</p>}
+                    {errors.noReview && <p className="error-message">{errors.noReview}</p>}
+                </label>
                 <button type='submit'>Leave Review</button>
             </form>
-            <div className='delete-review-button-container'>
-                <OpenModalButton
-                    buttonText='Delete Review'
-                    modalComponent={<DeleteReviewModal productId={productId} />}
-                    className='delete-review-button' // <-- this has been added to include the delete-review-button class
-                />
-            </div>
         </div>
     );
 }
