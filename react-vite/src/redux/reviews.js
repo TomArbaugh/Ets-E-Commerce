@@ -13,9 +13,9 @@ const addReview = (review) => ({
   type: ADD_REVIEW,
   payload: review
 })
-const editReview = (review) => ({
+const editReview = (data) => ({
   type: EDIT_REVIEW,
-  payload: review
+  payload: data
 })
 const deleteReview = (review) => ({
   type: DELETE_REVIEW,
@@ -52,16 +52,18 @@ export const createReview = (productId, reviewData) => async (dispatch) => {
 
 }
 export const updateReview = (productId, reviewData) => async (dispatch) => {
-  const response = await fetch(`/api/reviews/${productId}/edit-review`, {
+  console.log('REVIEW DATA: ', reviewData)
+  const response = await fetch(`/api/reviews/${productId}/edit-review/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(reviewData),
   });
-
+  console.log('RESPONSE: ', response)
   if (response.ok) {
     const data = await response.json();
+    console.log('DATA: ', data)
     dispatch(editReview(data));
   } else {
     const errorData = await response.json();
@@ -89,7 +91,7 @@ function reviewsReducer(state = initialState, action) {
     case ADD_REVIEW:
       return { ...state, reviews: [...state.reviews, action.payload] };
     case EDIT_REVIEW:
-      return { ...state, reviews: state.reviews.map((review) => review.id === action.payload.id ? action.payload : review), }
+      return { ...state, editedReview: action.payload }
     case DELETE_REVIEW:
       return { ...state, deletedReview: action.payload}
     default:

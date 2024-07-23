@@ -108,7 +108,7 @@ def edit_review(product_id):
            return "Errors in Route"
 
 
-       return "Successful edit!"
+       return jsonify({ "message" : "Successful edit!"}), 200
        # return    {
        #     "user_id": new_review.user_id,
        #     "product_id": new_review.product_id,

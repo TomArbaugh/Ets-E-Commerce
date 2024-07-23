@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
+// import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkAuthenticate } from "../../redux/session.js";
 import './EditReview.css';
+import { useModal } from "../../context/Modal.jsx";
+import { updateReview } from "../../redux/reviews.js";
+// import { thunkProductDetails } from "../../redux/products.js";
 
 function EditReview() {
     const { productId } = useParams();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const [review, setReview] = useState('');
@@ -14,6 +18,7 @@ function EditReview() {
     const [errors, setErrors] = useState({});
     const [err, setErr] = useState(null);
     const userId = user ? user.id : null;
+    const { closeModal } = useModal();
 
     const validateForm = () => {
         const newErrors = {};
@@ -63,20 +68,23 @@ function EditReview() {
         };
 
         try {
-            const reviewRes = await fetch(`/api/reviews/${productId}/edit-review/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(reviewData)
-            });
+            // const reviewRes = await fetch(`/api/reviews/${productId}/edit-review/`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(reviewData)
+            // });
 
-            if (reviewRes.ok) {
-                navigate(`/products/${productId}`);
-            } else {
-                const errorData = await reviewRes.json();
-                setErrors({ apiError: errorData.message || "An error occurred" });
-            }
+            // if (reviewRes.ok) {
+            //     closeModal();
+            //     navigate(`/products/${productId}`, { replace: true });
+            // } else {
+            //     const errorData = await reviewRes.json();
+            //     setErrors({ apiError: errorData.message || "An error occurred" });
+            // }
+            dispatch(updateReview(productId, reviewData));
+            closeModal()
         } catch (err) {
             console.error('Request Error:', err);
             setErrors({ apiError: "An error occurred" });

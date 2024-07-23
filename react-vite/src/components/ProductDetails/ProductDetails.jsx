@@ -6,30 +6,28 @@ import { addItemToCart } from '../../redux/cart';
 import './ProductDetails.css';
 import { getReviewsByProductId } from '../../redux/reviews';
 import EditReview from '../EditReview/EditReview';
+import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
 import OpenModalButton from '../OpenModalButton';
 import { FaStar } from 'react-icons/fa';
 
 const ProductDetails = () => {
-const dispatch = useDispatch();
-const { productId } = useParams();
-const product = useSelector((state) => state.products.productDetails);
-const [quantity, setQuantity] = useState(1);
-const [AddToCardMessage, setAddToCartMessage] = useState('');
-const reviews = useSelector((state) => state.reviews.reviews);
-const user = useSelector((state) => state.session.user);
-const deletedReview = useSelector((state) => state.reviews.deletedReview)
+  const dispatch = useDispatch();
+  const { productId } = useParams();
+  const product = useSelector((state) => state.products.productDetails);
+  const [quantity, setQuantity] = useState(1);
+  const [AddToCardMessage, setAddToCartMessage] = useState('');
+  const reviews = useSelector((state) => state.reviews.reviews);
+  const user = useSelector((state) => state.session.user);
+  const deletedReview = useSelector((state) => state.reviews.deletedReview)
+  const editedReview = useSelector((state) => state.reviews.editedReview)
 
   useEffect(() => {
     dispatch(thunkProductDetails(productId));
   }, [dispatch, productId]);
+
   useEffect(() => {
-    dispatch(thunkProductDetails(productId));
-  }, [dispatch, productId]);
-
-
- useEffect(() => {
-   dispatch(getReviewsByProductId(productId))
- }, [dispatch, productId, deletedReview])
+    dispatch(getReviewsByProductId(productId))
+  }, [dispatch, productId, deletedReview, editedReview])
 
 
   const handleAddToCart = async () => {
@@ -82,12 +80,20 @@ const deletedReview = useSelector((state) => state.reviews.deletedReview)
                     <div>{review.stars} <FaStar color="#ffc107" /></div>
                     <div className="reviewed-by"><strong>{review.first_name} {review.last_name}</strong> <em>{review.createdAt}</em></div>
                     {user && review.user_id === user.id && (
-                       <div className="button-pad-edit">
-                       {user && alreadyReviewed && <OpenModalButton
-                         buttonText='Edit Review'
-                         modalComponent={<EditReview productId={product.id} />}
-                       />}
-                     </div>
+                      <>
+                        <div className="button-pad-edit">
+                          {user && alreadyReviewed && <OpenModalButton
+                            buttonText='Edit Review'
+                            modalComponent={<EditReview productId={product.id} />}
+                          />}
+                        </div>
+                        <div className="button-pad-delete">
+                          {user && alreadyReviewed && <OpenModalButton
+                            buttonText='Delete Review'
+                            modalComponent={<DeleteReviewModal productId={product.id} />}
+                          />}
+                        </div>
+                      </>
                     )}
                   </li>
                 ))}
