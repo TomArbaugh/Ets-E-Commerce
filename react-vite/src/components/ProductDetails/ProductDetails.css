@@ -121,6 +121,10 @@
   margin: 20px 0px;
 }
 
+.button-pad-edit {
+  margin-top: 10px;
+}
+
 
 .edit-review-button {
   color: black;
@@ -138,6 +142,15 @@
 .edit-review-button:hover {
   color: grey;
   transform: scale(1.05);
+}
+
+.button-pad-edit {
+  margin-top: 10px;
+  
+  text-decoration: underline !important;
+}
+.button-pad-delete {
+  margin-top: 10px;
 }
 
 .delete-review-button {
