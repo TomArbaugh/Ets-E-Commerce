@@ -88,7 +88,7 @@ const ProductDetails = () => {
               <div className='create-button-pad'>
                 {user && !alreadyReviewed && <Link to={`/products/${product.id}/create-review`}>Create Review</Link>}
               </div>
-              <div className='button-pad'>
+              <div className="button-pad-edit">
                 {user && alreadyReviewed && <OpenModalButton
                   buttonText='Edit Review'
                   modalComponent={<EditReview productId={product.id} />}

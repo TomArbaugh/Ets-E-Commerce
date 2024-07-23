@@ -42,9 +42,10 @@
  .create-button-pad {
   /* border: 1px solid black; */
  }
- .button-pad {
+
+ .button-pad-edit {
   padding: 10px 10px;
-  /* border: 1px solid black; */
+  border: none;
  }
 
 
