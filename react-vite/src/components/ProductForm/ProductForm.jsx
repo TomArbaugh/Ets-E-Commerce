@@ -50,7 +50,7 @@ const ProductForm = () => {
     formData.append("image", image);
     setImageLoading(true);
     setHasSubmitted(true);
-
+    
     if (errors.length > 0) {
       setImageLoading(false);
       return;
