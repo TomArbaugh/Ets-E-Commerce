@@ -16,7 +16,7 @@ function DeleteReviewModal({ productId }) {
     function handleYesClick(e) {
         e.preventDefault();
         closeModal();
-        navigate(`/`);
+        navigate(`/products/${productId}`);
     }
 
     return (

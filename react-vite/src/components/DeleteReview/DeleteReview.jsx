@@ -1,10 +1,11 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeReview } from '../../redux/reviews';
 
 function DeleteReview() {
     const { productId } = useParams();
     const navigate = useNavigate();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     // const userId = useSelector(state => state.session.user.id);
     // const newErrors = {};
 
@@ -25,15 +26,15 @@ function DeleteReview() {
             const review = fetchedReviews.find((review) => review.user_id === userId);
 
             if (review) {
-                // await dispatch(removeReview(productId, review.id));
-                // navigate(`/products/${productId}`);
-                const deleteFetch = await fetch(`/api/reviews/${productId}/delete-review`, {
-                    method: 'DELETE'
-                })
-                const result = await deleteFetch.json()
-                if (result) {
-                    navigate(`/products/${productId}`);
-                }
+                await dispatch(removeReview(productId, review.id));
+                navigate(`/products/${productId}`);
+                // const deleteFetch = await fetch(`/api/reviews/${productId}/delete-review`, {
+                //     method: 'DELETE'
+                // })
+                // const result = await deleteFetch.json()
+                // if (result) {
+                //     navigate(`/products/${productId}`);
+                // }
             } else {
                 newErrors.errors = "You do not have a review to delete";
             }

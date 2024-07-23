@@ -18,7 +18,7 @@ const ProductDetails = () => {
  const [AddToCardMessage, setAddToCartMessage] = useState('');
  const reviews = useSelector((state) => state.reviews.reviews);
  const user = useSelector((state) => state.session.user);
-
+const deletedReview = useSelector((state) => state.reviews.deletedReview)
 
  useEffect(() => {
    dispatch(thunkProductDetails(productId));
@@ -27,7 +27,7 @@ const ProductDetails = () => {
 
  useEffect(() => {
    dispatch(getReviewsByProductId(productId))
- }, [dispatch, productId])
+ }, [dispatch, productId, deletedReview])
 
 
  const handleAddToCart = async () => {

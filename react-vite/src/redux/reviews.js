@@ -17,9 +17,9 @@ const editReview = (review) => ({
   type: EDIT_REVIEW,
   payload: review
 })
-const deleteReview = (reviewId) => ({
+const deleteReview = (review) => ({
   type: DELETE_REVIEW,
-  payload: reviewId
+  payload: review
 })
 
 export const getReviewsByProductId = (productId) => async (dispatch) => {
@@ -75,7 +75,8 @@ export const removeReview = (productId) => async (dispatch) => {
   });
 
   if (response.ok) {
-    dispatch(deleteReview(productId));
+    const review = await response.json()
+    dispatch(deleteReview(review));
   }
 }
 
@@ -90,7 +91,7 @@ function reviewsReducer(state = initialState, action) {
     case EDIT_REVIEW:
       return { ...state, reviews: state.reviews.map((review) => review.id === action.payload.id ? action.payload : review), }
     case DELETE_REVIEW:
-      return { ...state, reviews: state.reviews.filter((review) => review.id !== action.payload), }
+      return { ...state, deletedReview: action.payload}
     default:
       return state;
   }
