@@ -4,7 +4,9 @@ import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton"; 
 import LoginFormModal from "../LoginFormModal"; 
 import "./Navigation.css";
-import { RiShoppingCartLine } from "react-icons/ri";
+import { CgShoppingCart } from "react-icons/cg";
+import etsyLogo from '/../images/Etsy-Logo.png';
+
 
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user);
@@ -13,7 +15,7 @@ function Navigation() {
     <div id='header-container'>
       <div id='logo'>
         <NavLink className='logo-link-to-home' to='/'>
-          Home
+        <img src={etsyLogo} alt='Etsy Logo' className='etsy-logo' /> 
         </NavLink>  
       </div>
       
@@ -35,11 +37,11 @@ function Navigation() {
         <div id='shopping-cart-icon'>
           {sessionUser ? (
             <NavLink to='/cart'>
-              <RiShoppingCartLine />
+              <CgShoppingCart />
             </NavLink>
           ) : (
             <OpenModalButton
-              buttonText={<RiShoppingCartLine />}
+              buttonText={<CgShoppingCart />}
               modalComponent={<LoginFormModal />}
             />
           )}

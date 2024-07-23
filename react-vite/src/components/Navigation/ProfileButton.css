@@ -29,3 +29,13 @@
 .profile-dropdown button:hover, .profile-dropdown a:hover {
   background-color: #f0f0f0;
 }
+
+.profile-link {
+  color: grey;
+  text-decoration: none;
+  gap: 20px;
+}
+
+.profile-link .link-icon {
+  margin-right: 8px;
+}

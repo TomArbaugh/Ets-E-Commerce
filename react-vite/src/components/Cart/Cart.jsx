@@ -83,15 +83,18 @@ const Cart = () => {
                       <p>{item.product.name}</p>
                       <p>Price: ${typeof item.product.price === 'number' ? item.product.price.toFixed(2) : 'N/A'}</p>
                       <label>
-                        Quantity:
-                        <input
-                          type="number"
-                          value={item.quantity}
-                          onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value, 10))}
+                        {/* Quantity: */}
+                        <select
+                          value={item.quantity} 
+                          onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value, 10))} 
                           min="1"
-                        />
-                      </label>
-                      <button onClick={() => handleDelete(item.id)}>Remove from cart</button>
+                        > {/* <-- this has been updated to replace input with select */}
+                          {[...Array(30).keys()].map(i => (
+                            <option key={i+1} value={i+1}>{i+1}</option> 
+                          ))} {/* <-- this has been updated to add options */}
+                        </select>
+                      </label><br></br>
+                      <button className='remove-from-cart-button' onClick={() => handleDelete(item.id)}>Remove</button> 
                     </div>
                   </>
                 ) : (
@@ -107,8 +110,9 @@ const Cart = () => {
       <div>
         <h2>Total Price: ${totalPrice.toFixed(2)}</h2>
         <OpenModalButton
-          buttonText='Checkout'
+          buttonText='Proceed to checkout'
           modalComponent={<CheckoutModal />}
+          className='checkout-button'
         />
       </div>
     </>
