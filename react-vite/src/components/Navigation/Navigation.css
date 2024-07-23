@@ -1,5 +1,11 @@
 .profile-dropdown {
   position: absolute;
+  cursor: pointer;
+}
+
+.etsy-logo {
+  height: 40px; /* Adjust the height as needed */
+  width: auto; /* Maintain aspect ratio */
 }
 /* }comment this line for testing */
 #header-container {
@@ -38,6 +44,13 @@
 
 #shopping-cart-icon {
   margin-left: 20px; 
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+  font-size: inherit;
+  color: inherit;
+
 }
 
 

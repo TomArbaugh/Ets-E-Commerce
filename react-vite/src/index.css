@@ -3,6 +3,19 @@ body {
   font-family: 'Arial', sans-serif;
 }
 
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+}
+
+
 
 
 /* a {

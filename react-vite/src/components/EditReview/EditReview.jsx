@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { thunkAuthenticate } from "../../redux/session.js";
+import OpenModalButton from '../OpenModalButton'; // <-- this has been added to import OpenModalButton
+import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal'; // <-- this has been added to import DeleteReviewModal
+import './EditReview.css'; 
 
 function EditReview() {
     const { productId } = useParams();
@@ -103,6 +106,13 @@ function EditReview() {
                 {errors.apiError && <p className="error-message">{errors.apiError}</p>}
                 <button type='submit'>Leave Review</button>
             </form>
+            <div className='delete-review-button-container'>
+                <OpenModalButton
+                    buttonText='Delete Review'
+                    modalComponent={<DeleteReviewModal productId={productId} />}
+                    className='delete-review-button' // <-- this has been added to include the delete-review-button class
+                />
+            </div>
         </div>
     );
 }

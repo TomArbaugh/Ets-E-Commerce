@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaUserCircle } from 'react-icons/fa';
+import { LuClipboardList } from "react-icons/lu";
+import { IoMdCard } from "react-icons/io";
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
-import './ProfileButton.css'; // Make sure to import the CSS file
+import './ProfileButton.css'; 
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -17,7 +19,7 @@ function ProfileButton() {
   const navigate = useNavigate();
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
+    e.stopPropagation(); // keep from bubbling up to document and triggering closeMenu
     setShowMenu(!showMenu);
   };
 
@@ -60,12 +62,18 @@ function ProfileButton() {
           <>
             <p>{user.username}</p>
             <p>{user.email}</p>
+            <hr className="divider" /> {/* Horizontal divider line */}
             {/* <p><Link id='manage your listing' to='your-listings'>Your listing</Link></p> */}
             <p>
               {/* <a href='/orders/view' onClick={handleLink(event,'/orders/view')}>View Orders</a> */}
-              <Link to='/orders/view'>Your Orders</Link>
-              <Link to='/your-listings'>Your Listings</Link>
+              <Link to='/orders/view' className='profile-link'>
+                  <IoMdCard className='link-icon' /> Your Orders
+                </Link>
+              <Link to='/your-listings' className='profile-link'>
+                  <LuClipboardList className='link-icon' /> Your Listings
+              </Link>
             </p>
+            <hr className="divider" /> {/* Horizontal divider line */}
             <p>
               <button onClick={logout}>Log Out</button>
             </p>
