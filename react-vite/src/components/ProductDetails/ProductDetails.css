@@ -161,3 +161,22 @@
   color: red;
   font-weight: bold;
 }
+
+
+@media (max-width: 900px) {
+  .top-detail {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-div-image-container,
+  .right-div-product-description {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .left-div-image-container img {
+    min-width: 100%;
+    min-height: auto;
+  }
+}

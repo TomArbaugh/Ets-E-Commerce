@@ -24,7 +24,28 @@ def seed_products():
     product10 = Product(
         owner_id=1, name='Cable Organizer', category='Home & Living', description='Keep your desk clean and organized with our premium wooden cable organizer. Upgrade your workspace with our premium wooden cable organizer and enjoy the convenience and beauty of a clutter-free desk.', price=15.40, stock=12, created_at=datetime(2023,  6, 10, 12, 0))
 
-    db.session.add(product1)
+    # new products
+    product11 = Product(
+        owner_id=2, name='Custom Engraved Wooden Jewelry Box', category='Jewelry & Accessories', description='Presenting the custom engraved wooden jewelry box – an exquisite blend of elegance and function, tailored to cradle your cherished jewelry pieces with the utmost care.', price=60.00, stock=10, created_at=datetime(2024, 6, 15, 12, 0))
+    product12 = Product(
+        owner_id=2, name='6-Tier Free Standing Shoe Racks', category='Home & Living', description='Keep your shoes in one place with this spacious shoe rack that can accommodate a variety of shoe sizes and styles.', price=120.00, stock=15, created_at=datetime(2024, 6, 16, 12, 0))
+    product13 = Product(
+        owner_id=3, name='Wooden Cell Phone Speaker', category='Toys & Entertainment', description='Meet our top selling Beat Block Wooden Cell Phone Speaker. No wires are needed to power this speaker.', price=25.00, stock=30, created_at=datetime(2024, 6, 17, 12, 0))
+    product14 = Product(
+        owner_id=1, name='Pickleball Star Champion Party Napkin', category='Home & Living', description="Serve up style with the Pickleball Star Champion Napkin, showcasing a vibrant 'Pickleball Star' motif with a playful pickleball and pickle graphic.", price=12.00, stock=50, created_at=datetime(2024, 6, 18, 12, 0))
+    product15 = Product(
+        owner_id=3, name='Infinity Bicycle Necklace', category='Jewelry & Accessories', description='Sterling Silver Bicycle Pendant is made by hand in our workshop with care.', price=35.00, stock=25, created_at=datetime(2024, 6, 19, 12, 0))
+    product16 = Product(
+        owner_id=2, name='Modern Standing Desk Converter', category='Home & Living', description='This standing desk converter is made of CNC-milled high quality Baltic birch plywood, collapsible to take anywhere.', price=150.00, stock=10, created_at=datetime(2024, 6, 20, 12, 0))
+    product17 = Product(
+        owner_id=1, name='Linen Pillowcase in Dusty Rose', category='Home & Living', description='Fall into a blooming bed and relax like a queen, this wonderful dusty rose linen pillowcase is a perfect addition to your bedroom.', price=45.00, stock=20, created_at=datetime(2024, 6, 21, 12, 0))
+    product18 = Product(
+        owner_id=1, name='Modern Cat House', category='Home & Living', description='Our elegant, simple design cat cave is the perfect place to make your feline friend feel comfortable, safe and warm, while improving the aesthetic atmosphere of your home!', price=90.00, stock=15, created_at=datetime(2024, 6, 22, 12, 0))
+    product19 = Product(
+        owner_id=2, name='Personalized Name Bike Headset Cap For Cyclists', category='Jewelry & Accessories', description='Add some personalization to your bike with this aluminium headset cap, easily installed on virtually any bike in minutes.', price=20.00, stock=30, created_at=datetime(2024, 6, 23, 12, 0))
+    product20 = Product(
+        owner_id=2, name='Frog Plush Toy', category='Toys & Entertainment', description='Frog toy is ready to become friends with your kids and tell a lot of stories! Click to read more details and look all the pictures in the listing...', price=25.00, stock=40, created_at=datetime(2024, 6, 24, 12, 0))
+
     db.session.add(product1)
     db.session.add(product2)
     db.session.add(product3)
@@ -35,6 +56,16 @@ def seed_products():
     db.session.add(product8)
     db.session.add(product9)
     db.session.add(product10)
+    db.session.add(product11)
+    db.session.add(product12)
+    db.session.add(product13)
+    db.session.add(product14)
+    db.session.add(product15)
+    db.session.add(product16)
+    db.session.add(product17)
+    db.session.add(product18)
+    db.session.add(product19)
+    db.session.add(product20)
     db.session.commit()
 
 def undo_products():
