@@ -45,7 +45,7 @@ const addProductImage = (productId, image) => ({
 });
 
 export const thunkGetAllProducts = () => async (dispatch) => {
-  const res = await fetch('/api/products');
+  const res = await fetch('/api/products/');
   if (res.ok) {
     const allProducts = await res.json();
     dispatch(getAllProducts(allProducts.products))
