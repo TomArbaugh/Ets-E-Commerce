@@ -10,13 +10,17 @@ const LandingPage = () => {
   const products = useSelector((state) => state.products.allProducts || []);
   const sessionUser = useSelector((state) => state.session.user);
 
-  useEffect(() => {
 
-  }, [products])
 
   useEffect(() => {
     dispatch(thunkGetAllProducts());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!products.length) {
+      dispatch(thunkGetAllProducts());
+    }
+  }, [dispatch, products])
 
   const handleAddListing = () => {
     navigate('/products/new');
