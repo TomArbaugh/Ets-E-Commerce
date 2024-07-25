@@ -11,6 +11,10 @@ const LandingPage = () => {
   const sessionUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
+
+  }, [products])
+
+  useEffect(() => {
     dispatch(thunkGetAllProducts());
   }, [dispatch]);
 
