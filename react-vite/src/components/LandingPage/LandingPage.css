@@ -89,3 +89,42 @@
 .invisable {
   display: none;
 }
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  color: black;
+  border-top: black solid 1px;
+  padding-top: 20px;
+}
+
+.about-link-icons {
+  font-size: xxx-large;
+  display: flex;
+  justify-content: space-around;
+ 
+}
+
+.indi-link {
+  color: #53b956;
+}
+
+.indi-link:hover {
+  color: #45a049;
+}
+
+#Elya {
+  width: 8%;
+}
+
+#Hui {
+  width: 8%;
+}
+
+#Aaron {
+  width: 8%;
+}
+
+#Tom {
+  width: 8%;  
+}

@@ -374,14 +374,14 @@ https://etsyclone-4ah1.onrender.com/
 ```python
 [
     {
-        "user_id": record.user_id,
-        "first_name": record.first_name,
-        "last_name": record.last_name,
-        "product_id": record.product_id,
-        "review": record.review,
-        "stars": record.stars,
-        "createdAt": record.created_at,
-        "updatedAt": record.updated_at
+        "user_id": 1,
+        "first_name": "Joe",
+        "last_name": "Anderson",
+        "product_id": 2,
+        "review": "This is a great one",
+        "stars": 5,
+        "createdAt": "Sun, 07 Jul 2024 17:59:43 GMT",
+        "updatedAt": "Sun, 07 Jul 2024 17:59:43 GMT"
     }
 ]
 ```

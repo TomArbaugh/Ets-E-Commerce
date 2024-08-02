@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetAllProducts } from '../../redux/products';
+import { FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import './LandingPage.css';
 
 const LandingPage = () => {
@@ -31,7 +33,7 @@ const LandingPage = () => {
       <div className="landing-page-welcome-header">
         <div className="welcome-message">
           <h1>
-            Welcome to Etsy-ish<br />
+            Welcome to Getsy<br />
             <span>Where our crafting skills are better than our Wi-Fi signal!</span>
           </h1>
         </div>
@@ -60,6 +62,36 @@ const LandingPage = () => {
             </div>
           </Link>
         ))}
+      </div>
+      <div className='footer'>
+      <div id="Elya">
+        <h4>Elya Le</h4>
+                <div className="about-link-icons">
+                <Link className="indi-link" to="https://www.linkedin.com/in/elyale/"><FaLinkedin className="about-links"/></Link>
+                <Link className="indi-link" to="https://github.com/elya-le"><FaGithub className="about-links"/></Link>
+                </div>
+      </div>
+      <div id="Hui">
+        <h4>Hui (Sally) Wen</h4>
+                <div className="about-link-icons">
+                <Link className="indi-link" to="https://www.linkedin.com/in/hui-wen-49431943/"><FaLinkedin className="about-links"/></Link>
+                <Link className="indi-link" to="https://github.com/Sally-HuiWen"><FaGithub className="about-links"/></Link>
+                </div>
+      </div>
+      <div id="Aaron">
+        <h4>Aaron Pollock</h4>
+                <div className="about-link-icons">
+                <Link className="indi-link" to="https://www.linkedin.com/in/aaron-pollock-276822320/"><FaLinkedin className="about-links"/></Link>
+                <Link className="indi-link" to="https://github.com/aaronipollock"><FaGithub className="about-links"/></Link>
+                </div>
+      </div>
+      <div id="Tom">
+        <h4>Tom Arbaugh</h4>
+                <div className="about-link-icons">
+                <Link className="indi-link" to="https://www.linkedin.com/in/tomarbaugh/"><FaLinkedin className="about-links"/></Link>
+                <Link className="indi-link" to="https://github.com/TomArbaugh/"><FaGithub className="about-links"/></Link>
+                </div>
+      </div>
       </div>
     </div>
   );
