@@ -27,7 +27,7 @@ export const getReviewsByProductId = (productId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json()
     if (data.errors) {
-      console.log(data.errors)
+      console.log(' ')
     }
     dispatch(getReviews(productId, data))
   }
@@ -52,7 +52,7 @@ export const createReview = (productId, reviewData) => async (dispatch) => {
 
 }
 export const updateReview = (productId, reviewData) => async (dispatch) => {
-  console.log('REVIEW DATA: ', reviewData)
+  // console.log('REVIEW DATA: ', reviewData)
   const response = await fetch(`/api/reviews/${productId}/edit-review/`, {
     method: 'POST',
     headers: {
@@ -60,10 +60,10 @@ export const updateReview = (productId, reviewData) => async (dispatch) => {
     },
     body: JSON.stringify(reviewData),
   });
-  console.log('RESPONSE: ', response)
+  // console.log('RESPONSE: ', response)
   if (response.ok) {
     const data = await response.json();
-    console.log('DATA: ', data)
+    // console.log('DATA: ', data)
     dispatch(editReview(data));
   } else {
     const errorData = await response.json();
