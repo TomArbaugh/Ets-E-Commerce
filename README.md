@@ -365,7 +365,7 @@ https://etsyclone-4ah1.onrender.com/
 
 ## Reviews
 
-### all Reviews For a Product
+### Get all Reviews For a Product
 ##
 * Purpose: Get all Reviews For a Product
 * Method: ```GET```
@@ -386,7 +386,96 @@ https://etsyclone-4ah1.onrender.com/
 ]
 ```
 
+### Create a Review
+##
 
+*Require Authentication: true
+*Request
+*Method: POST
+*URL: /api/reviews/:product_id/create-review
+*Headers:
+*Content-Type: application/json
+*Body:
+```python
+    {
+     
+               review= "Great",
+               stars = 4
+    }
+```
+*Successful Response
+*Status Code: 200
+*Headers:
+*Content-Type: application/json
+*Body:
+"Successful create!"
+*Error Response: Body validation errors
+*Status Code: 400
+*Headers:
+*Content-Type: application/json
+*Body:
+```json
+
+        "Errors in Route"
+```
+
+### Edit a Review
+## Updates an existing review.
+
+*Require Authentication: true
+
+*Request
+*Method: POST
+*URL: /api/reviews/:product_id/edit-review
+*Headers:
+*Content-Type: application/json
+*Body:
+```
+    {
+        "review": "review",
+        "stars": "stars"
+    }
+```
+
+*Successful Response
+*Status Code: 200
+*Headers:
+*Content-Type: application/json
+*Body:
+```
+"Successful edit!"
+```
+*Error Response: Body validation errors
+*Status Code: 400
+*Headers:
+*Content-Type: application/json
+*Body:
+```
+    "Errors in Route"
+```
+
+
+### Delete a Group
+## Deletes an existing group.
+
+*Require Authentication: true
+
+*Request
+*Method: DELETE
+*URL: /api/reviews/:product_id/delete-review
+*Body: none
+
+*Successful Response
+*Status Code: 200
+*Headers:
+*Content-Type: application/json
+*Body:
+```
+    {
+      "message": "Review deleted"
+    }
+
+```
 # Future Features List
 1. favorite
 

@@ -5,7 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal"; 
 import "./Navigation.css";
 import { CgShoppingCart } from "react-icons/cg";
-import etsyLogo from '/../images/Etsy-Logo.png';
+// import etsyLogo from '/../images/Etsy-Logo.png';
 
 
 function Navigation() {
@@ -15,7 +15,8 @@ function Navigation() {
     <div id='header-container'>
       <div id='logo'>
         <NavLink className='logo-link-to-home' to='/'>
-        <img src={etsyLogo} alt='Etsy Logo' className='etsy-logo' /> 
+        {/* <img src={etsyLogo} alt='Etsy Logo' className='etsy-logo' />  */}
+        <h2 className='getsy-logo' alt='Etsy Logo'>Getsy</h2>
         </NavLink>  
       </div>
       
