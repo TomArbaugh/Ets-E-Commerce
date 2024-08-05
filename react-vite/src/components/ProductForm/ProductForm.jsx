@@ -32,15 +32,21 @@ const ProductForm = () => {
     if (!name) errorArr.push('Name is required');
     if (name.length > 50) errorArr.push('Name cannot be more than 50 characters');
     if (!category) errorArr.push('Category is required');
-    if (category.length > 50) errorArr.push('Category cannot be more than 50 characters');
     if (!description) errorArr.push('Description is required');
     if (description.length > 255) errorArr.push('Description cannot be more than 255 characters');
-    if (!price) errorArr.push('Price is required');
-    if (price <= 0) errorArr.push('Price must be a positive number');
-    if (!stock) errorArr.push('Stock is required');
-    if (stock <= 0) errorArr.push('Stock must be a positive number');
+    if (price === '') {
+      errorArr.push('Price is required');
+    } else if (price <= 0) {
+      errorArr.push('Price must be a positive number');
+    }
+    if (stock === '') {
+      errorArr.push('Stock is required');
+    } else if (stock <= 0) {
+      errorArr.push('Stock must be a positive number');
+    }
+    if (!image) errorArr.push('Photo or video is required');
     setErrors(errorArr);
-  }, [name, category, description, price, stock]);
+  }, [name, category, description, price, stock, image]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,7 +112,6 @@ const ProductForm = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
               placeholder='product name'
             />
           </label>
@@ -119,7 +124,6 @@ const ProductForm = () => {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              required
             >
               <option value="">Select a category</option>
               {categories.map((cat, idx) => (
@@ -130,7 +134,9 @@ const ProductForm = () => {
         </div>
 
         <div className='photo-div'>
-          <label>Photos and video *</label>
+          <label>Photos and video *
+          {hasSubmitted && errors.includes('Photo or video is required') && <span className="error-message">Photo or video is required</span>}
+          </label>
           <div className="dropzone" onDrop={handleDrop} onDragOver={handleDragOver}>
             {image ? image.name : 'Drag and drop an image'}
           </div> 
@@ -152,7 +158,6 @@ const ProductForm = () => {
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              required
               placeholder='product description'
             />
           </label>
@@ -169,7 +174,6 @@ const ProductForm = () => {
               step="0.01"  // allow decimal values
               min="0"
               onChange={(e) => setPrice(e.target.value)}
-              required
               placeholder='price'
             />
           </label>
@@ -181,7 +185,6 @@ const ProductForm = () => {
               value={stock}
               min="0"
               onChange={(e) => setStock(e.target.value)}
-              required
               placeholder='stock'
             />
           </label>

@@ -43,8 +43,9 @@
   cursor: pointer;
 }
 
-.errors {
+.error-message {
   color: red;
+  padding-left: 15px;
 }
 
 .photo-div {
