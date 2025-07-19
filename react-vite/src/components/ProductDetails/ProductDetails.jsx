@@ -34,12 +34,14 @@ const ProductDetails = () => {
     const result = await dispatch(addItemToCart(productId, quantity));
     if (!result.errors) {
       setAddToCartMessage('Item added to cart!');
+    } else if (!user) {
+      setAddToCartMessage('Please login to add items to cart.');
     } else {
       setAddToCartMessage('Failed to add item to cart.');
     }
     setTimeout(() => {
       setAddToCartMessage('');
-    }, 2000);
+    }, 5000);
   };
 
   const imageUrl = product.images && product.images.length > 0 ? product.images[0].url : '';
@@ -67,9 +69,15 @@ const ProductDetails = () => {
             <option value="3">3</option>
           </select>
           <button className="add-to-cart-button" onClick={handleAddToCart}>Add to cart</button>
+
           <div className='confirmation-message-container'>
-            {AddToCardMessage && <p className="confirmation-message">{AddToCardMessage}</p>}
+            {AddToCardMessage && <p className={AddToCardMessage === 'Item added to cart!' ? "confirmation-message" : "error-message"}>{AddToCardMessage}</p>}
           </div>
+
+          {/* <div className='confirmation-message-container'>
+            {AddToCardMessage !== 'Item added to cart!' && <p className="error-message">{AddToCardMessage}</p>}
+          </div> */}
+
           <div className="bottom-reviews">
             <h2>Reviews</h2>
             {reviews ? (
